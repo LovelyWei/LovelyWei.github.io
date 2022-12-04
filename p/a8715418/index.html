@@ -317,7 +317,7 @@
     <!-- Custom Head -->
     
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.0.0"></head>
 
 
     
@@ -505,9 +505,10 @@
 <blockquote>
 <p>最近在学习一些 OI 的知识，其实以前是学过 C++的但是, <del>Python 实在是太香了</del><br>由于太久没用过全部白给了，但是由于了解到比赛 C++可以用 STL <del>真香</del><br>所以开了一个从 C 转换到 C++的一些笔记. <del>天坑</del> &gt; <del>什么时候支持 C++11</del></p>
 </blockquote>
-<h2 id="从-scanf-到-cin-到-getline"><a href="#从-scanf-到-cin-到-getline" class="headerlink" title="从 scanf 到 cin 到 getline"></a>从 scanf 到 cin 到 getline</h2><p>之前习惯使用 scanf 来某些格式化的输入 如<br><a href="https://vjudge.net/problem/HDU-2005" target="_blank" rel="external nofollow noopener noreferrer">https://vjudge.net/problem/HDU-2005</a></p>
+<h2 id="从-scanf-到-cin-到-getline"><a href="#从-scanf-到-cin-到-getline" class="headerlink" title="从 scanf 到 cin 到 getline"></a>从 scanf 到 cin 到 getline</h2><p>之前习惯使用 scanf 来某些格式化的输入 如<br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://vjudge.net/problem/HDU-2005">https://vjudge.net/problem/HDU-2005</a></p>
 <p>可以通过</p>
-<pre><code class="c">scanf(&quot;%d/%d/%d&quot;,&amp;year,&amp;month,&amp;day);</code></pre>
+<pre><code class="c">scanf(&quot;%d/%d/%d&quot;,&amp;year,&amp;month,&amp;day);
+</code></pre>
 <p>分割输入</p>
 <p>转换到 C++时 当然是要使用 STL 辣</p>
 <p>但是似乎没有类似</p>
@@ -526,23 +527,25 @@
         basic_istream&lt;_Elem, _Traits&gt;&amp; _Istr,
         basic_string&lt;_Elem, _Traits, _Alloc&gt;&amp; _Str,
         const _Elem _Delim)
-        {
+        &#123;
         // get characters into string, discard delimiter
         return (getline(_STD move(_Istr), _Str, _Delim);
-        }</code></pre>
+        &#125;
+</code></pre>
 <p>这个方法可以设置结束符号</p>
 <p>还是与HDU-2005为例子</p>
 <blockquote>
-<p>1985/1/20</p>
+<p>1985&#x2F;1&#x2F;20</p>
 </blockquote>
 <pre><code class="cpp">    std::string year;
     std::string month;
     std::string day;
     while (std::getline(std::cin, year, &#39;/&#39;))
-    {
+    &#123;
         std::getline(std::cin, month, &#39;/&#39;);
         std::getline(std::cin, day, &#39;/&#39;);
-    }</code></pre>
+    &#125;
+</code></pre>
 <p>这样就可以获取到三个值了</p>
 <p>总感觉有点怪怪的,应该有更好的方法我不知道吧,各位dalao评论区请</p>
 

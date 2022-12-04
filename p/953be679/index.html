@@ -317,7 +317,7 @@
     <!-- Custom Head -->
     
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.0.0"></head>
 
 
     
@@ -497,7 +497,7 @@
                 年轻人的第一个私人BGP(三) - 带入家中
             </p>
             <p>BGP系列也好久没更新过了,最近放假放的有点久…干了点新的东西,让家里的网络用上自己的IP.</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <p>解决方案是 strongSwan IKEv2 VPN隧道到VPS服务器上,IKEv2 的证书使用的是Let’s encrypt的证书,域名挂在了<code>CloudFlare</code>上以便于调用api.</p>
 <h2 id="配置服务器环境"><a href="#配置服务器环境" class="headerlink" title="配置服务器环境"></a>配置服务器环境</h2><p>博主这里使用了 香港阿里云的轻量VPS <code>CentOS7</code> (物理位置近+便宜) + HE.net 的BGP隧道,至于实现方案可以参考<a href="https://hex.moe/p/d6a20b99/">上一篇bgp系列的文章</a>.</p>
@@ -511,82 +511,94 @@
 <pre><code>[root@host ~]# ip addr add dev sit1 2a0f:9400:8000::1/48
 [root@host ~]# ip -6 route change default dev sit1  src 2a0f:9400:8000::1  metric 1
 [root@host ~]# curl ipv6.ip.sb
-2a0f:9400:8000::1</code></pre><hr>
+2a0f:9400:8000::1
+</code></pre>
+<hr>
 <ul>
 <li><h3 id="安装并配置-acme-sh-生成证书"><a href="#安装并配置-acme-sh-生成证书" class="headerlink" title="安装并配置 acme.sh, 生成证书"></a>安装并配置 acme.sh, 生成证书</h3><ol>
-<li><p>安装 <a href="http://acme.sh/" target="_blank" rel="external nofollow noopener noreferrer">acme.sh</a> ,用于自助签发TLS证书,并创建一个<code>alias</code>方便使用.</p>
+<li>安装 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://acme.sh/">acme.sh</a> ,用于自助签发TLS证书,并创建一个<code>alias</code>方便使用.</li>
+</ol>
 <pre><code class="sh">curl  https://get.acme.sh | sh
-alias acme.sh=~/.acme.sh/acme.sh</code></pre>
-</li>
-<li><p>获取<code>CloudFlare</code>的<a href="https://dash.cloudflare.com/profile" target="_blank" rel="external nofollow noopener noreferrer">Api</a></p>
-<blockquote>
+alias acme.sh=~/.acme.sh/acme.sh
+</code></pre>
+<ol start="2">
+<li>获取<code>CloudFlare</code>的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://dash.cloudflare.com/profile">Api</a><blockquote>
 <p>至于详细的获取<code>CloudFlare Api Token</code>可以参考<a href="https://hex.moe/p/aaafb04f/">利用CloudFlare Api实现DDNS</a>.</p>
 </blockquote>
 </li>
-<li><p>写<code>Token</code>到环境变量</p>
+<li>写<code>Token</code>到环境变量</li>
+</ol>
 <pre><code class="sh">export CF_Key=&quot;sdfsdfsdfljlbjkljlkjsdfoiwje&quot;
-export CF_Email=&quot;xxxx@sss.com&quot;</code></pre>
-</li>
-<li><p>现在,可以用命令自动创建证书了</p>
-<pre><code class="sh">acme.sh --issue --dns dns_cf -d hex.moe -d vpn.hex.moe # 记得替换域名</code></pre>
-</li>
-<li><p>使用 <code>acme.sh --cron</code> 可以生成 cronjob 自动更新证书</p>
-</li>
+export CF_Email=&quot;xxxx@sss.com&quot;
+</code></pre>
+<ol start="4">
+<li>现在,可以用命令自动创建证书了</li>
+</ol>
+<pre><code class="sh">acme.sh --issue --dns dns_cf -d hex.moe -d vpn.hex.moe # 记得替换域名
+</code></pre>
+<ol start="5">
+<li>使用 <code>acme.sh --cron</code> 可以生成 cronjob 自动更新证书</li>
 </ol>
 <p>经过配置,应该可以在<code>/root/.acme.sh/vpn.hex.moe</code>中看到你的证书</p>
 <pre><code class="sh">[root@host vpn.hex.moe]# pwd
 /root/.acme.sh/vpn.hex.moe
 [root@host vpn.hex.moe]# ls
 ca.cer         vpn.hex.moe.cer   vpn.hex.moe.csr       vpn.hex.moe.key
-fullchain.cer  vpn.hex.moe.conf  vpn.hex.moe.csr.conf</code></pre>
+fullchain.cer  vpn.hex.moe.conf  vpn.hex.moe.csr.conf
+</code></pre>
 </li>
 <li><h3 id="然后安装并配置-strongswan"><a href="#然后安装并配置-strongswan" class="headerlink" title="然后安装并配置 strongswan"></a>然后安装并配置 <code>strongswan</code></h3><ol>
-<li><p>安装<code>strongswan</code></p>
-<pre><code class="sh">yum install strongswan</code></pre>
-</li>
-<li><p>修改配置文件<code>ipsec.conf</code></p>
-<blockquote>
+<li>安装<code>strongswan</code></li>
+</ol>
+<pre><code class="sh">yum install strongswan
+</code></pre>
+<ol start="2">
+<li>修改配置文件<code>ipsec.conf</code><blockquote>
 <p>这里使用了旧版的配置文件,由于已经配置好了遂不再更变.( <del>又不是不能用</del></p>
 </blockquote>
-<pre><code class="sh">vim /etc/strongswan/ipsec.conf</code></pre>
-<p>以下是内容:</p>
+</li>
+</ol>
+<pre><code class="sh">vim /etc/strongswan/ipsec.conf
+</code></pre>
+<p>  以下是内容:</p>
 <pre><code class="conf">conn setup
 uniqueids = no
 
 conn %default
-   compress = yes
-   keyexchange=ike
-   ike=aes256-sha256-sha1-modp2048-modp1024,3des-sha256-sha1-modp2048-modp1024!
-   esp=aes256-sha256-sha1,3des-sha256-sha1!
-   leftdns=8.8.8.8,8.8.4.4,2001:4860:4860::8888 # 此处是dns
-   rightdns=8.8.8.8,8.8.4.4,2001:4860:4860::8888
+    compress = yes
+    keyexchange=ike
+    ike=aes256-sha256-sha1-modp2048-modp1024,3des-sha256-sha1-modp2048-modp1024!
+    esp=aes256-sha256-sha1,3des-sha256-sha1!
+    leftdns=8.8.8.8,8.8.4.4,2001:4860:4860::8888 # 此处是dns
+    rightdns=8.8.8.8,8.8.4.4,2001:4860:4860::8888
 
 conn ikev2
-   dpdaction=clear
-   dpddelay=60s
-   rekey=no
-   fragmentation=yes
-   eap_identity=%identity
+    dpdaction=clear
+    dpddelay=60s
+    rekey=no
+    fragmentation=yes
+    eap_identity=%identity
 
-   left=%any
-   leftid=&quot;vpn.hex.moe&quot; # 签发证书的域名
-   leftsubnet=0.0.0.0/0,::/0
-   leftauth=pubkey
-   leftcert=fullchain.cer
-   leftsendcert=always
-   leftfirewall=yes
+    left=%any
+    leftid=&quot;vpn.hex.moe&quot; # 签发证书的域名
+    leftsubnet=0.0.0.0/0,::/0
+    leftauth=pubkey
+    leftcert=fullchain.cer
+    leftsendcert=always
+    leftfirewall=yes
 
-   right=%any
-   rightid=%any
-   rightsourceip=10.1.0.0/24,2a0e:b107:16::/48 # 要分配给客户端的ip,这里用了双栈
-   rightauth=eap-mschapv2
-   rightsendcert=never
+    right=%any
+    rightid=%any
+    rightsourceip=10.1.0.0/24,2a0e:b107:16::/48 # 要分配给客户端的ip,这里用了双栈
+    rightauth=eap-mschapv2
+    rightsendcert=never
 
-   auto=add</code></pre>
+    auto=add
+</code></pre>
 <blockquote>
-<p>还有一套是<code>swanctl.conf</code>的新版配置文件,由于博主没有配置过所以不多做介绍.<br>可参考这一位博主写的 <a href="https://m13253.blogspot.com/2018/07/strongswan-ikev2-vpn.html" target="_blank" rel="external nofollow noopener noreferrer">用 strongSwan 配一个支持 AEAD 的远程访问 IKEv2 VPN</a>.</p>
+<p>还有一套是<code>swanctl.conf</code>的新版配置文件,由于博主没有配置过所以不多做介绍.<br>可参考这一位博主写的 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://m13253.blogspot.com/2018/07/strongswan-ikev2-vpn.html">用 strongSwan 配一个支持 AEAD 的远程访问 IKEv2 VPN</a>.</p>
 </blockquote>
-</li>
+<ol start="3">
 <li><p>配置<code>strongswan</code>的证书<br>使用软连接方便更新<code>ln -s [源路径] [目标路径]</code> , 将<code>/root/.acme.sh/[域名]</code>中的</p>
 <ul>
 <li><code>fullchain.cer</code>放入<code>/etc/strongswan/ipsec.d/certs</code></li>
@@ -595,23 +607,27 @@ conn ikev2
 </ul>
 </li>
 <li><p>配置<code>ipsec.secrets</code>,添加用户</p>
-<pre><code class="sh"> vim /etc/strongswan/ipsec.secrets</code></pre>
+<pre><code class="sh">vim /etc/strongswan/ipsec.secrets
+</code></pre>
 <p> 以下是我写的内容:</p>
-<pre><code class="secrets"> # ipsec.secrets - strongSwan IPsec secrets file
- : RSA vpn.hex.moe.key # 这里是私钥的文件名
+<pre><code class="secrets"># ipsec.secrets - strongSwan IPsec secrets file
+: RSA vpn.hex.moe.key # 这里是私钥的文件名
 
- #这里是用户名和密码,%any表示任意用户名均可,EAP后面的为密码
- user1 %any : EAP &quot;123456&quot;</code></pre>
+#这里是用户名和密码,%any表示任意用户名均可,EAP后面的为密码
+user1 %any : EAP &quot;123456&quot;
+</code></pre>
 </li>
 </ol>
 </li>
 <li><p>配置<code>sysctl.conf</code> , 开启Linux的内核转发</p>
-<pre><code class="sh">/etc/sysctl.conf</code></pre>
+<pre><code class="sh">/etc/sysctl.conf
+</code></pre>
 <p>在后面添加开启相关转发的内容</p>
 <pre><code class="conf">net.ipv4.ip_forward = 1
 net.ipv4.conf.all.accept_redirects = 0
 net.ipv4.conf.all.send_redirects = 0
-net.ipv6.conf.all.forwarding=1</code></pre>
+net.ipv6.conf.all.forwarding=1
+</code></pre>
 </li>
 <li><p>配置iptables防火墙</p>
 <pre><code class="sh">iptables -A INPUT -p ah -j ACCEPT
@@ -622,7 +638,8 @@ iptables -A POSTROUTING -t nat -m policy --pol ipsec --dir out -j ACCEPT
 iptables -A POSTROUTING -t nat -s 10.1.0.0/24 -o eth0 -j MASQUERADE
 iptables -A FORWARD -t nat -i eth0 -m policy --pol ipsec --dir in -j ACCEPT
 iptables-save
-systemctl restart iptables</code></pre>
+systemctl restart iptables
+</code></pre>
 <blockquote>
 <p>虽然说如果<code>ah</code>和<code>esp</code>头如果走不通的话会走<code>udp</code>协议,但是还是加上了</p>
 </blockquote>
@@ -634,21 +651,25 @@ systemctl restart iptables</code></pre>
 <p>允许 ‘AH’ 和 ‘ESP’ 身份验证协议和加密协议通过防火墙</p>
 </blockquote>
 <pre><code class="sh">firewall-cmd --zone=public --permanent --add-rich-rule=&#39;rule protocol value=&quot;esp&quot; accept&#39;
-firewall-cmd --zone=public --permanent --add-rich-rule=&#39;rule protocol value=&quot;ah&quot; accept&#39;</code></pre>
+firewall-cmd --zone=public --permanent --add-rich-rule=&#39;rule protocol value=&quot;ah&quot; accept&#39;
+</code></pre>
 <blockquote>
 <p>开放 ipsec 和相关端口</p>
 </blockquote>
 <pre><code class="sh">firewall-cmd --zone=public --permanent --add-port=500/udp
 firewall-cmd --zone=public --permanent --add-port=4500/udp
-firewall-cmd --zone=public --permanent --add-service=&quot;ipsec&quot;</code></pre>
+firewall-cmd --zone=public --permanent --add-service=&quot;ipsec&quot;
+</code></pre>
 <blockquote>
 <p>允许 ip 伪装</p>
 </blockquote>
-<pre><code class="sh">firewall-cmd --zone=public --permanent --add-masquerade</code></pre>
+<pre><code class="sh">firewall-cmd --zone=public --permanent --add-masquerade
+</code></pre>
 <blockquote>
 <p>然后重新加载防火墙</p>
 </blockquote>
-<pre><code class="sh">firewall-cmd --reload</code></pre>
+<pre><code class="sh">firewall-cmd --reload
+</code></pre>
 <hr>
 </li>
 <li><p>启动<code>strongswan</code>服务 <code>systemctl restart strongswan</code></p>
@@ -656,12 +677,12 @@ firewall-cmd --zone=public --permanent --add-service=&quot;ipsec&quot;</code></p
 </ul>
 <p>此时就能用Windows连接到IKEv2 VPN了!</p>
 <h2 id="连接VPN"><a href="#连接VPN" class="headerlink" title="连接VPN"></a>连接VPN</h2><p>打开Win10的 <code>设置-&gt;网络和Internet-&gt;VPN</code> 并点击 <code>添加VPN连接</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301003025.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301003025.png"></p>
 <p>写好配置并保存.</p>
 <p>然后点击 <code>状态-&gt;更改适配器选项</code> 右键 <code>VPN-&gt;属性-&gt;网络</code></p>
 <p>如果需要使用IPv4和IPv6流量都走VPN隧道的话你需要稍微调整下IPv4的设置</p>
 <p>点击<code>IPv4-&gt;属性-&gt;高级</code> 勾选 <code>在远程网络上使用默认网关</code>和 取消勾选 <code>自动跃点</code> 跃点数写一个相对小的数值,比如说,我写了<code>5</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301004612.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301004612.png"></p>
 <p>当然,我现在并不需要(</p>
 <p>所以我将IPv4勾掉了,ipv4流量不走vpn,后来我连接上后…</p>
 <p>…</p>
@@ -670,24 +691,25 @@ firewall-cmd --zone=public --permanent --add-service=&quot;ipsec&quot;</code></p
 </blockquote>
 <p>后面了解到,虽然IPv6中也有一个 <code>在远程网络上使用默认网关</code> 但是那个完全没有用,也不知道微软阿三程序员怎么写的,总之就是没有用,需要手动配置一下路由</p>
 <p>所以,连接上VPN后,在<code>cmd</code>中敲入 <code>ipconfig</code> 查看分配到的ip</p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301005308.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301005308.png"></p>
 <p>并手动添加路由… </p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301005426.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301005426.png"></p>
 <p><code>请求的操作需要提升</code>(权限) , 好吧 ,右键左下角的 <code>Win</code> 图标, 选择 <code>Windows Powershell (管理员)</code>,用打开的shell再次手动添加路由</p>
-<pre><code class="sh">route add ::/0 [分配到的IP]</code></pre>
+<pre><code class="sh">route add ::/0 [分配到的IP]
+</code></pre>
 <p>此时再去测试一下…</p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301005811.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301005811.png"></p>
 <p>终于成功了,这也太累了…</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>其实想做这个项目已经很久了,只是一直没有动力去做,刚好放假放了这么多天,游戏也玩腻了,刷各种网站也刷累了,看到了某篇 <a href="https://www.91yunbbs.com/discussion/641/drcais-noob-bgplayer-in-1hour-%E7%BB%9D%E8%B5%9E%E9%80%9F%E6%88%90%E7%8F%AD-%E9%80%83" target="_blank" rel="external nofollow noopener noreferrer">Noob BGPlayer in 1hour 绝赞速成班</a> ,就来实现自己的方式了”带入家中”了,当成功的那一刻还是很开心的…</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>其实想做这个项目已经很久了,只是一直没有动力去做,刚好放假放了这么多天,游戏也玩腻了,刷各种网站也刷累了,看到了某篇 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.91yunbbs.com/discussion/641/drcais-noob-bgplayer-in-1hour-%E7%BB%9D%E8%B5%9E%E9%80%9F%E6%88%90%E7%8F%AD-%E9%80%83">Noob BGPlayer in 1hour 绝赞速成班</a> ,就来实现自己的方式了”带入家中”了,当成功的那一刻还是很开心的…</p>
 <p>最后感谢MoeQing动物园的各位dalao的答疑(</p>
 <p><del>什么?你说近期啊,近期还有一篇水文</del></p>
 <p>以上</p>
 <hr>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
-<li><a href="https://blog.itnmg.net/2018/08/28/centos-7-ikev2-vpn-strongswan/" target="_blank" rel="external nofollow noopener noreferrer">https://blog.itnmg.net/2018/08/28/centos-7-ikev2-vpn-strongswan/</a></li>
-<li><a href="https://www.91yunbbs.com/discussion/641/drcais-noob-bgplayer-in-1hour-%E7%BB%9D%E8%B5%9E%E9%80%9F%E6%88%90%E7%8F%AD-%E9%80%83" target="_blank" rel="external nofollow noopener noreferrer">https://www.91yunbbs.com/discussion/641/drcais-noob-bgplayer-in-1hour-%E7%BB%9D%E8%B5%9E%E9%80%9F%E6%88%90%E7%8F%AD-%E9%80%83</a></li>
-<li><a href="https://recursiveg.me/2016/12/assign-ipv6-through-ipsec-and-strongswan/" target="_blank" rel="external nofollow noopener noreferrer">https://recursiveg.me/2016/12/assign-ipv6-through-ipsec-and-strongswan/</a></li>
-<li><a href="https://m13253.blogspot.com/2018/07/strongswan-ikev2-vpn.html" target="_blank" rel="external nofollow noopener noreferrer">https://m13253.blogspot.com/2018/07/strongswan-ikev2-vpn.html</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.itnmg.net/2018/08/28/centos-7-ikev2-vpn-strongswan/">https://blog.itnmg.net/2018/08/28/centos-7-ikev2-vpn-strongswan/</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.91yunbbs.com/discussion/641/drcais-noob-bgplayer-in-1hour-%E7%BB%9D%E8%B5%9E%E9%80%9F%E6%88%90%E7%8F%AD-%E9%80%83">https://www.91yunbbs.com/discussion/641/drcais-noob-bgplayer-in-1hour-%E7%BB%9D%E8%B5%9E%E9%80%9F%E6%88%90%E7%8F%AD-%E9%80%83</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://recursiveg.me/2016/12/assign-ipv6-through-ipsec-and-strongswan/">https://recursiveg.me/2016/12/assign-ipv6-through-ipsec-and-strongswan/</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://m13253.blogspot.com/2018/07/strongswan-ikev2-vpn.html">https://m13253.blogspot.com/2018/07/strongswan-ikev2-vpn.html</a></li>
 </ul>
 
             

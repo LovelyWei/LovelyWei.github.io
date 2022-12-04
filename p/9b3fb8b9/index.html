@@ -317,7 +317,7 @@
     <!-- Custom Head -->
     
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.0.0"></head>
 
 
     
@@ -497,20 +497,20 @@
                 再次重建博客(建立一个Hexo博客)
             </p>
             <p>&lt;关于我博客又丢档案了这件事&gt;</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <p>时隔 <del>多年</del> 几个月 我突然发现好像有个博客已经吃灰很久了,开始想更新下内容,结果发现又又又 <del>丢人</del> 丢档了(Hexo博客的源文件丢了)</p>
 <h2 id="这篇文章就讲下重建博客的时候干的一些事情吧"><a href="#这篇文章就讲下重建博客的时候干的一些事情吧" class="headerlink" title="这篇文章就讲下重建博客的时候干的一些事情吧."></a>这篇文章就讲下重建博客的时候干的一些事情吧.</h2><blockquote>
 <p>同时也是一个教萌新搭建博客的教程</p>
 </blockquote>
 <h3 id="1-装Hexo"><a href="#1-装Hexo" class="headerlink" title="1. 装Hexo"></a>1. 装Hexo</h3><p>首先Node Js 肯定是必须的</p>
-<p><a href="https://nodejs.org/en/" target="_blank" rel="external nofollow noopener noreferrer">NodeJs官网</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://nodejs.org/en/">NodeJs官网</a></p>
 <p>下载其中任意一个版本安装,装好后在命令行中敲</p>
 <blockquote>
 <p>npm version</p>
 </blockquote>
 <p>会看到 NodeJs的版本 如:</p>
-<pre><code class="json">{ npm: &#39;6.5.0&#39;,
+<pre><code class="json">&#123; npm: &#39;6.5.0&#39;,
   ares: &#39;1.15.0&#39;,
   brotli: &#39;1.0.7&#39;,
   cldr: &#39;34.0&#39;,
@@ -526,20 +526,21 @@
   unicode: &#39;11.0&#39;,
   uv: &#39;1.25.0&#39;,
   v8: &#39;7.0.276.38-node.16&#39;,
-  zlib: &#39;1.2.11&#39; }</code></pre>
+  zlib: &#39;1.2.11&#39; &#125;
+</code></pre>
 <p>接下来安装</p>
-<p><a href="https://git-scm.com/" target="_blank" rel="external nofollow noopener noreferrer">Git</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://git-scm.com/">Git</a></p>
 <p>关于Git就不再多做介绍了,安装的方法可以在网上搜索到</p>
 <p>Git安装完后</p>
 <p>接下来可以开始安装Hexo了.</p>
 <p>不过 在这之前,由于国内网络的种种原因,先在安装之前调整一些配置</p>
 <p>调整npm的源为淘宝镜像</p>
 <blockquote>
-<p>npm config set registry <a href="http://registry.npm.taobao.org/" target="_blank" rel="external nofollow noopener noreferrer">http://registry.npm.taobao.org/</a></p>
+<p>npm config set registry <a target="_blank" rel="external nofollow noopener noreferrer" href="http://registry.npm.taobao.org/">http://registry.npm.taobao.org/</a></p>
 </blockquote>
 <p>为Git设置代理(可选,<strong>如果你不知道这里在设置什么就不用设置了</strong>)</p>
 <blockquote>
-<p>git config –global http.proxy ‘socks5://127.0.0.1:1080’<br>git config –global https.proxy ‘socks5://127.0.0.1:1080’</p>
+<p>git config –global http.proxy ‘socks5:&#x2F;&#x2F;127.0.0.1:1080’<br>git config –global https.proxy ‘socks5:&#x2F;&#x2F;127.0.0.1:1080’</p>
 </blockquote>
 <p>接下来就可以正式开始安装Hexo了</p>
 <p>先下载Hexo程序</p>
@@ -562,24 +563,28 @@ d-----        2019/8/21     13:16                themes
 -a----        2019/8/21     15:02          64543 db.json
 -a----        2019/8/21     13:53         135764 package-lock.json
 -a----        2019/8/21     13:53            629 package.json
--a----        2019/8/21     14:17           1962 _config.yml</code></pre><p>接下来运行</p>
+-a----        2019/8/21     14:17           1962 _config.yml
+</code></pre>
+<p>接下来运行</p>
 <blockquote>
 <p>hexo server</p>
 </blockquote>
 <p>会见到类似</p>
 <pre><code>INFO  Start processing
-INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</code></pre><p>此时打开 <a href="https://localhost:4000" target="_blank" rel="external nofollow noopener noreferrer">https://localhost:4000</a> 就能看到一个新的博客了<br>(因每个人的环境不同所以地址可能有出入,以命令行显示的为准<br>)</p>
+INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.
+</code></pre>
+<p>此时打开 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://localhost:4000/">https://localhost:4000</a> 就能看到一个新的博客了<br>(因每个人的环境不同所以地址可能有出入,以命令行显示的为准<br>)</p>
 <p>打开网址见到Hello World 安装Hexo就结束了</p>
 <h3 id="2-安装-Material-主题"><a href="#2-安装-Material-主题" class="headerlink" title="2. 安装 Material 主题"></a>2. 安装 Material 主题</h3><p>安装好博客后可以自行安装主题来美化博客,我选了Material 感觉这个主题的简约风格挺好看的</p>
 <blockquote>
 <p>可以选择自己喜欢的主题 大体安装方式都类似</p>
 </blockquote>
-<p>打开 <a href="https://github.com/viosey/hexo-theme-material" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/viosey/hexo-theme-material</a></p>
+<p>打开 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/viosey/hexo-theme-material">https://github.com/viosey/hexo-theme-material</a></p>
 <p>点击 Release 下载 1.5.2 的版本</p>
 <blockquote>
 <p>新版本的我安装了报错,不知道为什么 2019-9-21</p>
 </blockquote>
-<p>下载完成后打开压缩包将其中的文件夹解压至 /themes</p>
+<p>下载完成后打开压缩包将其中的文件夹解压至 &#x2F;themes</p>
 <p>将解压的文件夹名称修改为 material</p>
 <p>进入 material文件夹 将 <code>_config.template.yml</code> 文件重命名为 <code>_config.yml</code></p>
 <p>回到博客根目录 打开博客根目录的配置文件 <code>_config.yml</code> 将其中 <code>theme</code> 值修改为 <code>theme: material</code></p>
@@ -591,23 +596,25 @@ INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</code></p
 <p>后面选择了 <code>hexo-abbrlink</code> 这个插件,这个插件可以在你让你的文章获得唯一的 ID.</p>
 <p>在接下来的设置中就可以将URL设置为例如 <code>http://example.com/p/:UID/</code></p>
 <p>操作方式如下:</p>
-<p>安装 <a href="https://github.com/rozbo/hexo-abbrlink" target="_blank" rel="external nofollow noopener noreferrer">hexo-abbrlink</a>,在网页根目录下插入</p>
+<p>安装 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/rozbo/hexo-abbrlink">hexo-abbrlink</a>,在网页根目录下插入</p>
 <blockquote>
 <p>npm install hexo-abbrlink –save</p>
 </blockquote>
 <p>接下调整博客的配置<code>_config.yml</code>(根目录下的,不是主题那个),在配置中添加</p>
 <pre><code class="yaml">abbrlink:
   alg: crc32  # 算法：crc16(default) and crc32
-  rep: hex    # 进制：dec(default) and hex</code></pre>
+  rep: hex    # 进制：dec(default) and hex
+</code></pre>
 <p>然后修改<code>permalink</code>如</p>
-<pre><code class="yaml">permalink: p/:abbrlink/</code></pre>
+<pre><code class="yaml">permalink: p/:abbrlink/
+</code></pre>
 <p>运行</p>
 <blockquote>
 <p>hexo server</p>
 </blockquote>
 <p>可以看到文章的链接变成了</p>
 <blockquote>
-<p><a href="http://localhost:4000/p/9b3fb8b9/" target="_blank" rel="external nofollow noopener noreferrer">http://localhost:4000/p/9b3fb8b9/</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="http://localhost:4000/p/9b3fb8b9/">http://localhost:4000/p/9b3fb8b9/</a></p>
 </blockquote>
 <h4 id="B-为网站添加RSS订阅"><a href="#B-为网站添加RSS订阅" class="headerlink" title="B. 为网站添加RSS订阅"></a>B. 为网站添加RSS订阅</h4><blockquote>
 <p>虽然9012了,但是还是有许多人喜欢RSS的方式阅读信息,加上最近也多了一些好用的RSS阅读器</p>
@@ -621,16 +628,18 @@ INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</code></p
 <pre><code class="yaml">feed:
   type: atom
   path: atom.xml
-  limit: 20</code></pre>
+  limit: 20
+</code></pre>
 <p>接下来到主题目录下的<code>_config.yml</code> 将<code>rss</code>设置如</p>
-<pre><code class="yml">rss: /atom.xml</code></pre>
+<pre><code class="yml">rss: /atom.xml
+</code></pre>
 <p>运行本地服务</p>
 <blockquote>
 <p>hexo s</p>
 </blockquote>
 <p>打开</p>
 <blockquote>
-<p><a href="http://localhost:4000/atom.xml" target="_blank" rel="external nofollow noopener noreferrer">http://localhost:4000/atom.xml</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="http://localhost:4000/atom.xml">http://localhost:4000/atom.xml</a></p>
 </blockquote>
 <p>可以看到RSS xml已经有了.</p>
 <h4 id="C-给网站添加sitemap-xml"><a href="#C-给网站添加sitemap-xml" class="headerlink" title="C. 给网站添加sitemap.xml"></a>C. 给网站添加sitemap.xml</h4><blockquote>
@@ -648,7 +657,7 @@ INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</code></p
 <p>创建好github账号后开始新建一个仓库(repository)</p>
 <p>仓库的名字命名为你的 <code>ID.github.io</code></p>
 <blockquote>
-<p>以我为例 我的github地址 <a href="https://github.com/LovelyWei" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/LovelyWei</a><br>创建仓库的时候就创建为 <code>LovelyWei.github.io</code></p>
+<p>以我为例 我的github地址 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/LovelyWei">https://github.com/LovelyWei</a><br>创建仓库的时候就创建为 <code>LovelyWei.github.io</code></p>
 </blockquote>
 <p>接下来不用调整什么 直接确定就能建立好一个仓库了</p>
 <p>建立好仓库后开始配置Hexo 让Hexo能推送到Github仓库</p>
@@ -661,7 +670,8 @@ INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</code></p
 <pre><code class="yml">deploy:
   type: git
   repo: https://github.com/LovelyWei/LovelyWei.github.io.git
-  branch: master</code></pre>
+  branch: master
+</code></pre>
 <p><code>repo</code>处的值修改为你的推送地址</p>
 <p>接下来尝试</p>
 <blockquote>
@@ -670,20 +680,28 @@ INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</code></p
 <p>中间可能需要你输入你的Github账号和密码,上传完成后就能看到仓库里已经有静态文件了</p>
 <p>访问github.io网址就能看到blog了</p>
 <blockquote>
-<p><a href="https://lovelywei.github.io/" target="_blank" rel="external nofollow noopener noreferrer">https://lovelywei.github.io/</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://lovelywei.github.io/">https://lovelywei.github.io/</a></p>
 </blockquote>
 <h3 id="5-博客绑定域名"><a href="#5-博客绑定域名" class="headerlink" title="5. 博客绑定域名"></a>5. 博客绑定域名</h3><blockquote>
 <p>挂着xxx.github.io 似乎不是那么的好看,我自己又去买了一个域名,用自己的域名访问会更加个性一点?</p>
 </blockquote>
 <p>在购买域名的服务商上设置到ID.github.io的别名,如</p>
-<pre><code>CNAME @ LovelyWei.github.io</code></pre><p>设置好后在 <code>source</code> 文件夹中新建<code>CNAME</code>文件,里面写上你设置的域名如</p>
-<pre><code>hex.moe</code></pre><p>若你设置的别名是带了<code>www</code>之类的,如</p>
-<pre><code>CNAME www LovelyWei.github.io</code></pre><p><code>CNAME</code>文件中的内容就要修改为</p>
-<pre><code>www.hex.moe</code></pre><p>重新发布</p>
+<pre><code>CNAME @ LovelyWei.github.io
+</code></pre>
+<p>设置好后在 <code>source</code> 文件夹中新建<code>CNAME</code>文件,里面写上你设置的域名如</p>
+<pre><code>hex.moe
+</code></pre>
+<p>若你设置的别名是带了<code>www</code>之类的,如</p>
+<pre><code>CNAME www LovelyWei.github.io
+</code></pre>
+<p><code>CNAME</code>文件中的内容就要修改为</p>
+<pre><code>www.hex.moe
+</code></pre>
+<p>重新发布</p>
 <blockquote>
 <p>hexo cl<br>hexo g<br>hexo d</p>
 </blockquote>
-<p>等待数分钟后访问网址(如 <a href="http://hex.moe">http://hex.moe</a> ),就能看到博客了</p>
+<p>等待数分钟后访问网址(如 <a href="http://hex.moe/">http://hex.moe</a> ),就能看到博客了</p>
 <p>完</p>
 
             

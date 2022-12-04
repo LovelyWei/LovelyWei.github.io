@@ -317,7 +317,7 @@
     <!-- Custom Head -->
     
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.0.0"></head>
 
 
     
@@ -499,10 +499,10 @@
             <p>接上篇BGP,这个时候已经拿下了自己ASN和IP,在RIPE中可以查询到,并且也添加了 <code>Route6</code> 对象,接下来就把自己的IP广播出去….  </p>
 <p>在广播之前,需要寻找一家能为你做广播的电信运营商….Emm至少在国内是不可能了,不过还可以选择云服务器,Vultr 提供了广播BGP的服务,还有 he.net 家的BGP隧道..</p>
 <blockquote>
-<p>参考:<br><a href="https://blog.yuzu.im/marchives/133" target="_blank" rel="external nofollow noopener noreferrer">https://blog.yuzu.im/marchives/133</a><br><a href="https://blog.ni-co.moe/public/559.html" target="_blank" rel="external nofollow noopener noreferrer">https://blog.ni-co.moe/public/559.html</a></p>
+<p>参考:<br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.yuzu.im/marchives/133">https://blog.yuzu.im/marchives/133</a><br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.ni-co.moe/public/559.html">https://blog.ni-co.moe/public/559.html</a></p>
 </blockquote>
 <h2 id="开通Vultr的BGP广播服务"><a href="#开通Vultr的BGP广播服务" class="headerlink" title="开通Vultr的BGP广播服务"></a>开通Vultr的BGP广播服务</h2><blockquote>
-<p>直达链接:<a href="https://my.vultr.com/bgp/" target="_blank" rel="external nofollow noopener noreferrer">https://my.vultr.com/bgp/</a></p>
+<p>直达链接:<a target="_blank" rel="external nofollow noopener noreferrer" href="https://my.vultr.com/bgp/">https://my.vultr.com/bgp/</a></p>
 </blockquote>
 <blockquote>
 <p>由于下面的过程博主没都截图,所以…只好文字描述下了..</p>
@@ -514,7 +514,7 @@
 <li><code>IP Prefixes</code> 填入前缀</li>
 <li>LOA文件可参考下图 <del>瞎编一个</del></li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191106084609.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191106084609.png"></p>
 <ul>
 <li><code>Routes</code> 选择 <code>Full Table</code></li>
 <li>然后点击<code>Setup</code></li>
@@ -537,59 +537,70 @@
 <li><p>修改 <code>/etc/bird6.conf</code>的配置文件</p>
 </li>
 <li><p>修改配置中的 <code>router id</code> 改为自己的IPv4地址</p>
-<pre><code>router id 198.51.100.1;</code></pre></li>
-<li><p>在文件的最后添加上</p>
+</li>
+</ul>
+<pre><code>router id 198.51.100.1;
+</code></pre>
+<ul>
+<li>在文件的最后添加上</li>
+</ul>
 <pre><code>protocol bgp vultr
-{
-  local as 你的asn(开头不带as);
-  source address 实例的ipv6;
-  import none;
-  export all;
-  graceful restart on;
-  multihop 2;
-  neighbor 2001:19f0:ffff::1 as 64515; #这个是Vultr服务器的ip
-  password &quot;在申请广播的时候设置的bgp密码&quot;;
-}</code></pre></li>
-<li><p>寻找到<code>protocol static</code></p>
+&#123;
+    local as 你的asn(开头不带as);
+    source address 实例的ipv6;
+    import none;
+    export all;
+    graceful restart on;
+    multihop 2;
+    neighbor 2001:19f0:ffff::1 as 64515; #这个是Vultr服务器的ip
+    password &quot;在申请广播的时候设置的bgp密码&quot;;
+&#125;
+</code></pre>
+<ul>
+<li>寻找到<code>protocol static</code></li>
+</ul>
 <pre><code>protocol static
-{
-  route  [v6前缀] via [实例的IPv6];
-  #route  2001:2333:2333::/48 via 4096:4096:4096:338:5400:01ff:fecf:596c;
-}</code></pre><blockquote>
-<p>vultr要求广播的ipv6最小block为/48,ipv4为/24</p>
+&#123;
+    route  [v6前缀] via [实例的IPv6];
+    #route  2001:2333:2333::/48 via 4096:4096:4096:338:5400:01ff:fecf:596c;
+&#125;
+</code></pre>
+<blockquote>
+<p>vultr要求广播的ipv6最小block为&#x2F;48,ipv4为&#x2F;24</p>
 </blockquote>
-</li>
-<li><p>找到<code>protocol direct</code></p>
+<ul>
+<li>找到<code>protocol direct</code></li>
+</ul>
 <pre><code>protocol direct
-{
-  interface &quot;dummy*&quot;;
-  import all;
-}</code></pre></li>
-<li><p>保存配置</p>
-</li>
-<li><p>配置虚拟网卡以及ip地址</p>
+&#123;
+    interface &quot;dummy*&quot;;
+    import all;
+&#125;
+</code></pre>
+<ul>
+<li>保存配置</li>
+<li>配置虚拟网卡以及ip地址</li>
+</ul>
 <pre><code class="sh">ip link add dev dummy1 type dummy # 添加虚拟网卡
 ip link set dummy1 up
-ip addr add dev dummy1 [前缀内的任意一个地址] # 添加地址</code></pre>
-</li>
-<li><p>启动<code>bird6</code></p>
-<blockquote>
+ip addr add dev dummy1 [前缀内的任意一个地址] # 添加地址
+</code></pre>
+<ul>
+<li>启动<code>bird6</code><blockquote>
 <p>service bird6 restart</p>
 </blockquote>
 </li>
-<li><p>查看状态 <code>birdc6 show route</code>/<code>birdc6 show proto all</code></p>
-</li>
-<li><p>完</p>
-</li>
+<li>查看状态 <code>birdc6 show route</code>&#x2F;<code>birdc6 show proto all</code></li>
+<li>完</li>
 </ul>
 <blockquote>
-<p>在 <a href="https://tools.ipip.net/traceroute.php?v=6" target="_blank" rel="external nofollow noopener noreferrer">https://tools.ipip.net/traceroute.php?v=6</a> 中可以看traceroute</p>
+<p>在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://tools.ipip.net/traceroute.php?v=6">https://tools.ipip.net/traceroute.php?v=6</a> 中可以看traceroute</p>
 </blockquote>
 <h2 id="he-net-的BGP隧道"><a href="#he-net-的BGP隧道" class="headerlink" title="he.net 的BGP隧道"></a>he.net 的BGP隧道</h2><blockquote>
-<p>直达链接: <a href="https://tunnelbroker.net/new_tunnel.php?type=bgp" target="_blank" rel="external nofollow noopener noreferrer">https://tunnelbroker.net/new_tunnel.php?type=bgp</a></p>
+<p>直达链接: <a target="_blank" rel="external nofollow noopener noreferrer" href="https://tunnelbroker.net/new_tunnel.php?type=bgp">https://tunnelbroker.net/new_tunnel.php?type=bgp</a></p>
 </blockquote>
 <p>该填写的还是类似上面Vultr中的内容</p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191106093253.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191106093253.png"></p>
 <p>然后就是等待客服验证你的ASN和IP前缀</p>
 <blockquote>
 <p>建议先在Vultr做好广播后再找 he.net 开通隧道,博主和 he.net 的客服为了验证我的ASN是我的ASN,我的前缀IRR验证了这些问题扯皮了很久..</p>
@@ -599,7 +610,7 @@ ip addr add dev dummy1 [前缀内的任意一个地址] # 添加地址</code></p
 </blockquote>
 <p>等待客服批准,就可以开始配置了(</p>
 <h2 id="配置BGP隧道广播"><a href="#配置BGP隧道广播" class="headerlink" title="配置BGP隧道广播"></a>配置BGP隧道广播</h2><p>总体来说,其实和上面的配置差不多,只不过要加一个建立隧道的过程(</p>
-<p>当经过客服通过后,会看到下面的状态<br><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191106143512.png" alt></p>
+<p>当经过客服通过后,会看到下面的状态<br><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191106143512.png"></p>
 <p>状态变成 <code>Available</code></p>
 <p>点击 <code>Example Configurations</code> 复制一段 <code>net-tools</code>的配置到服务器,建立隧道</p>
 <blockquote>
@@ -607,18 +618,21 @@ ip addr add dev dummy1 [前缀内的任意一个地址] # 添加地址</code></p
 </blockquote>
 <pre><code>net.ipv6.conf.all.disable_ipv6 = 0
 net.ipv6.conf.default.disable_ipv6 = 0
-net.ipv6.conf.lo.disable_ipv6 = 0</code></pre><blockquote>
+net.ipv6.conf.lo.disable_ipv6 = 0
+</code></pre>
+<blockquote>
 <p>保存,再运行 sysctl -p 的命令</p>
 </blockquote>
 <blockquote>
-<p>参考:<a href="https://blog.csdn.net/ei__nino/article/details/71331717" target="_blank" rel="external nofollow noopener noreferrer">https://blog.csdn.net/ei__nino/article/details/71331717</a></p>
+<p>参考:<a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/ei__nino/article/details/71331717">https://blog.csdn.net/ei__nino/article/details/71331717</a></p>
 </blockquote>
 <p>类似</p>
 <pre><code class="bash">ifconfig sit0 up
 ifconfig sit0 inet6 tunnel ::216.218.221.2
 ifconfig sit1 up
 ifconfig sit1 inet6 add 2001:470:17:10e::2/64
-route -A inet6 add ::/0 dev sit1</code></pre>
+route -A inet6 add ::/0 dev sit1
+</code></pre>
 <p>当隧道建立好后,<code>sit1</code>中可以看到建立隧道后自己的ip地址</p>
 <blockquote>
 <p>尝试 curl ipv6.ip.sb,若能访问则有了公网IPv6</p>
@@ -626,7 +640,7 @@ route -A inet6 add ::/0 dev sit1</code></pre>
 <p>然后开始配置bird6,广播IP段</p>
 <p>编辑<code>/etc/bird6.conf</code> 嘛,博主直接贴出自己的配置…</p>
 <pre><code>protocol bgp he
-{
+&#123;
         local as 208191;
         source address 2001:470:17:10e::2;
         import none;
@@ -634,7 +648,9 @@ route -A inet6 add ::/0 dev sit1</code></pre>
         graceful restart on;
         multihop 2;
         neighbor 2001:470:17:10e::1 as 6939;
-}</code></pre><p><code>source address</code>修改为 he.net 分配给的客户端ip</p>
+&#125;
+</code></pre>
+<p><code>source address</code>修改为 he.net 分配给的客户端ip</p>
 <p><code>neighbor</code> 修改为 he.ne 给的服务器ip</p>
 <p>然后就可以跳到上面Vultr <code>protocol static</code> 内容了(</p>
 <blockquote>

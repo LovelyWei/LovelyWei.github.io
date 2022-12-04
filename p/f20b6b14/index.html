@@ -317,7 +317,7 @@
     <!-- Custom Head -->
     
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.0.0"></head>
 
 
     
@@ -500,7 +500,7 @@
 <p>大学快要开学了,我通过py关系弄到了一份班级的列表,但是没有性别,正好这几天看到一个通过名字猜测性别的库</p>
 </blockquote>
 <h1 id="通过姓名猜测性别"><a href="#通过姓名猜测性别" class="headerlink" title="通过姓名猜测性别"></a>通过姓名猜测性别</h1><blockquote>
-<p><a href="https://github.com/observerss/ngender" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/observerss/ngender</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/observerss/ngender">https://github.com/observerss/ngender</a></p>
 </blockquote>
 <p>在最近,发现了一个<code>ngender</code>库,作用只有一个 通过姓名猜测性别,使用方式也很简单</p>
 <blockquote>
@@ -510,12 +510,13 @@
 &gt;&gt;&gt; ngender.guess(&#39;赵本山&#39;)
 (&#39;male&#39;, 0.9836229687547046)
 &gt;&gt;&gt; ngender.guess(&#39;宋丹丹&#39;)
-(&#39;female&#39;, 0.9759486128949907)</code></pre>
+(&#39;female&#39;, 0.9759486128949907)
+</code></pre>
 <h1 id="开始实践想法"><a href="#开始实践想法" class="headerlink" title="开始实践想法"></a>开始实践想法</h1><h2 id="xls转csv"><a href="#xls转csv" class="headerlink" title="xls转csv"></a>xls转csv</h2><p>首先通过Excel将<code>.xls</code>文件另存为 CSV 文件,因为Python自带CSV库,操作起来比操作xls文件简单(</p>
 <blockquote>
 <p>逗号分隔值（Comma-Separated Values，CSV，有时也称为字符分隔值，因为分隔字符也可以不是逗号），其文件以纯文本形式存储表格数据（数字和文本）</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190829193024.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190829193024.png"></p>
 <p>source大概长这样</p>
 <h2 id="转化为CSV后开始写代码"><a href="#转化为CSV后开始写代码" class="headerlink" title="转化为CSV后开始写代码"></a>转化为CSV后开始写代码</h2><pre><code class="python">import csv
 import ngender
@@ -530,16 +531,17 @@ with open(&#39;list.csv&#39;,&#39;r&#39;,encoding=&#39;utf-8&#39;) as f:
         row.append(guess[0])
         row.append(round(guess[1]*100,3))
         new_csv.append(row)
-
+    
 with open(&#39;test.csv&#39;,&#39;w&#39;,newline=&#39;&#39;)as f:
     f_csv = csv.writer(f)
-    f_csv.writerows(new_csv)</code></pre>
+    f_csv.writerows(new_csv)
+</code></pre>
 <h2 id="遇到的两个坑"><a href="#遇到的两个坑" class="headerlink" title="遇到的两个坑"></a>遇到的两个坑</h2><ul>
 <li><strong><code>open</code>的编码格式</strong><br>Excel转的CSV是UTF-8编码的,<del>众所周知</del> Python在中文Windows系统下的默认编码是GBK 所以<code>open</code>的时候要加上<code>encoding=&#39;utf-8&#39;</code></li>
 <li><strong>保存时的默认新行</strong><br>保存的结果每一行都会多一行,将<code>newline</code>设置为空字符串就好了</li>
 </ul>
 <h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>打开保存好的Excel,简单排序一下</p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190829193849.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190829193849.png"></p>
 <p>完</p>
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>根据判断我们班有9个小姐姐,后面去问了下辅导员,实际上是八个,误差不大(</p>
 <p>接下来可能没时间搞这些了,开学还要考英语,几个月没碰过全白给了,呜呜呜</p>

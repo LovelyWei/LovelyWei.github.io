@@ -317,7 +317,7 @@
     <!-- Custom Head -->
     
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.0.0"></head>
 
 
     
@@ -504,14 +504,14 @@
 <blockquote>
 <p>185.199.108.153<br>185.199.109.153<br>185.199.110.153<br>185.199.111.153</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824120540.png" alt><br>类似这样 (我其实设置的是@ 帮我显示成了域名)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824120540.png"><br>类似这样 (我其实设置的是@ 帮我显示成了域名)</p>
 <p>如果域名设置为CNAME的话,证书到期了无法自动续签 (没错 Github使用的是Let’s Encrypt的证书)</p>
 <p>网上搜索了相关案例,这是案例中客服的回复</p>
 <blockquote>
 <p>Hello,<br>Thanks for writing in! I took a look and it appears that your custom domain is set up using a CNAME record. You’ll need to make some changes to your DNS settings before we’ll be able to renew the HTTPS certificate for your custom domain.<br>You’ll need to remove your existing CNAME record, and replace it with at least one A record that points to one of the following IP addresses:<br>185.199.108.153<br>185.199.109.153<br>185.199.110.153<br>185.199.111.153<br>Optionally, you can create additional A records that point to the other IP addresses from the list. Additional records essentially act as a backup in case of DNS or CDN issues, so having at least two is best practice, though your site will still function with just one.<br>Once you’ve replaced the CNAME record, you’ll need to visit your repository’s settings page, remove your custom domain and click save, then re-add it again. This will kick off the process of provisioning an HTTPS certificate for your domain name.<br>Once your certificate has been provisioned, you’ll then be able to enforce HTTPS by checking the “Enforce HTTPS” checkbox.<br>Bear in mind that it can take up for 24 hours for DNS changes to take full effect, and up to an hour for an HTTPS certificate to be requested, so if you follow these steps but are still having trouble, that’s usually why.<br>Cheers,<br>Steven</p>
 </blockquote>
 <h3 id="然后设置的CNAME文件"><a href="#然后设置的CNAME文件" class="headerlink" title="然后设置的CNAME文件"></a>然后设置的CNAME文件</h3><p>将CNAME文件放在网站的根目录(也就是Github Page 仓库的根目录中),配合设置域名的DNS解析,可以达到使用你自己的域名访问到博客的效果. (而不是 xxx.github.io)</p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824121410.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824121410.png"></p>
 <p>这里讲Hexo博客设置<code>CNAME</code>文件时的一些坑</p>
 <p>当我生成完文件,然后把<code>CNAME</code>丢入public,然后上传到GitHub仓库,嗯,设置好了</p>
 <p>可是问题来了,我每次生成CNAME文件都会不见,消失</p>
@@ -521,10 +521,10 @@
 <p>注意:不是<code>CNAME.txt</code>,<code>CNAME</code>文件中只能有一个自定义域</p>
 </blockquote>
 <p>如</p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824122245.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824122245.png"></p>
 <p>(当然,不一定需要在根域,看个人喜好)</p>
 <h3 id="设置Github仓库"><a href="#设置Github仓库" class="headerlink" title="设置Github仓库"></a>设置Github仓库</h3><p>打开网页Github仓库,点击<code>Settings</code>,向下拉,会发现<code>Github Page</code>的相关设定</p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824122915.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824122915.png"></p>
 <p>在<code>Custom domain</code>中填入刚刚在CNAME填写的域名提交,约要十几分钟后,使用HTTPS协议访问的域名,就看到小绿锁了</p>
 <h2 id="方案二-使用cloudflare的代理实现HTTPS"><a href="#方案二-使用cloudflare的代理实现HTTPS" class="headerlink" title="方案二 使用cloudflare的代理实现HTTPS"></a>方案二 使用cloudflare的代理实现HTTPS</h2><blockquote>
 <p>不推荐,以后再写</p>

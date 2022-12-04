@@ -317,7 +317,7 @@
     <!-- Custom Head -->
     
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.0.0"></head>
 
 
     
@@ -504,7 +504,7 @@
 </blockquote>
 <p>科技就是力量,分析是如何判断登陆的</p>
 <p>打开 <code>Edit This Cookie</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190827144046.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190827144046.png"></p>
 <p>Emm Cookie有点多,不管了 先全部复制进去尝试一下</p>
 <p>用<code>requests</code>跑下结果是能用的,登陆状态正常</p>
 <p>但是,得分析下哪个Cookie才是真正的身份信息</p>
@@ -520,10 +520,10 @@ import random
 
 error=0
 while 1:
-    cookie = {
+    cookie = &#123;
     &#39;B7Y9_2132_auth&#39;:&#39;This is your auth&#39;,
     &#39;B7Y9_2132_saltkey&#39;:&#39;This is your slatkey&#39;
-}
+&#125;
     try:
         res = requests.get(&#39;https://bbs.saraba1st.com/2b/forum-75-1.html&#39;,cookies=cookie)
         now = time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;, time.localtime())
@@ -539,9 +539,10 @@ while 1:
         error=error+1
         time.sleep(300)
         if error&gt;=3:
-            break</code></pre>
+            break
+</code></pre>
 <blockquote>
-<p><a href="https://github.com/LovelyWei/stage1stKeepLogin" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/LovelyWei/stage1stKeepLogin</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/LovelyWei/stage1stKeepLogin">https://github.com/LovelyWei/stage1stKeepLogin</a></p>
 </blockquote>
 <p>加点random和等候时间,防止被防火墙拦了</p>
 <p>测试有效,完</p>
@@ -551,12 +552,12 @@ while 1:
 <p>首先判断Ex是什么方式获取数据的,按下F12,发现是服务端渲染,所以我使用了bs4来解析html数据</p>
 <p>先填入 <code>cookie</code> 上<code>requests</code>测试,发现登陆成功</p>
 <p>然后就是获取收藏列表里的本子有没有磁力,之前Ex改版过一次,有磁力的在评分右边会有一个绿色的下载箭头</p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190827145816.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190827145816.png"></p>
 <p>通过这个判断是否有磁力链接,对比两个元素发现可以下载的有<code>title=&quot;Show torrents&quot;</code>不能下载的是 <code>title=&quot;No torrents available&quot;</code></p>
 <p>bs4 解析搜索获取到下载页面</p>
 <p>进入到了下载页面本来想的是做下载种子的,结果发现下载链接长这样</p>
 <blockquote>
-<p><a href="https://sadpanda.org/torrent/1472720/9f195ee0788a64322c2f04e3a608a991cb1f10f.torrent" target="_blank" rel="external nofollow noopener noreferrer">https://sadpanda.org/torrent/1472720/9f195ee0788a64322c2f04e3a608a991cb1f10f.torrent</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://sadpanda.org/torrent/1472720/9f195ee0788a64322c2f04e3a608a991cb1f10f.torrent">https://sadpanda.org/torrent/1472720/9f195ee0788a64322c2f04e3a608a991cb1f10f.torrent</a></p>
 </blockquote>
 <p>后面那个明显是磁力链接,所以用 <del>正则匹配一下</del> 用了<code>os.path.splitext</code>和<code>os.path.basename</code>截取下文件名</p>
 <p>由于当时赶时间就直接使用print输出了</p>
@@ -567,10 +568,10 @@ import time
 import os
 import threading
 
-header={
+header=&#123;
 &#39;User-Agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36&#39;,
 &#39;Cookie&#39;:&#39;THIS IS YOUR COOKIE&#39;
-}
+&#125;
 
 def getPage(url,header,page=0):
     while 1:
@@ -611,9 +612,10 @@ page = int(soup.find(class_=&quot;ptt&quot;).find_all(&#39;a&#39;)[-2].text)
 print(&quot;Page:&quot;+str(page))
 
 for i in range(0,page):
-    threading.Thread(target=getList,args=(header,i,)).start()</code></pre>
+    threading.Thread(target=getList,args=(header,i,)).start()
+</code></pre>
 <blockquote>
-<p><a href="https://github.com/LovelyWei/EhMagnet" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/LovelyWei/EhMagnet</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/LovelyWei/EhMagnet">https://github.com/LovelyWei/EhMagnet</a></p>
 </blockquote>
 <p>测试能用,完</p>
 

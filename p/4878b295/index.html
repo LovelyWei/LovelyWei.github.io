@@ -317,7 +317,7 @@
     <!-- Custom Head -->
     
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.0.0"></head>
 
 
     
@@ -497,7 +497,7 @@
                 关于伪造邮件的简单研究
             </p>
             <p>最近拿到了学校的邮箱,心血来潮想开始测试一下关于电子邮件安全之类的…说干就干…伪造一封退学通知书(雾</p>
-<h2 id="伪造邮件的原理"><a href="#伪造邮件的原理" class="headerlink" title="伪造邮件的原理"></a>伪造邮件的原理</h2><p>最初的SMTP 协议定义 (1982年<a href="https://tools.ietf.org/html/rfc821" target="_blank" rel="external nofollow noopener noreferrer">RFC 821</a>) 中并没有写如何对发件人进行身份验证,所以任何人都可以说我是 Alice (这就导致了垃圾邮件和虚假邮件的产生.</p>
+<h2 id="伪造邮件的原理"><a href="#伪造邮件的原理" class="headerlink" title="伪造邮件的原理"></a>伪造邮件的原理</h2><p>最初的SMTP 协议定义 (1982年<a target="_blank" rel="external nofollow noopener noreferrer" href="https://tools.ietf.org/html/rfc821">RFC 821</a>) 中并没有写如何对发件人进行身份验证,所以任何人都可以说我是 Alice (这就导致了垃圾邮件和虚假邮件的产生.</p>
 <p>那….知道原理后先来伪造一封邮件(</p>
 <h2 id="使用Swaks伪造一封邮件"><a href="#使用Swaks伪造一封邮件" class="headerlink" title="使用Swaks伪造一封邮件"></a>使用<code>Swaks</code>伪造一封邮件</h2><ul>
 <li><h3 id="Swaks-是什么"><a href="#Swaks-是什么" class="headerlink" title="Swaks 是什么?"></a>Swaks 是什么?</h3><p>Swaks的全称是 <code>Swiss Army Knife SMTP</code>(SMTP界的瑞士军刀),用于测试SMTP协议的各种操作.</p>
@@ -508,44 +508,54 @@
 </li>
 <li><h3 id="测试目标"><a href="#测试目标" class="headerlink" title="测试目标"></a>测试目标</h3><p>首先直接输入了<code>swaks</code>,在to中写入自己的邮箱,先尝试了qq邮箱,然后被550了….</p>
 <pre><code class="sh">kali@kali:~$ swaks
-To: </code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200228160018.png" alt></p>
-<p>没有关系,再测一下目标,试一下学校的邮箱,用的也是腾讯的企业邮箱…<br><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/1582886911.png" alt></p>
+To: 
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200228160018.png"></p>
+<p>没有关系,再测一下目标,试一下学校的邮箱,用的也是腾讯的企业邮箱…<br><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/1582886911.png"></p>
 <p>成了,但是结果也没收到通知,翻了一下原来躺在垃圾箱里了…</p>
 </li>
 <li><h3 id="进一步尝试"><a href="#进一步尝试" class="headerlink" title="进一步尝试"></a>进一步尝试</h3><blockquote>
 <p>这里博主用了之前的写法(几个月前),结果还是被拒了…腾讯升级的也太快了吧</p>
 </blockquote>
-<pre><code class="sh">kali@kali:~$ swaks --to xxxxxxx@mail.xxx.edu.cn --from info@example.com  --ehlo example.com --body hello --header &quot;Subject: hello&quot;</code></pre>
+<pre><code class="sh">kali@kali:~$ swaks --to xxxxxxx@mail.xxx.edu.cn --from info@example.com  --ehlo example.com --body hello --header &quot;Subject: hello&quot;
+</code></pre>
 <p>第一次 550(我记得之前就是这样写的呀…),怀疑是<code>X-Mailer</code>挂着个swaks的问题,修改一下swaks</p>
-<pre><code class="sh">kali@kali:~$ swaks --to xxxxxxx@mail.xxx.edu.cn --from info@example.com  --ehlo example.com --body hello --header &quot;Subject: hello&quot; --header-X-Mailer SMTP</code></pre>
+<pre><code class="sh">kali@kali:~$ swaks --to xxxxxxx@mail.xxx.edu.cn --from info@example.com  --ehlo example.com --body hello --header &quot;Subject: hello&quot; --header-X-Mailer SMTP
+</code></pre>
 <p>难不成还是<code>Message-Id</code>有kali的问题吗,也改一下吧…</p>
-<pre><code class="sh">kali@kali:~$ swaks --to xxxxxx@mail.xxxx.edu.cn --from info@example.com  --ehlo example.com --body hello --header &quot;Subject: hello&quot;  --header-X-Mailer SMTP --header-Message-Id &#39;&lt;51891223094431836868@example.com&gt;&#39;</code></pre>
+<pre><code class="sh">kali@kali:~$ swaks --to xxxxxx@mail.xxxx.edu.cn --from info@example.com  --ehlo example.com --body hello --header &quot;Subject: hello&quot;  --header-X-Mailer SMTP --header-Message-Id &#39;&lt;51891223094431836868@example.com&gt;&#39;
+</code></pre>
 <p>也被拒了….没办法了,用个跳板吧.</p>
 </li>
-<li><h3 id="邮件托管平台"><a href="#邮件托管平台" class="headerlink" title="邮件托管平台"></a>邮件托管平台</h3><p>这里使用了<a href="https://support.smtp2go.com/hc/en-gb" target="_blank" rel="external nofollow noopener noreferrer">Smtp2go</a>这个平台作为一个跳板,用有信誉的SMTP服务器转发邮件会增加可信度(吧)</p>
+<li><h3 id="邮件托管平台"><a href="#邮件托管平台" class="headerlink" title="邮件托管平台"></a>邮件托管平台</h3><p>这里使用了<a target="_blank" rel="external nofollow noopener noreferrer" href="https://support.smtp2go.com/hc/en-gb">Smtp2go</a>这个平台作为一个跳板,用有信誉的SMTP服务器转发邮件会增加可信度(吧)</p>
 <p>注册邮箱,注册时候需要有一个自己域名的邮件地址…注册好后免费的用户能发1000封邮件,足够了</p>
 <p>初次登陆进去会让你设置用户名和密码,设置好后就可以使用Swaks+Smtp2go来伪造邮件了</p>
 <pre><code>swaks --to id@xxx.edu.cn --from root@xxx.edu.cn\
  --header-X-Mailer SMTP  --ehlo xxx.edu.cn --body &#39;test&#39;\
- --server mail.smtp2go.com -p 2525 -au username -ap passwd</code></pre><p>发送后就能在收件箱收到了…稍加修改,加上附件和主题</p>
+ --server mail.smtp2go.com -p 2525 -au username -ap passwd
+</code></pre>
+<p>发送后就能在收件箱收到了…稍加修改,加上附件和主题</p>
 <pre><code>  swaks --to id@xxx.edu.cn --from root@xxx.edu.cn\
  --header-X-Mailer SMTP  --ehlo xxx.edu.cn --body &#39;退学通知&#39;\
  --server mail.smtp2go.com -p 2525 -au username -ap passwd \
- --attach /home/kali/Desktop/Notice.docx --header &quot;Subject:退学通知&quot;</code></pre><p> 就…完成啦</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200228191934.png" alt></p>
+ --attach /home/kali/Desktop/Notice.docx --header &quot;Subject:退学通知&quot;
+</code></pre>
+<p> 就…完成啦</p>
+<p> <img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200228191934.png"></p>
 <p> 效果图</p>
 <p> 但是其实还是有一些问题的,比如发件人处并不是伪造的邮箱名称</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200228192125.png" alt></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200228192125.png"></p>
 <p> 加上Mail.from即可显示名称了</p>
-<pre><code>  swaks --to id@xxx.edu.cn --from root@xxx.edu.cn\
-  --header-X-Mailer SMTP  --ehlo xxx.edu.cn --body &#39;退学通知&#39;\
-  --server mail.smtp2go.com -p 2525 -au username -ap passwd \
-  --attach /home/kali/Desktop/Notice.docx --header &quot;Subject:退学通知&quot; \
-  --h-From: &#39;教务处&lt;admin@xxx.edu.cn&gt;&#39;</code></pre><p> 最终效果<br> <img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200228192546.png" alt></p>
+<pre><code> swaks --to id@xxx.edu.cn --from root@xxx.edu.cn\
+ --header-X-Mailer SMTP  --ehlo xxx.edu.cn --body &#39;退学通知&#39;\
+ --server mail.smtp2go.com -p 2525 -au username -ap passwd \
+ --attach /home/kali/Desktop/Notice.docx --header &quot;Subject:退学通知&quot; \
+ --h-From: &#39;教务处&lt;admin@xxx.edu.cn&gt;&#39;
+</code></pre>
+<p> 最终效果<br> <img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200228192546.png"></p>
 </li>
 <li><h3 id="附加-绕过SPF"><a href="#附加-绕过SPF" class="headerlink" title="附加:绕过SPF"></a>附加:绕过SPF</h3><p>SMTP出来了这么长时间里,其实伪造邮件一直都存在,如何解决这个问题呢?</p>
-<p>早在2006年的<a href="https://tools.ietf.org/html/rfc4408" target="_blank" rel="external nofollow noopener noreferrer">RFC 4408</a>中提出了Sender Policy Framework (SPF)发件人政策框架 规定了如何验证发件人身份.</p>
+<p>早在2006年的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://tools.ietf.org/html/rfc4408">RFC 4408</a>中提出了Sender Policy Framework (SPF)发件人政策框架 规定了如何验证发件人身份.</p>
 <p>通过域名DNS TXT记录中的一段SPF文字 来验证发件人的SMTP服务器IP地址是不是属于当前域的IP.如果发件IP无法通过SPF验证则会降低邮件的可信度(有可能被拒信).</p>
 <p>虽然QQ邮箱的安全性已经做的不错了,但是上面的邮件没有通过SPF记录的还是能正常的发送到收件人的邮箱中.</p>
 <p>而其实绕过SPF记录也挺简单的,在使用了第三方SMTP服务器转发的情况下,将<code>from</code>写为第三方发件的域,如:</p>
@@ -553,7 +563,9 @@ To: </code></pre>
 --header-X-Mailer SMTP  --ehlo xxx.edu.cn --body &#39;退学通知&#39;\
 --server mail.smtp2go.com -p 2525 -au username -ap passwd \
 --attach /home/kali/Desktop/Notice.docx --header &quot;Subject:退学通知&quot; \
---h-From: &#39;教务处&lt;admin@xxx.edu.cn&gt;&#39;</code></pre><p>由于各种邮箱显示的发件人都是<code>Header中的From</code>,所以这样做既通过了SPF验证也显示的是伪造的名字.</p>
+--h-From: &#39;教务处&lt;admin@xxx.edu.cn&gt;&#39;
+</code></pre>
+<p>由于各种邮箱显示的发件人都是<code>Header中的From</code>,所以这样做既通过了SPF验证也显示的是伪造的名字.</p>
 </li>
 </ul>
 <h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>其实一早就构思好了文章怎么写的了(在几个月前),结果因为咕咕太久了被腾讯升级邮箱的安全性后整个想好的都被打乱了…最终”简单研究”变得复杂了起来</p>
@@ -562,13 +574,13 @@ To: </code></pre>
 <hr>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><blockquote>
 <ul>
-<li><a href="https://linux.die.net/man/1/swaks" target="_blank" rel="external nofollow noopener noreferrer">https://linux.die.net/man/1/swaks</a></li>
-<li><a href="https://payloads.online/archivers/2019-05-09/1" target="_blank" rel="external nofollow noopener noreferrer">https://payloads.online/archivers/2019-05-09/1</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol" target="_blank" rel="external nofollow noopener noreferrer">https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Sender_Policy_Framework" target="_blank" rel="external nofollow noopener noreferrer">https://en.wikipedia.org/wiki/Sender_Policy_Framework</a></li>
-<li><a href="https://www.freebuf.com/sectool/92397.html" target="_blank" rel="external nofollow noopener noreferrer">https://www.freebuf.com/sectool/92397.html</a></li>
-<li><a href="https://www.freebuf.com/articles/web/133689.html" target="_blank" rel="external nofollow noopener noreferrer">https://www.freebuf.com/articles/web/133689.html</a></li>
-<li><a href="https://www.freebuf.com/articles/web/138764.html" target="_blank" rel="external nofollow noopener noreferrer">https://www.freebuf.com/articles/web/138764.html</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://linux.die.net/man/1/swaks">https://linux.die.net/man/1/swaks</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://payloads.online/archivers/2019-05-09/1">https://payloads.online/archivers/2019-05-09/1</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Sender_Policy_Framework">https://en.wikipedia.org/wiki/Sender_Policy_Framework</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.freebuf.com/sectool/92397.html">https://www.freebuf.com/sectool/92397.html</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.freebuf.com/articles/web/133689.html">https://www.freebuf.com/articles/web/133689.html</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.freebuf.com/articles/web/138764.html">https://www.freebuf.com/articles/web/138764.html</a></li>
 </ul>
 </blockquote>
 

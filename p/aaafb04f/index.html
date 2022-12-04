@@ -317,7 +317,7 @@
     <!-- Custom Head -->
     
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.0.0"></head>
 
 
     
@@ -499,18 +499,19 @@
             <p>最近发现学校宿舍移动的宽带有 IPv6 就把吃灰的树莓派翻了出来,然后发现一个问题….IPv6太长了,所以就打算利用CloudFlare Api实现一个DDNS服务</p>
 <h2 id="CloudFlare-Token"><a href="#CloudFlare-Token" class="headerlink" title="CloudFlare Token"></a>CloudFlare Token</h2><p>首先,获取你的 Token 博主偷懒直接选择了使用全局 Token(</p>
 <p>进入 <code>Overview</code> 界面,可以在右下角找到 <code>Get your API token</code> 的链接</p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191024223341.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191024223341.png"></p>
 <p>点击 <code>Global API Key</code> 的 <code>View</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191024223556.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191024223556.png"></p>
 <p>输入密码和验证码,即可获得 你的<code>Token</code></p>
 <h2 id="CloudFlare-Api"><a href="#CloudFlare-Api" class="headerlink" title="CloudFlare Api"></a>CloudFlare Api</h2><blockquote>
-<p><a href="https://api.cloudflare.com/#getting-started-requests" target="_blank" rel="external nofollow noopener noreferrer">https://api.cloudflare.com/#getting-started-requests</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://api.cloudflare.com/#getting-started-requests">https://api.cloudflare.com/#getting-started-requests</a></p>
 </blockquote>
 <p>有了 <code>Token</code> 首先先获取下基本信息</p>
 <pre><code class="bash">curl -X GET &quot;https://api.cloudflare.com/client/v4/zones/$zone_ID&quot; \
      -H &quot;Content-Type:application/json&quot; \
      -H &quot;X-Auth-Key:1234567893feefc5f0q5000bfo0c38d90bbeb&quot; \
-     -H &quot;X-Auth-Email:example@example.com&quot;</code></pre>
+     -H &quot;X-Auth-Email:example@example.com&quot;
+</code></pre>
 <p>将其中的</p>
 <ul>
 <li><code>X-Auth-Email</code>的值换成登陆的邮箱</li>
@@ -531,15 +532,16 @@
 <li><code>address</code>先随便填写一个</li>
 </ul>
 <p>最后将Cloudflare的代理 <code>Proxy</code> 关闭 <code>Save</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191024231252.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191024231252.png"></p>
 <h2 id="使用API获取DNS记录的ID"><a href="#使用API获取DNS记录的ID" class="headerlink" title="使用API获取DNS记录的ID"></a>使用API获取DNS记录的ID</h2><p>使用以下脚本</p>
 <pre><code class="bash">curl -X GET &quot;https://api.cloudflare.com/client/v4/zones/$zone_ID/dns_records&quot; \
      -H &quot;Content-Type:application/json&quot; \
      -H &quot;X-Auth-Key:1234567893feefc5f0q5000bfo0c38d90bbeb&quot; \
-     -H &quot;X-Auth-Email:example@example.com&quot;</code></pre>
+     -H &quot;X-Auth-Email:example@example.com&quot;
+</code></pre>
 <p>找到刚刚设置的域名ID</p>
 <blockquote>
-<p>如果太过凌乱可以将域名修改为<br><a href="https://api.cloudflare.com/client/v4/zones/$zone_ID/dns_records?type=AAAA&amp;name=刚刚设置的域名(记得写全)" target="_blank" rel="external nofollow noopener noreferrer">https://api.cloudflare.com/client/v4/zones/$zone_ID/dns_records?type=AAAA&amp;name=刚刚设置的域名(记得写全)</a></p>
+<p>如果太过凌乱可以将域名修改为<br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://api.cloudflare.com/client/v4/zones/$zone_ID/dns_records?type=AAAA&amp;name=%E5%88%9A%E5%88%9A%E8%AE%BE%E7%BD%AE%E7%9A%84%E5%9F%9F%E5%90%8D(%E8%AE%B0%E5%BE%97%E5%86%99%E5%85%A8)">https://api.cloudflare.com/client/v4/zones/$zone_ID/dns_records?type=AAAA&amp;name=刚刚设置的域名(记得写全)</a></p>
 </blockquote>
 <blockquote>
 <p>IPv4 <code>type</code> 修改为 <code>A</code></p>
@@ -549,10 +551,11 @@ curl -X GET &quot;https://api.cloudflare.com/client/v4/zones/$zone_ID/dns_record
      -H &quot;Content-Type:application/json&quot; \
      -H &quot;X-Auth-Key:1234567893feefc5f0q5000bfo0c38d90bbeb&quot; \
      -H &quot;X-Auth-Email:example@example.com&quot;
-     --data &#39;{&quot;type&quot;:&quot;AAAA&quot;,&quot;name&quot;:&quot;&#39;$DNS_RECORD&#39;&quot;,&quot;content&quot;:&quot;&#39;$CURRENT_IP&#39;&quot;,&quot;ttl&quot;:1,&quot;proxied&quot;:false}&#39;</code></pre>
+     --data &#39;&#123;&quot;type&quot;:&quot;AAAA&quot;,&quot;name&quot;:&quot;&#39;$DNS_RECORD&#39;&quot;,&quot;content&quot;:&quot;&#39;$CURRENT_IP&#39;&quot;,&quot;ttl&quot;:1,&quot;proxied&quot;:false&#125;&#39;
+</code></pre>
 <ul>
 <li>将<code>$dns_ID</code>修改为自己的dns ID</li>
-<li><code>$DNS_RECORD</code>修改为自己的记录名称(写全/如:”test.hex.moe”)</li>
+<li><code>$DNS_RECORD</code>修改为自己的记录名称(写全&#x2F;如:”test.hex.moe”)</li>
 <li><code>$CURRENT_IP</code>修改为自己想使用的IP</li>
 </ul>
 <blockquote>
@@ -561,10 +564,11 @@ curl -X GET &quot;https://api.cloudflare.com/client/v4/zones/$zone_ID/dns_record
 <blockquote>
 <p>在上面的代码中,我用了 ipv6.ip.sb 来获取自己的IPv6地址</p>
 </blockquote>
-<h2 id="设置crontab"><a href="#设置crontab" class="headerlink" title="设置crontab"></a>设置crontab</h2><pre><code class="bash">crontab -e</code></pre>
+<h2 id="设置crontab"><a href="#设置crontab" class="headerlink" title="设置crontab"></a>设置crontab</h2><pre><code class="bash">crontab -e
+</code></pre>
 <p>添加一行</p>
 <blockquote>
-<p>*/1 * * * * /root/setDNS.sh</p>
+<p>*&#x2F;1 * * * * &#x2F;root&#x2F;setDNS.sh</p>
 </blockquote>
 <p>一分钟执行一次 setDNS.sh (将后方的路径修改为自己的)</p>
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>一分钟获取一次地址会不会太频繁了….之后考虑一下从本机读取吧…</p>
