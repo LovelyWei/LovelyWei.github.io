@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.2 -->
+    <script>
+        window.materialVersion = "1.5.2"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            我的2020(下) | 
+        
+        LovelyWei&#39;s 废纸篓
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/avatar.jpg">
+    <link rel="icon" href="/img/avatar.jpg">
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" itemprop="description" content="[已完坑]
+前言下半年也没有学到什么,甚至一篇Blog也没有发…虽然已经如此糟糕了,但是年末总结还是要写下的. 证明自己还活着和写下对未来的少许期望.
+依照惯例,博主文笔不好,所以这这一篇依旧是给自己看的毫无营养的流水账,也许更像一种日记吧.">
+    <meta name="keywords" content=",日常">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?LH0s8usgiEPzK9Nm8d0feA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/tomorrow-night-eighties.min.css?2LJQzURO+Kr8r/fl/T8oMA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
+
+    
+
+    
+        
+            <link rel="stylesheet" href="/css/fontawesome.min.css">
+        
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?ezyEvm8ST5CGfpA+kFFi1g==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="LovelyWei&#39;s 废纸篓">
+    <meta name="msapplication-starturl" content="https://hex.moe/p/e5270b01/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="LovelyWei&#39;s 废纸篓">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/avatar.jpg">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+        
+            <link rel="alternate" type="application/atom+xml" href="/atom.xml">
+        
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://hex.moe/p/e5270b01/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="我的2020(下) | LovelyWei&#39;s 废纸篓">
+    <meta property="og:image" content="/img/avatar.jpg">
+    <meta property="og:description" content="[已完坑]
+前言下半年也没有学到什么,甚至一篇Blog也没有发…虽然已经如此糟糕了,但是年末总结还是要写下的. 证明自己还活着和写下对未来的少许期望.
+依照惯例,博主文笔不好,所以这这一篇依旧是给自己看的毫无营养的流水账,也许更像一种日记吧.">
+    <meta property="og:article:tag" content="日常"> 
+
+    
+        <meta property="article:published_time" content="Tue Feb 02 2021 16:42:00 GMT+0800">
+        <meta property="article:modified_time" content="Fri Nov 18 2022 18:19:54 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://hex.moe/p/e5270b01/index.html">
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://hex.moe/p/e5270b01/index.html",
+    "headline": "我的2020(下)",
+    "datePublished": "Tue Feb 02 2021 16:42:00 GMT+0800",
+    "dateModified": "Fri Nov 18 2022 18:19:54 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "LovelyWei",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.jpg"
+        },
+        "description": "A Noob."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "LovelyWei&#39;s 废纸篓",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/avatar.jpg"
+        }
+    },
+    "keywords": ",日常",
+    "description": "[已完坑]
+前言下半年也没有学到什么,甚至一篇Blog也没有发…虽然已经如此糟糕了,但是年末总结还是要写下的. 证明自己还活着和写下对未来的少许期望.
+依照惯例,博主文笔不好,所以这这一篇依旧是给自己看的毫无营养的流水账,也许更像一种日记吧.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-120647290-2', 'auto');ga('send', 'pageview');
+</script>
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+    
+        <body id="scheme-Isolation" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+                    <!-- Isolation Header -->
+                    <header class="header">
+    <div class="header-wrapper">
+        <!-- Header Copyright -->
+        <div class="header-copyright">
+            <div class="header-site">
+                ©&nbsp;
+                <script type="text/javascript">
+                    var fd = new Date();
+                    document.write(fd.getFullYear());
+                </script>
+                &nbsp;LovelyWei's 废纸篓
+            </div>
+            <!--
+            I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+            It will not impact the appearance and can give developers a lot of support :)
+
+            很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+            它不会影响美观并可以给开发者很大的支持。 :)
+            -->
+            <div>
+                Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a>
+                <br>
+                Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Material</a>
+            </div>
+        </div>
+
+        <!-- Header Title -->
+        <span class="header-title header-item">
+            <a href="/" title="LovelyWei&#39;s 废纸篓">
+                LovelyWei&#39;s 废纸篓
+            </a>
+        </span>
+
+        <p class="header-slogan header-item">
+        
+            
+                A Noob.
+            
+        
+        </p>
+
+        <!-- Header Nav -->
+        <nav class="header-nav header-item">
+            <span class="header-nav-item">
+                <a href="/" title="Home">
+                    <span>Home</span>
+                </a>
+            </span>
+
+            <!-- Pages  -->
+            
+                <span class="header-nav-item">
+                    <a href="/tags" title="Tags">
+                        <span>Tags</span>
+                    </a>
+                </span>
+            
+                <span class="header-nav-item">
+                    <a href="/friends" title="Friends">
+                        <span>Friends</span>
+                    </a>
+                </span>
+            
+                <span class="header-nav-item">
+                    <a href="/timeline" title="TimeLine">
+                        <span>TimeLine</span>
+                    </a>
+                </span>
+            
+                <span class="header-nav-item">
+                    <a href="/about" title="About">
+                        <span>About</span>
+                    </a>
+                </span>
+            
+            
+        </nav>
+
+        <!-- Header SNS -->
+        <div class="header-item header-sns_list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Telegram -->
+    
+        <a href="https://t.me/LovelyWei" target="_blank" rel="external nofollow noopener noreferrer">
+            <i class="fa fa-telegram fa-lg" aria-hidden="true"></i>
+        </a>
+    
+</div>
+
+    </div>
+</header>
+
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+
+                    <!-- Post TOC -->
+
+    
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+
+
+    <!-- Isolation Post Header -->
+    <!-- Post thumbnail -->
+    
+        <!-- Post Header Info -->
+        <div class="post-header_info without-thumbnail">
+            <!-- Author Avatar & Name -->
+            <img src="/img/avatar.jpg" class="avatar-img" width="44px" height="44px" alt="LovelyWei's avatar">
+            <span class="name-span">LovelyWei</span>
+        </div>
+
+        <!-- Null Thumbnail -->
+        <div class="post_thumbnail-null">
+    
+        </div>
+
+
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+
+    
+        <div class="post-content_wrapper">
+            <p class="post-title">
+                我的2020(下)
+            </p>
+            <p>[已完坑]</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>下半年也没有学到什么,甚至一篇Blog也没有发…虽然已经如此糟糕了,但是年末总结还是要写下的. 证明自己还活着和写下对未来的少许期望.</p>
+<p>依照惯例,博主文笔不好,所以这这一篇依旧是给自己看的毫无营养的流水账,也许更像一种日记吧.</p>
+<a id="more"></a>
+
+<h2 id="我的下半年"><a href="#我的下半年" class="headerlink" title="我的下半年"></a>我的下半年</h2><h3 id="暑假-6月"><a href="#暑假-6月" class="headerlink" title="暑假 6月"></a>暑假 6月</h3><p>在下半年开始的三个月内中,平平淡淡,无所事事,也受到疫情的影响,虽然自己没有中招新冠病毒,但上半年的新闻让我感到压抑,心情一直很糟糕,学业和技术上的事情都没有动过,一旦想起就会变得头疼,想在这几个月内让自己放松一下…</p>
+<p>日常活动主要是找高中的同学和朋友,逛逛街,吃吃饭,虽然只是短暂的快乐,但也总比没有好.</p>
+<h3 id="上海之旅-7月"><a href="#上海之旅-7月" class="headerlink" title="上海之旅 7月"></a>上海之旅 7月</h3><p>由于图片过多,占的篇幅较大,这部分内容挪动到了 <a href="/p/b2266cd1/">上海之旅</a></p>
+<h3 id="无所事事-漫无止境-的8月"><a href="#无所事事-漫无止境-的8月" class="headerlink" title="无所事事 漫无止境 的8月"></a>无所事事 <del>漫无止境</del> 的8月</h3><p>这段时间感觉并没有什么实质性的收获 主要是摸鱼和约朋友出来逛逛街… <del>养老</del></p>
+<h3 id="学校-9月-10月-11月-12月"><a href="#学校-9月-10月-11月-12月" class="headerlink" title="学校 9月/10月/11月/12月"></a>学校 9月/10月/11月/12月</h3><h4 id="开学"><a href="#开学" class="headerlink" title="开学"></a>开学</h4><p>月初开学,终于回到了久违的学校,凭着初中英语水平的我裸考了一次四级,理所当然的没过(</p>
+<p>随着正式开学,进入大二的我专业课程逐渐多了起来,有</p>
+<ul>
+<li>计算机网络</li>
+<li>计算机组成原理</li>
+<li>微控制器应用</li>
+</ul>
+<p>类似这些名字看似高大上的课程.</p>
+<p>同时开始了新学期的第一个错误决定,我没有选择自修/免修这些课程.</p>
+<p>天真的我对我校课程还有一丝的期待,想着去上几门高质量的专业课,现实把我狠狠的教育了一顿…</p>
+<p>事实证明可以在一个星期内就能学完我校整个学期的所有计算机专业课内容.</p>
+<p>接下来的各种错误决定便接连发生了,去上各种水课的我并没有珍惜好宝贵的时间,选择了在课堂上上网摸鱼,在这里我也不想多为自己狡辩是因为课堂吵闹等原因了…</p>
+<h4 id="社团"><a href="#社团" class="headerlink" title="社团"></a>社团</h4><p>同时到了选社团和选择选修课程的时间,但我今年并没有继续留在信息安全相关的社团.</p>
+<p>主要原因大概还是我个人,大概是因为以下几点原因</p>
+<ul>
+<li>平时不够活跃,加上半个学期的疫情影响,并没有很好的融入社团中</li>
+<li>在学校CTF战队招人时也没有积极的去参与</li>
+<li>并不是信息安全专业的学生</li>
+</ul>
+<p>结果就是没能进入我校CTF战队.</p>
+<p>最后选择加入了相对轻松而且开心的日语社(</p>
+<h4 id="选修"><a href="#选修" class="headerlink" title="选修"></a>选修</h4><p>选修课选择了一个说轻松也轻松,说困难也困难的 计算机视觉 相关选修.</p>
+<p>平常睡觉,期末炼出物体识别的丹作为大作业上交就可以.</p>
+<p>(如何炼丹全靠自学</p>
+<p>剩下的更多时间在观赏日本动画片与参观深圳,回想起来,这一年的确是颓废的一年.</p>
+<h4 id="动画片"><a href="#动画片" class="headerlink" title="动画片"></a>动画片</h4><p>观赏的动画片都是一些知名/口碑较好且年代较为久远的,相信口碑较好的动画片一定很有意思,主要有(</p>
+<ul>
+<li>EVA</li>
+<li>轻音少女</li>
+<li>京吹</li>
+<li>利兹与青鸟</li>
+<li>请问你要来点兔子吗</li>
+</ul>
+<p>除&lt;轻音少女&gt;和&lt;点兔&gt;是放松心情的外,其他几部比较有深度,从中学到了许多东西,算是影响深刻了.(在动画片里学东西是不是搞错了什么</p>
+<p><del>可是现在都 2021/2/2 了 EVA 终 怎么还没有.</del></p>
+<h4 id="重返深渊"><a href="#重返深渊" class="headerlink" title="重返深渊"></a>重返深渊</h4><p>这次回到深圳,印象发生了很大的改变,也许是呆久了 (其实也没多久,半年都不到) ,脑海中逐渐映出一句话.</p>
+<p>远看深圳像天堂,近看深圳像牢房.</p>
+<p>有空时常常走街串巷,体会到的不再是大城市的美好与光鲜亮丽,反倒觉得这个城市特别的压抑…人活在深圳会体会到整个社会都在给你压力.</p>
+<p>人们在地铁站内步伐匆忙,聊的事情也是不外乎炒股/赚钱,有着近乎离谱的房价与物价 <del>在市中心附近吃饭人均90,还是麦当劳1+1好</del> ,是当之无愧的内卷之城.</p>
+<p>同时,我认为深圳也是一座赛博之城,还是由于疫情的原因,各种健康码/人脸识别测温/无接触取餐一夜间占领了市场,回想起去年还是前年看过了一篇文章,里面的内容已经不再是幻想,而是渐渐地在这个城市中成为现实…</p>
+<blockquote>
+<p><a href="https://www.zhihu.com/question/351592617/answer/884128175" target="_blank" rel="external nofollow noopener noreferrer">中式赛博朋克，“未来已来”</a></p>
+</blockquote>
+<p>不过无论我对这座城市是喜欢也好,讨厌也好,也改变不了任何事实.</p>
+<p>不可否认的是深圳市对于年轻人而言有着更多的机会,更高的薪酬,以及更多的压力.</p>
+<p>我想以后就业,也还会尽量的选择在这个城市吧,虽然可能是租着房子,每周996的干活.</p>
+<h4 id="认识的人"><a href="#认识的人" class="headerlink" title="认识的人"></a>认识的人</h4><p>虽然是一名社恐,但是在这个学期中也认识了几位新的小可爱,也有了第一次 <del>鸽子</del> 网友见面会.</p>
+<blockquote>
+<p><del>这里的细节被抹掉了</del></p>
+</blockquote>
+<p>一个比较失败的地方在于没有认识到可爱的学弟学妹,校内除了同班同学外基本上不认识其他人了,和校内日语社的小可爱们没有什么共同话题,也没有参加校内的大型活动(</p>
+<p><del>我觉得就算参加了也不会有什么结果的,毕竟社恐</del></p>
+<h4 id="关于爱情"><a href="#关于爱情" class="headerlink" title="关于爱情"></a>关于爱情</h4><p>今年的爱情收获也是 <code>0</code> , 没有!</p>
+<p>但宿舍和朋友圈的小伙伴也逐渐脱单了,虽然理智上我有更加重要的事情要去做,这个水平的我根本无法保护和去爱任何人…</p>
+<p>但是还是避免不了心里难受.</p>
+<p><del>平时能为自己找到一万种理由,却在关键时刻找不到我能爱别人的理由</del></p>
+<h4 id="未来方向"><a href="#未来方向" class="headerlink" title="未来方向"></a>未来方向</h4><p>没能顺利的加入我校CTF战队这件事情对我的影响还算蛮大的 <del>能算是对我打击吗(?</del> …以至于后面思考了一段时间未来该干一些什么,继续往信息安全方向发展的话会缺少与校内同龄人交流的机会,各种各样的机会也会变小,和原本的目标相差较远.</p>
+<p><del>看到他们一起挖SRC和去HW还蛮羡慕的</del></p>
+<p>若选择往开发方向,在去年开学没有加入算法竞赛的队伍…</p>
+<p>逐渐的,对信安方面热情下降了许多,除了上面的原因外还有一个原因是遇到了瓶颈,如果需要继续深入的研究信息安全需要各种各样的计算机基础,数学基础,与英语基础.</p>
+<p>同时CURD也不是太想干,婉拒了学校小程序开发的邀请.</p>
+<p>思考一段时间未来该干什么后,虽然还没有想清楚一个结果,但算是想开了一个方向.</p>
+<p>虽然孤独,但一个人也挺好的.</p>
+<p>信安的兴趣减弱了但是还是想深入学习RE和PWN,加上各种计算机的基础对开发也有好处,所以在课余的时间把&lt;深入理解计算机系统&gt;和汇编相关的书籍看完了.</p>
+<p>看完后,本来想写一个简易的操作系统,但是由于懒的缘故并没有动手(</p>
+<h4 id="想干的事"><a href="#想干的事" class="headerlink" title="想干的事"></a>想干的事</h4><p>接下来需要做的事情应该就是继续研究各种机械工业出版社的大理石封面书籍,提升计算机基础,2021年6月的英语4级别,同时需要面对2022年4月的一场大考试.</p>
+<p>大考试是广东省本科插班生的考试(也就是俗称的专升本),虽然平时不是很愿意提及学历问题,但这里是日记对吧,日记是没问题的吧(</p>
+<p>对于从中专再到大专的我来说,文化课水平基本上是丈育水平,实际上还蛮担心这次的考试,加上广东也算是个内卷大省,录取率并不算高,所以接下来的时间可能需要更多的投入到数理基础和外语政治上,过完寒假后研究计算机和其他有趣的时间就要变少了.</p>
+<p><del>脑袋笨笨,欠下的迟早要补上的</del></p>
+<p>不过说到兴趣方面,还是希望做二进制研究,最近对软件无线电也有少许兴趣.</p>
+<p>但理智告诉我需要研究算法与开发,学历和实际经验都不足的情况下研究信安是要饿肚子的.</p>
+<p>如果有时间的话,希望我能入门算法,顺便能写一些技术博客就好了.</p>
+<h4 id="违约的事"><a href="#违约的事" class="headerlink" title="违约的事"></a>违约的事</h4><p>上一年插下了许多的旗子,但貌似只完成了一个,将CSAPP看完了.</p>
+<p>英语四级和算法…只能明年再战了.</p>
+<p>但是关于驾驶证的事情,是我后悔但无力改变现实的一件事,考驾照需要大概5000 CNY,由于家境贫寒…并没有那么多钱钱让我去考,一月份参加的一下小竞赛获奖奖金也迟迟不见下发,未来可能也没有时间再去考驾照,只能说残念了.</p>
+<h4 id="关于病"><a href="#关于病" class="headerlink" title="关于病"></a>关于病</h4><p>之前关于页面写了一行</p>
+<blockquote>
+<p>得了一个治不好但是又没这么快死的病.</p>
+</blockquote>
+<p>今年又去检查了几次指标,在水平范围内,但是都在逐渐恶化…最后一次测试达到了临界值…目前今年还没去医院检查,挺害怕再去住一次医院(</p>
+<p>不过自从上次出院后,作息改良了许多,目前也在坚持运动了,等瘦一点就再去检查一次,听天由命吧(</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总而言之,2020年是颓废的一年,无所事事,也一无所成,年度状态是焦虑不安,常常使用着手机浏览无意义的碎片化信息却不愿意专注努力的做一件事…</p>
+<p>虽然不想写失败之类的话语,但回首2020,的确是我的失败一年,错过了机会,浪费了时间,没有兑现自己的承诺</p>
+<blockquote>
+<p>一如既往的健康,在接下来的一年里不再迷茫,”喜欢就好” 能有成果</p>
+</blockquote>
+<p>三件事一件也未完成,原计划与年末的年度总结也拖到了2月份,在我写下这篇文章的同时心情杂乱但又未差到极点(不然就不会有这篇文章了),但按照惯例.</p>
+<p>感谢一直为我提供支持与帮助的所有人们,希望2021的我能有所收获.</p>
+<p><strong>记于 2021/2/2 16:42:00</strong></p>
+
+            
+                <blockquote>
+                    <p>
+                         
+                            This blog is under a <a href="/creativecommons.html" target="_blank">CC BY-NC-SA 3.0 Unported License</a>
+                        
+                        <br>
+                        Link to this article:  https://hex.moe/p/e5270b01/
+                    </p>
+                </blockquote>
+            
+        </div>
+    
+</div>
+
+
+                
+                    <!-- Paradox Post Info -->
+                    
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 Gitalk -->
+<div id="gitalk-comment">
+    <!-- Gitalk 评论框 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script>
+    var gitalk = new Gitalk({
+            clientID: 'dda34f7fb2fdd05c451f',
+            clientSecret: '943037abd1cb1327dff02dda54bc9094c464084b',
+            repo: 'LovelyWei.github.io',
+            owner: 'LovelyWei',
+            admin: ['LovelyWei'],
+            id: window.location.origin + window.location.pathname,
+            // facebook-like distraction free mode
+            distractionFreeMode: false
+        })
+   gitalk.render('gitalk-container')
+</script>
+</div>
+<style>
+    #gitalk-comment {
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/p/58041928/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/p/b2266cd1/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?wgjW/HuQG9JDgvPDPoRAng==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?V/53wGualMuiPM3xoetD5Q==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+   <!-- GitTalk -->
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('
+<link rel="stylesheet" href="/css/uc.css">
+');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+    
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.2 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

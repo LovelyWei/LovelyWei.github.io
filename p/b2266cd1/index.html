@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.2 -->
+    <script>
+        window.materialVersion = "1.5.2"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            上海之旅 | 
+        
+        LovelyWei&#39;s 废纸篓
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/avatar.jpg">
+    <link rel="icon" href="/img/avatar.jpg">
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" itemprop="description" content="
+璀璨不夜城，繁华梦一场
+">
+    <meta name="keywords" content=",日常">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?LH0s8usgiEPzK9Nm8d0feA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/tomorrow-night-eighties.min.css?2LJQzURO+Kr8r/fl/T8oMA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
+
+    
+
+    
+        
+            <link rel="stylesheet" href="/css/fontawesome.min.css">
+        
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?ezyEvm8ST5CGfpA+kFFi1g==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="LovelyWei&#39;s 废纸篓">
+    <meta name="msapplication-starturl" content="https://hex.moe/p/b2266cd1/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="LovelyWei&#39;s 废纸篓">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/avatar.jpg">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+        
+            <link rel="alternate" type="application/atom+xml" href="/atom.xml">
+        
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://hex.moe/p/b2266cd1/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="上海之旅 | LovelyWei&#39;s 废纸篓">
+    <meta property="og:image" content="/img/avatar.jpg">
+    <meta property="og:description" content="
+璀璨不夜城，繁华梦一场
+">
+    <meta property="og:article:tag" content="日常"> 
+
+    
+        <meta property="article:published_time" content="Mon Feb 01 2021 23:00:10 GMT+0800">
+        <meta property="article:modified_time" content="Fri Nov 18 2022 18:19:54 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://hex.moe/p/b2266cd1/index.html">
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://hex.moe/p/b2266cd1/index.html",
+    "headline": "上海之旅",
+    "datePublished": "Mon Feb 01 2021 23:00:10 GMT+0800",
+    "dateModified": "Fri Nov 18 2022 18:19:54 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "LovelyWei",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.jpg"
+        },
+        "description": "A Noob."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "LovelyWei&#39;s 废纸篓",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/avatar.jpg"
+        }
+    },
+    "keywords": ",日常",
+    "description": "
+璀璨不夜城，繁华梦一场
+",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-120647290-2', 'auto');ga('send', 'pageview');
+</script>
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+    
+        <body id="scheme-Isolation" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+                    <!-- Isolation Header -->
+                    <header class="header">
+    <div class="header-wrapper">
+        <!-- Header Copyright -->
+        <div class="header-copyright">
+            <div class="header-site">
+                ©&nbsp;
+                <script type="text/javascript">
+                    var fd = new Date();
+                    document.write(fd.getFullYear());
+                </script>
+                &nbsp;LovelyWei's 废纸篓
+            </div>
+            <!--
+            I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+            It will not impact the appearance and can give developers a lot of support :)
+
+            很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+            它不会影响美观并可以给开发者很大的支持。 :)
+            -->
+            <div>
+                Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a>
+                <br>
+                Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Material</a>
+            </div>
+        </div>
+
+        <!-- Header Title -->
+        <span class="header-title header-item">
+            <a href="/" title="LovelyWei&#39;s 废纸篓">
+                LovelyWei&#39;s 废纸篓
+            </a>
+        </span>
+
+        <p class="header-slogan header-item">
+        
+            
+                A Noob.
+            
+        
+        </p>
+
+        <!-- Header Nav -->
+        <nav class="header-nav header-item">
+            <span class="header-nav-item">
+                <a href="/" title="Home">
+                    <span>Home</span>
+                </a>
+            </span>
+
+            <!-- Pages  -->
+            
+                <span class="header-nav-item">
+                    <a href="/tags" title="Tags">
+                        <span>Tags</span>
+                    </a>
+                </span>
+            
+                <span class="header-nav-item">
+                    <a href="/friends" title="Friends">
+                        <span>Friends</span>
+                    </a>
+                </span>
+            
+                <span class="header-nav-item">
+                    <a href="/timeline" title="TimeLine">
+                        <span>TimeLine</span>
+                    </a>
+                </span>
+            
+                <span class="header-nav-item">
+                    <a href="/about" title="About">
+                        <span>About</span>
+                    </a>
+                </span>
+            
+            
+        </nav>
+
+        <!-- Header SNS -->
+        <div class="header-item header-sns_list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Telegram -->
+    
+        <a href="https://t.me/LovelyWei" target="_blank" rel="external nofollow noopener noreferrer">
+            <i class="fa fa-telegram fa-lg" aria-hidden="true"></i>
+        </a>
+    
+</div>
+
+    </div>
+</header>
+
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+
+                    <!-- Post TOC -->
+
+    
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+
+
+    <!-- Isolation Post Header -->
+    <!-- Post thumbnail -->
+    
+        <!-- Post Header Info -->
+        <div class="post-header_info without-thumbnail">
+            <!-- Author Avatar & Name -->
+            <img src="/img/avatar.jpg" class="avatar-img" width="44px" height="44px" alt="LovelyWei's avatar">
+            <span class="name-span">LovelyWei</span>
+        </div>
+
+        <!-- Null Thumbnail -->
+        <div class="post_thumbnail-null">
+    
+        </div>
+
+
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+
+    
+        <div class="post-content_wrapper">
+            <p class="post-title">
+                上海之旅
+            </p>
+            <blockquote>
+<p><strong>璀璨不夜城，繁华梦一场</strong></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>一个星期前看到朋友圈的人都去了上海玩，正好又有两个同学陪同，<del>脑子一热</del>就决定去上海看看了。</p>
+<h4 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h4><p>时间转眼到了七月份,国内的疫情也控制的很好,朋友圈中掀起了旅游的热潮,当时的机票也挺便宜,但之前一直都没怎么出过远门 <del>主要是没钱</del> 在预算 1500CNY(实际上后面还是超额了) 左右构思了一个星期的行程计划后,决定约上了几个朋友前往上海.</p>
+<p>作为第一次坐飞机,内心既激动又惊慌,在决定出发日的前几日,下单了南航飞往上海的机票,来回合计 700 CNY.</p>
+<p>出发的前一天夜里,怀着对现代大都市的各种幻想中…失眠了.同时也迫不及待地想对比下,作为老牌一线大城市的上海和深圳的种种不同.</p>
+<h4 id="Day1"><a href="#Day1" class="headerlink" title="Day1"></a>Day1</h4><h5 id="出发"><a href="#出发" class="headerlink" title="出发"></a>出发</h5><p>值得纪念的早晨从前一晚的失眠开始,日常的和同学碰头,从家乡小城市坐了一个小时的机场快运大巴后,抵达了机场.</p>
+<blockquote>
+<p><em>接下来的一切就犹如梦境一般开始了</em></p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/IMG_20200716_184955.jpg" alt></p>
+<p>过了层层安检,又等了一个小时,终于踏上了飞机,但这次乘坐体验不是很好,原因是被人骗去了安全门附近,导致第一次的体验很糟心 x</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/IMG_20200716_201156.jpg" alt></p>
+<p>起初还有点害怕之类的,但其实飞机比高铁好很多,上升和下降都不会很令人难受,最重要的是在飞行过程没有网络,不会有外发抖音的事情发生,带上大法降噪后,感觉和高铁一样(</p>
+<h5 id="下机"><a href="#下机" class="headerlink" title="下机"></a>下机</h5><p>在浦东国际机场下了飞机,等一个已经提前偷跑的朋友过来接去酒店…结果等了一个小时,凌晨一点的上海,好冷…</p>
+<p>不过不愧是国内第二大的机场,即使是凌晨12点也是人满为患 <del>(指打不上滴滴)</del> ,机场内还有地铁 <del>走断腿</del> </p>
+<p>好在后面还是坐上了旅馆的接送车,第一天到了一个离机场近的郊区住下了.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_005506.jpg" alt></p>
+<h4 id="Day2"><a href="#Day2" class="headerlink" title="Day2"></a>Day2</h4><h5 id="郊区"><a href="#郊区" class="headerlink" title="郊区"></a>郊区</h5><p>从郊区的旅馆的大床中醒来 <del>知らない天井だ</del> ,准备在旅馆周围吃一顿早餐然后坐旅馆的接送车到附近的地铁站,去市区内的酒店安置一下.</p>
+<p>由于晚上到旅馆时候一片漆黑,加上也很累了,并没有很好的观察周围环境,第二天起床的时候发现上海郊区其实和广州城中村也没什么区别(x</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_085015.jpg" alt></p>
+<p>随便在周围晃了下,感觉也没什么好吃的,决定去市区内在决定早餐吃什么了.</p>
+<p>上海的郊区也很大,酒店的接送车坐了快半个小时才到最近的一个地铁站,开始有大城市的感觉了.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_092014.jpg" alt></p>
+<p>由于某个不靠谱队友的原因,上了地铁后发现他还没有订好酒店,几个人在地铁上现场决定今晚睡哪里(坏</p>
+<p>快速讨论出两个条件</p>
+<ul>
+<li>离地铁站近,靠经市区(陆家嘴)</li>
+<li>便宜</li>
+</ul>
+<p>后决定了一个在 中山公园 地铁站附近的一家平价酒店 200CNY 左右.</p>
+<h5 id="中山公园"><a href="#中山公园" class="headerlink" title="中山公园"></a>中山公园</h5><p>到了中山公园地铁站后第一个感觉是,来到了霓虹 (加上在上海的几天吃的都是日料后更加确信了)</p>
+<p>出地铁站第一个看到的就是一个几乎全日语的广告牌.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_104411.jpg" alt></p>
+<p>运气不好,天空下起了小雨,选择乘坐出租车到酒店,坐在出租车前排后自觉的系上了安全带,被司机大叔说 “哎,上海不用系安全带的” “欸,副驾驶位也不用吗?” “不用的,不用的”(kusa</p>
+<p>到酒店稍微安置 <del>把东西一丢</del> 后就开始去附近找吃的了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_121128.jpg" alt></p>
+<p>走到了酒店附近的 龙之梦购物中心 的 花丸乌冬面 吃了份咖喱乌冬,感觉咖喱淡了点,比较一般. <del>为什么记得这么清楚,因为是来上海吃的第一顿日料(x</del></p>
+<p>随后又走了走,感觉上海市区的购物中心挺密集的,基本上走两步就一个购物中心,不愧是现代化大都市(x</p>
+<p>不过发现上海市挺多红绿灯的屏幕不太一样,使用的是方形点阵屏显示数字,不是七段数码管,感觉有点奇特.</p>
+<p>回到了中山公园地铁站,乘坐地铁到了人民广场站.<del>二次元日开始</del></p>
+<p>在等待地铁2号线的时候,感觉到非常的凉快(?</p>
+<p>后面想了下,原因在2号线部分站没有全屏蔽门,所以比起广州深圳的地铁的风要大.</p>
+<h5 id="人民广场"><a href="#人民广场" class="headerlink" title="人民广场"></a>人民广场</h5><p>出了地铁站后选择 福州路 的出口,一出门就看到了现代化的高楼与有历史气息的矮平房有点说不出的感觉.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_124432.jpg" alt></p>
+<p>沿着 福州路 往下走,发现了一家二次元气息浓厚的罗森(意外发现),当时还是LoveLive主题的罗森,进入后发现有一些阿姨也在里面平常的挑选商品,该说…大城市包容性高吗,毕竟我看起来还是比较媚宅的.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_124503.jpg" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_124720.jpg" alt></p>
+<p>图:二次元罗森.</p>
+<p>在二次元罗森购买了个折扣中的咖啡(难喝),稍微坐下休息后,继续沿着 福州路 往下走.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_130741.jpg" alt></p>
+<p>来到了上海书城,作为一个书城,算是挺大的了,进去逛了几圈,发现种类全面,环境也好 <del>羡慕,我住在这附近该多好</del></p>
+<p>但是由于时间关系并没有呆多久,随后便沿着 福州路 继续往下走.</p>
+<p>沿路发现上海二次元浓度还是蛮高的( <del>也许只是这一条街</del></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//20201226230846.png" alt></p>
+<p>最后到了目的地 外文书店 <del>浓度最高的地方</del></p>
+<p>逛了下二楼,基本上是外文的原版书,还有国家地理幼儿版,但可惜没有原版的国际地理,不然想买一份了.</p>
+<p>到了4楼后就是外文书店的 Animate店 和 松阪书屋,卖各种周边和各种日文原版的轻小说和漫画书.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_135736.jpg" alt></p>
+<p>在 Animate 逛了十多分钟,卖的很多是立牌,但是十分的…贵,基本上都要50CNY+,所以也就看看了…</p>
+<p>Animate外是松阪书屋,可惜松阪书屋都是日文的原版书,并没有台译的轻小说和漫画书,也没有购买到什么.</p>
+<p>出门后发现外文书店还是优秀历史建筑,1931年就存在了,刚刚进去逛的时候却没有感受快100年的建筑物有什么违和的历史气息.</p>
+<p>这就是上海的一种魅力吧(?</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_143101.jpg" alt></p>
+<p>继续向下后还有 文匯報 的旧址,接着看到了另一个让我感到新奇的东西</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_144233.jpg" alt></p>
+<p>上海市区内还有许多电话亭,而且,这些电话亭还是能够正常使用的,在广东这边,我已经快10年没见过电话亭了吧.</p>
+<p>随后又瞎逛了下,贴一些图和无端联想(</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_151007.jpg" alt></p>
+<p><code>new 小区();</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_151346.jpg" alt></p>
+<p>…不敢判断是BUG还真的壕(</p>
+<p>后面到了 世贸广场 准备找吃的.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_154943.jpg" alt></p>
+<p>世贸广场的乐高店 超凶.jpg</p>
+<p>世贸广场内有一个贩卖专辑和音乐器材的店(SOUND STUDIO).</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_155625.jpg" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_155959.jpg" alt></p>
+<p>世贸广场内没什么想吃的,逛着逛着便忘记吃饭了(</p>
+<p>时间转眼间就到了下午五点,作为初到上海的游客,第一晚必定去的是 外滩 (</p>
+<h5 id="外滩"><a href="#外滩" class="headerlink" title="外滩"></a>外滩</h5><p>在来的路上也发现上海的路名也挺有意思的,黄浦区大部分的路都是全国各地的省和省会名字(</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//20201227161710.png" alt></p>
+<p>还有去外滩路上的一个百货名字,中日英三语(?</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_210617.jpg" alt></p>
+<p>是和平饭店,看起来好高端,不过貌似不是很贵的样子(相对于某些别的高端酒店),最便宜可以花 1500CNY 住一晚 <del>以后有钱一定来住一晚</del></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_211506.jpg" alt></p>
+<p>到外滩后,终于拍下了每个来上海的游客都会拍的一张照片.</p>
+<p>不过相对于对面的东方明珠,我个人认为这一侧的万国建筑群更有魅力.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200717_211058.jpg" alt></p>
+<p>随便拍了一下.</p>
+<p>随后晚上几个人一起吃了顿海底捞结束这一天.</p>
+<h4 id="Day3"><a href="#Day3" class="headerlink" title="Day3"></a>Day3</h4><p>一早起床没想好去哪决定逛逛 南京路 和 陆家嘴 好了.</p>
+<h5 id="南京路与陆家嘴"><a href="#南京路与陆家嘴" class="headerlink" title="南京路与陆家嘴"></a>南京路与陆家嘴</h5><p>走过南京路,观望各种招牌和建筑,仿佛置身与历史与现代之间.</p>
+<p>不过大多是奢侈品和餐饮店铺,走了两圈后发现一个比较有特色的 <code>M&amp;M Words</code>,全球只有五家,决定进去看看 <del>然后就中了消费主义陷阱</del></p>
+<p>在 <code>M&amp;M Words</code> 里可以自己随意搭配巧克力豆,有各式各样的口味还有一堆 M&amp;M 的周边,吃了些巧克力豆后坐地铁来到了陆家嘴.</p>
+<p>陆家嘴全是商场与写字楼,东方明珠有上千人,上不去…转了下后发现没有什么感兴趣的,就决定去地铁站吧.</p>
+<p>去地铁站的路中,一直在想下一站选择去哪里,有什么是具有上海特色,并且好玩的…想了后发现一个作为一线大城市才有的产物,而上海作为中国最繁华的一线城市,不得不去一趟特色产物,并且我有兴趣的…那只有 妹抖咖啡厅 了(</p>
+<h5 id="女仆咖啡厅1"><a href="#女仆咖啡厅1" class="headerlink" title="女仆咖啡厅1"></a>女仆咖啡厅1</h5><p>一开始来到了 思南公馆 的一家女仆咖啡厅,地方不算偏僻,离地铁站有些距离…但是服务态度比较一般…不过留言板还蛮有意思的,喝了杯普普通通的咖啡便离开了.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200718_185958.jpg" alt></p>
+<p>棉花糖玛奇朵.jpg</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200718_185341.jpg" alt></p>
+<p>留言板.jpg</p>
+<p>出门后,时间一转到了晚上…去了…</p>
+<h5 id="bilibili总部"><a href="#bilibili总部" class="headerlink" title="bilibili总部"></a>bilibili总部</h5><p>在写这一片文章时,我已经不记得当时为什么要去bilibili总部了…</p>
+<p><del>相关资料已被抹除</del></p>
+<h5 id="外滩-1"><a href="#外滩-1" class="headerlink" title="外滩"></a>外滩</h5><p>最后在回去酒店时,中途在陆家嘴下了地铁,突然想看看从陆家嘴望过的外滩.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200718_222152.jpg" alt></p>
+<p>最后回到中山公园站时,发现出错口了…中山公园站有3条线,每个地铁线都有自己的出站口…我记得是3号口出然后出到了隔壁线的3号口.</p>
+<p>花了半个小时走回酒店结束Day3.</p>
+<h4 id="Day4"><a href="#Day4" class="headerlink" title="Day4"></a>Day4</h4><p>一大早去了豫园地铁站附近的城隍庙.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200719_171247.jpg" alt></p>
+<p>第一次体验逛庙会的感觉(</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200719_171611.jpg" alt></p>
+<p>不过大都是卖美食和中国结,书画之类的.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200719_173031.jpg" alt></p>
+<p>在一排老字号中出现一个 Starbucks w</p>
+<p>在庙中,有一家 <code>超能动漫</code> 也是手办和周边店.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200719_171817_1.jpg" alt></p>
+<p>贴几张随手拍的(</p>
+<p><em>二次元浓度过浓与NSFW警告</em></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200719_172239.jpg" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200719_172332.jpg" alt></p>
+<p>NepNep.jpg</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200719_172400.jpg" alt></p>
+<p>然后走着走着就出来了(</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200719_175847.jpg" alt></p>
+<p>附一个好看的猫猫.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200719_180109.jpg" alt></p>
+<p>转眼间就到了下午,随意吃了下便利店食物后来到了另一家 妹抖咖啡厅.</p>
+<h5 id="女仆咖啡厅2"><a href="#女仆咖啡厅2" class="headerlink" title="女仆咖啡厅2"></a>女仆咖啡厅2</h5><p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200719_185319.jpg" alt></p>
+<p>由于对上一家印象不太好,觉得可能是去错地方了,趁着还有空便来到了另一家名为 <code>SABAC Cafe&amp;Bar</code> 的女仆咖啡厅.</p>
+<p>这家咖啡厅比较有特色的地方是 早上是普通的女仆咖啡厅 晚上就化身为女仆酒吧了. <del>Rabbit House吗</del></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200719_185327.jpg" alt></p>
+<p>总体感觉上比上一家好很多,点了杯普通拿铁咖啡喝,味道一般.</p>
+<p>邻近换班时间去还听见几只女仆在唱歌 w</p>
+<h5 id="大悦城"><a href="#大悦城" class="headerlink" title="大悦城"></a>大悦城</h5><p>最后去了一趟 静安区的大悦城 当时有 魔卡少女樱的展览 不过由于去的时候已经很晚的,就没看到什么..</p>
+<p>最后回酒店时,在路上品尝了一份 <strong>光明冰砖</strong> 真的是便宜又大还好吃…可惜只在长三角贩卖,广东想吃只能网购了..</p>
+<h4 id="Day5"><a href="#Day5" class="headerlink" title="Day5"></a>Day5</h4><p>第五天是一开始计划好的漫展日,之前在家附近的漫展并不是很精彩,想来看看上海的大型漫展是更好.</p>
+<p>展览的地方在世博馆附近,在来的路上体验了上海的早高峰地铁,远处看见了瞩目的世博会的中国馆,不过由于时间关系,没能过去看.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200720_114618.jpg" alt></p>
+<p>在漫展中主要也是看了一些手办之类的,对其他的活动没什么兴趣.</p>
+<p>贴一些随手拍的图.</p>
+<p><del>多图杀猫</del></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200720_094556.jpg" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//20201228152421.png" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200720_112226.jpg" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200720_112231.jpg" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200720_112239.jpg" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200720_112259.jpg" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200720_112309.jpg" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200720_112328.jpg" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200720_112358.jpg" alt></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200720_112414.jpg" alt></p>
+<p>@某只猫娘(x</p>
+<p>从结果来看并没有想象中的美好..漫展内没有什么能吸引我的活动.</p>
+<p>随后回到了酒店,准备为回程做准备,结束为期五天的上海之旅.</p>
+<h5 id="回程"><a href="#回程" class="headerlink" title="回程"></a>回程</h5><p>回程体验了下国内唯一一条高速磁悬浮,从地铁 磁浮龙阳路站 换乘磁悬浮.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200721_132902.jpg" alt></p>
+<p>从感觉上来说,和高铁没什么区别嘛!</p>
+<p>可能由于年代久远的原因,速度也没有和达到宣称速度.</p>
+<p>但是体验上和高铁还是有细微不一样的(图丢了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData//IMG_20200721_175641.jpg" alt></p>
+<h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2>
+            
+                <blockquote>
+                    <p>
+                         
+                            This blog is under a <a href="/creativecommons.html" target="_blank">CC BY-NC-SA 3.0 Unported License</a>
+                        
+                        <br>
+                        Link to this article:  https://hex.moe/p/b2266cd1/
+                    </p>
+                </blockquote>
+            
+        </div>
+    
+</div>
+
+
+                
+                    <!-- Paradox Post Info -->
+                    
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 Gitalk -->
+<div id="gitalk-comment">
+    <!-- Gitalk 评论框 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script>
+    var gitalk = new Gitalk({
+            clientID: 'dda34f7fb2fdd05c451f',
+            clientSecret: '943037abd1cb1327dff02dda54bc9094c464084b',
+            repo: 'LovelyWei.github.io',
+            owner: 'LovelyWei',
+            admin: ['LovelyWei'],
+            id: window.location.origin + window.location.pathname,
+            // facebook-like distraction free mode
+            distractionFreeMode: false
+        })
+   gitalk.render('gitalk-container')
+</script>
+</div>
+<style>
+    #gitalk-comment {
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/p/e5270b01/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/p/36a9de4d/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?wgjW/HuQG9JDgvPDPoRAng==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?V/53wGualMuiPM3xoetD5Q==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+   <!-- GitTalk -->
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('
+<link rel="stylesheet" href="/css/uc.css">
+');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+    
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.2 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
