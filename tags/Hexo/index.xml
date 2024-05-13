@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Hexo on Chocolate&#39;s 废纸篓</title>
+        <link>https://hex.moe/tags/hexo/</link>
+        <description>Recent content in Hexo on Chocolate&#39;s 废纸篓</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 24 Aug 2019 14:24:36 +0000</lastBuildDate><atom:link href="https://hex.moe/tags/hexo/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>再次重建博客(建立一个Hexo博客)</title>
+        <link>https://hex.moe/p/rebulid-hexo2019/</link>
+        <pubDate>Sat, 24 Aug 2019 14:24:36 +0000</pubDate>
+        
+        <guid>https://hex.moe/p/rebulid-hexo2019/</guid>
+        <description>&lt;p&gt;&amp;lt;关于我博客又丢档案了这件事&amp;gt;&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;时隔 &lt;del&gt;多年&lt;/del&gt; 几个月 我突然发现好像有个博客已经吃灰很久了,开始想更新下内容,结果发现又又又 &lt;del&gt;丢人&lt;/del&gt; 丢档了(Hexo博客的源文件丢了)&lt;/p&gt;
+&lt;h2 id=&#34;这篇文章就讲下重建博客的时候干的一些事情吧&#34;&gt;这篇文章就讲下重建博客的时候干的一些事情吧.
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;同时也是一个教萌新搭建博客的教程&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;1-装hexo&#34;&gt;1. 装Hexo
+&lt;/h3&gt;&lt;p&gt;首先Node Js 肯定是必须的&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://nodejs.org/en/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;NodeJs官网&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载其中任意一个版本安装,装好后在命令行中敲&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;npm version&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;会看到 NodeJs的版本 如:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;npm:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;6.5.0&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;ares:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;1.15.0&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;brotli:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;1.0.7&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;cldr:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;34.0&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;http_parser:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;2.8.0&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;icu:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;63.1&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;llhttp:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;1.0.1&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;modules:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;67&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;napi:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;4&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;nghttp2:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;1.34.0&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;node:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;11.8.0&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;openssl:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;1.1.0j&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;tz:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;2018e&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;unicode:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;11.0&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;uv:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;1.25.0&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;v8:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;7.0.276.38-node.16&amp;#39;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;err&#34;&gt;zlib:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;1.2.11&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;接下来安装&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://git-scm.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Git&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;关于Git就不再多做介绍了,安装的方法可以在网上搜索到&lt;/p&gt;
+&lt;p&gt;Git安装完后&lt;/p&gt;
+&lt;p&gt;接下来可以开始安装Hexo了.&lt;/p&gt;
+&lt;p&gt;不过 在这之前,由于国内网络的种种原因,先在安装之前调整一些配置&lt;/p&gt;
+&lt;p&gt;调整npm的源为淘宝镜像&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;npm config set registry &lt;a class=&#34;link&#34; href=&#34;http://registry.npm.taobao.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://registry.npm.taobao.org/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;为Git设置代理(可选,&lt;strong&gt;如果你不知道这里在设置什么就不用设置了&lt;/strong&gt;)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;git config &amp;ndash;global http.proxy &amp;lsquo;socks5://127.0.0.1:1080&amp;rsquo;
+git config &amp;ndash;global https.proxy &amp;lsquo;socks5://127.0.0.1:1080&amp;rsquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;接下来就可以正式开始安装Hexo了&lt;/p&gt;
+&lt;p&gt;先下载Hexo程序&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;npm install hexo-cli -g&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;接下来,打开命令行到你想安装博客的目录,运行&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;hexo init&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;就开始自动化的初始化Hexo了&lt;/p&gt;
+&lt;p&gt;初始化结束后会看到目录结构如下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Mode                LastWriteTime         Length Name
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;----                -------------         ------ ----
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;d-----        2019/8/21     13:53                node_modules
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;d-----        2019/8/21      1:25                scaffolds
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;d-----        2019/8/21     14:23                source
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;d-----        2019/8/21     13:16                themes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-a----        2019/8/21      1:25             71 .gitignore
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-a----        2019/8/21     15:02          64543 db.json
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-a----        2019/8/21     13:53         135764 package-lock.json
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-a----        2019/8/21     13:53            629 package.json
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-a----        2019/8/21     14:17           1962 _config.yml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;接下来运行&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;hexo server&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;会见到类似&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;INFO  Start processing
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;此时打开 https://localhost:4000 就能看到一个新的博客了
+(因每个人的环境不同所以地址可能有出入,以命令行显示的为准
+)&lt;/p&gt;
+&lt;p&gt;打开网址见到Hello World 安装Hexo就结束了&lt;/p&gt;
+&lt;h3 id=&#34;2-安装-material-主题&#34;&gt;2. 安装 Material 主题
+&lt;/h3&gt;&lt;p&gt;安装好博客后可以自行安装主题来美化博客,我选了Material 感觉这个主题的简约风格挺好看的&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;可以选择自己喜欢的主题 大体安装方式都类似&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;打开 &lt;a class=&#34;link&#34; href=&#34;https://github.com/viosey/hexo-theme-material&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/viosey/hexo-theme-material&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;点击 Release 下载 1.5.2 的版本&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;新版本的我安装了报错,不知道为什么 2019-9-21&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;下载完成后打开压缩包将其中的文件夹解压至 /themes&lt;/p&gt;
+&lt;p&gt;将解压的文件夹名称修改为 material&lt;/p&gt;
+&lt;p&gt;进入 material文件夹 将 &lt;code&gt;_config.template.yml&lt;/code&gt; 文件重命名为 &lt;code&gt;_config.yml&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;回到博客根目录 打开博客根目录的配置文件 &lt;code&gt;_config.yml&lt;/code&gt; 将其中 &lt;code&gt;theme&lt;/code&gt; 值修改为 &lt;code&gt;theme: material&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;重新运行 &lt;code&gt;hexo s&lt;/code&gt; 可以看到主题已经安装成功了&lt;/p&gt;
+&lt;h3 id=&#34;3-安装插件&#34;&gt;3. 安装插件
+&lt;/h3&gt;&lt;p&gt;虽然Hexo已经集成了许多东西,但是我觉得还是缺了点什么,例如文章的URL不是很好之类,我选择安装了&lt;/p&gt;
+&lt;h4 id=&#34;a-url永久化&#34;&gt;A. URL永久化
+&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;Hexo安装完成发表文章的时URL看起来不美观,特别是标题是中文时,URL直接就写上了中文URL,不利于SEO,所以得想优化下URL.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;后面选择了 &lt;code&gt;hexo-abbrlink&lt;/code&gt; 这个插件,这个插件可以在你让你的文章获得唯一的 ID.&lt;/p&gt;
+&lt;p&gt;在接下来的设置中就可以将URL设置为例如 &lt;code&gt;http://example.com/p/:UID/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;操作方式如下:&lt;/p&gt;
+&lt;p&gt;安装 &lt;a class=&#34;link&#34; href=&#34;https://github.com/rozbo/hexo-abbrlink&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hexo-abbrlink&lt;/a&gt;,在网页根目录下插入&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;npm install hexo-abbrlink &amp;ndash;save&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;接下调整博客的配置&lt;code&gt;_config.yml&lt;/code&gt;(根目录下的,不是主题那个),在配置中添加&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;abbrlink&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;alg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;crc32 &lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 算法：crc16(default) and crc32&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;rep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;hex   &lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 进制：dec(default) and hex&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;然后修改&lt;code&gt;permalink&lt;/code&gt;如&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;permalink&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;p/:abbrlink/&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;运行&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;hexo server&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;可以看到文章的链接变成了&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;http://localhost:4000/p/9b3fb8b9/&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;b-为网站添加rss订阅&#34;&gt;B. 为网站添加RSS订阅
+&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;虽然9012了,但是还是有许多人喜欢RSS的方式阅读信息,加上最近也多了一些好用的RSS阅读器&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;所以决定还是弄上RSS,&lt;del&gt;反正也很简单&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;首先到博客的根目录运行&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;npm install hexo-generator-feed &amp;ndash;save&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;安装完成后我们开始修改根目录下的配置文件&lt;code&gt;_config.yml&lt;/code&gt;加入&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;feed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;atom&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;atom.xml&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;limit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;m&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;接下来到主题目录下的&lt;code&gt;_config.yml&lt;/code&gt; 将&lt;code&gt;rss&lt;/code&gt;设置如&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yml&#34; data-lang=&#34;yml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;rss&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;/atom.xml&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;运行本地服务&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;hexo s&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;打开&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;http://localhost:4000/atom.xml&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;可以看到RSS xml已经有了.&lt;/p&gt;
+&lt;h4 id=&#34;c-给网站添加sitemapxml&#34;&gt;C. 给网站添加sitemap.xml
+&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;虽然这个网站现在没有什么干活,但是SEO还是要做一下的.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;其实添加sitemap也很简单&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;npm install hexo-generator-sitemap
+npm install hexo-generator-sitemap &amp;ndash;save-dev
+npm install hexo-generator-baidu-sitemap &amp;ndash;save-dev&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;然后就可以放着不管了,当然你也可以想搜索引擎主动的提交你的sitemap.&lt;/p&gt;
+&lt;h3 id=&#34;4-发布到-githubio&#34;&gt;4. 发布到 github.io
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;按照传统的方式建立一个网站是要有一个服务器的,但是github有一个服务可以直接挂上你的静态网站,这就是github.io 这也是我选择hexo的原因 &lt;del&gt;能白嫖&lt;/del&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;首先需要建立一个github账号 这点不详细阐述了&lt;/p&gt;
+&lt;p&gt;创建好github账号后开始新建一个仓库(repository)&lt;/p&gt;
+&lt;p&gt;仓库的名字命名为你的 &lt;code&gt;ID.github.io&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;以我为例 我的github地址 &lt;a class=&#34;link&#34; href=&#34;https://github.com/LovelyWei&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/LovelyWei&lt;/a&gt;
+创建仓库的时候就创建为 &lt;code&gt;LovelyWei.github.io&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;接下来不用调整什么 直接确定就能建立好一个仓库了&lt;/p&gt;
+&lt;p&gt;建立好仓库后开始配置Hexo 让Hexo能推送到Github仓库&lt;/p&gt;
+&lt;p&gt;先安装&lt;code&gt;hexo-deployer-git&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;npm install hexo-deployer-git &amp;ndash;save&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;安装好后打开根目录的配置文件 &lt;code&gt;_config.yml&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;配置&lt;code&gt;deploy&lt;/code&gt;选项如&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yml&#34; data-lang=&#34;yml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;deploy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;git&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;repo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;https://github.com/LovelyWei/LovelyWei.github.io.git&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;branch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;master&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;repo&lt;/code&gt;处的值修改为你的推送地址&lt;/p&gt;
+&lt;p&gt;接下来尝试&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;hexo g
+hexo d&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;中间可能需要你输入你的Github账号和密码,上传完成后就能看到仓库里已经有静态文件了&lt;/p&gt;
+&lt;p&gt;访问github.io网址就能看到blog了&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://lovelywei.github.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://lovelywei.github.io/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;5-博客绑定域名&#34;&gt;5. 博客绑定域名
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;挂着xxx.github.io 似乎不是那么的好看,我自己又去买了一个域名,用自己的域名访问会更加个性一点?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在购买域名的服务商上设置到ID.github.io的别名,如&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;CNAME @ LovelyWei.github.io
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;设置好后在 &lt;code&gt;source&lt;/code&gt; 文件夹中新建&lt;code&gt;CNAME&lt;/code&gt;文件,里面写上你设置的域名如&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hex.moe
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;若你设置的别名是带了&lt;code&gt;www&lt;/code&gt;之类的,如&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;CNAME www LovelyWei.github.io
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;CNAME&lt;/code&gt;文件中的内容就要修改为&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;www.hex.moe
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;重新发布&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;hexo cl
+hexo g
+hexo d&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;等待数分钟后访问网址(如 &lt;a class=&#34;link&#34; href=&#34;http://hex.moe&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;http://hex.moe&lt;/a&gt; ),就能看到博客了&lt;/p&gt;
+&lt;p&gt;完&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>用Github来当博客图床</title>
+        <link>https://hex.moe/p/picgo2019/</link>
+        <pubDate>Sat, 24 Aug 2019 13:44:09 +0000</pubDate>
+        
+        <guid>https://hex.moe/p/picgo2019/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;之前试过 sm.ms 觉得还不错,不过最近发现这个图床处于墙与不墙的薛定谔状态,而且也不是很好留档,所以决定使用Github来当作博客的图床&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;一个图床软件-picgo&#34;&gt;一个图床软件 PicGo
+&lt;/h1&gt;&lt;h2 id=&#34;下载-picgo&#34;&gt;下载 PicGo
+&lt;/h2&gt;&lt;p&gt;在这里&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/Molunerfinn/PicGo/releases&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/Molunerfinn/PicGo/releases&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;可以下载到PicGo的安装包&lt;/p&gt;
+&lt;h2 id=&#34;配置picgo&#34;&gt;配置PicGo
+&lt;/h2&gt;&lt;p&gt;首先 新建一个仓库 名字随意&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824135003.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;不用修改任何配置 创建&lt;/p&gt;
+&lt;p&gt;创建完成后点击 &lt;code&gt;头像&lt;/code&gt; 进入我的 &lt;code&gt;Settings&lt;/code&gt; 点击 &lt;code&gt;Developer settings&lt;/code&gt; 点击 &lt;code&gt;Personal access tokens&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;点击这里可以直接进入: &lt;a class=&#34;link&#34; href=&#34;https://github.com/settings/tokens&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/settings/tokens&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;新建一个 &lt;code&gt;token&lt;/code&gt; 点击 &lt;code&gt;Generate new token&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824135507.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Note&lt;/code&gt; 处填入名字 勾选 &lt;code&gt;repo&lt;/code&gt; 让其有仓库管理权限 然后即可 点击&lt;code&gt;Generate token&lt;/code&gt; 新建 &lt;code&gt;token&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824135716.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;如图所示&lt;/p&gt;
+&lt;p&gt;复制下 &lt;code&gt;token&lt;/code&gt; 的值&lt;/p&gt;
+&lt;p&gt;打开 &lt;code&gt;PicGo&lt;/code&gt; 软件&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824135856.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;点击Github设置&lt;/p&gt;
+&lt;p&gt;设定仓库名设置为 &lt;code&gt;用户名/仓库名&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;设定分支名设置为 &lt;code&gt;master&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;设定Token设置为你刚刚复制下的Token&lt;/p&gt;
+&lt;p&gt;设为默认图床 点击确定&lt;/p&gt;
+&lt;p&gt;回到上传区 尝试上传图片 图片上传成功后 会自动将Markdown格式的图片链接放在你的剪贴板&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824140141.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;完&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>为Hexo博客配置上HTTPS</title>
+        <link>https://hex.moe/p/blog-https-2019/</link>
+        <pubDate>Sat, 24 Aug 2019 11:30:39 +0000</pubDate>
+        
+        <guid>https://hex.moe/p/blog-https-2019/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;9012年了,Chrome纷纷给各种HTTP网站打上不安全,由于我用了自定义域名,所以并没有小绿锁,为了&amp;quot;安全&amp;quot;一点,把博客也加上小绿锁好了&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;为博客添加https&#34;&gt;为博客添加HTTPS
+&lt;/h1&gt;&lt;h2 id=&#34;方案一-github-page-自带的证书&#34;&gt;方案一 Github Page 自带的证书
+&lt;/h2&gt;&lt;p&gt;在去年六月,Github宣布支持自定义域的HTTPS了,下面来讲讲如何配置&lt;/p&gt;
+&lt;h3 id=&#34;首先到的域名提供商处修改的记录&#34;&gt;首先到的域名提供商处修改的记录
+&lt;/h3&gt;&lt;p&gt;Github称,如果需要为自定义域加上HTTPS,域名需要设置为A记录并指向下面几个地址其中一个 (&lt;del&gt;不要问我为什么&lt;/del&gt;)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824120540.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+类似这样 (我其实设置的是@ 帮我显示成了域名)&lt;/p&gt;
+&lt;p&gt;如果域名设置为CNAME的话,证书到期了无法自动续签 (没错 Github使用的是Let&amp;rsquo;s Encrypt的证书)&lt;/p&gt;
+&lt;p&gt;网上搜索了相关案例,这是案例中客服的回复&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hello,
+Thanks for writing in! I took a look and it appears that your custom domain is set up using a CNAME record. You&amp;rsquo;ll need to make some changes to your DNS settings before we&amp;rsquo;ll be able to renew the HTTPS certificate for your custom domain.
+You&amp;rsquo;ll need to remove your existing CNAME record, and replace it with at least one A record that points to one of the following IP addresses:
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+Optionally, you can create additional A records that point to the other IP addresses from the list. Additional records essentially act as a backup in case of DNS or CDN issues, so having at least two is best practice, though your site will still function with just one.
+Once you&amp;rsquo;ve replaced the CNAME record, you&amp;rsquo;ll need to visit your repository&amp;rsquo;s settings page, remove your custom domain and click save, then re-add it again. This will kick off the process of provisioning an HTTPS certificate for your domain name.
+Once your certificate has been provisioned, you&amp;rsquo;ll then be able to enforce HTTPS by checking the &amp;ldquo;Enforce HTTPS&amp;rdquo; checkbox.
+Bear in mind that it can take up for 24 hours for DNS changes to take full effect, and up to an hour for an HTTPS certificate to be requested, so if you follow these steps but are still having trouble, that&amp;rsquo;s usually why.
+Cheers,
+Steven&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;然后设置的cname文件&#34;&gt;然后设置的CNAME文件
+&lt;/h3&gt;&lt;p&gt;将CNAME文件放在网站的根目录(也就是Github Page 仓库的根目录中),配合设置域名的DNS解析,可以达到使用你自己的域名访问到博客的效果. (而不是 xxx.github.io)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824121410.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这里讲Hexo博客设置&lt;code&gt;CNAME&lt;/code&gt;文件时的一些坑&lt;/p&gt;
+&lt;p&gt;当我生成完文件,然后把&lt;code&gt;CNAME&lt;/code&gt;丢入public,然后上传到GitHub仓库,嗯,设置好了&lt;/p&gt;
+&lt;p&gt;可是问题来了,我每次生成CNAME文件都会不见,消失&lt;/p&gt;
+&lt;p&gt;后面发现Hexo &lt;code&gt;source&lt;/code&gt;文件夹中自己写入的内容都会原封不动的复制到&lt;code&gt;public&lt;/code&gt;中&lt;/p&gt;
+&lt;p&gt;于是&lt;strong&gt;在&lt;code&gt;source&lt;/code&gt;文件夹中添加一个&lt;code&gt;CNAME&lt;/code&gt;文件,在文件中写入你配置的好的域&lt;/strong&gt;就好了&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意:不是&lt;code&gt;CNAME.txt&lt;/code&gt;,&lt;code&gt;CNAME&lt;/code&gt;文件中只能有一个自定义域&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824122245.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;(当然,不一定需要在根域,看个人喜好)&lt;/p&gt;
+&lt;h3 id=&#34;设置github仓库&#34;&gt;设置Github仓库
+&lt;/h3&gt;&lt;p&gt;打开网页Github仓库,点击&lt;code&gt;Settings&lt;/code&gt;,向下拉,会发现&lt;code&gt;Github Page&lt;/code&gt;的相关设定&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824122915.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;Custom domain&lt;/code&gt;中填入刚刚在CNAME填写的域名提交,约要十几分钟后,使用HTTPS协议访问的域名,就看到小绿锁了&lt;/p&gt;
+&lt;h2 id=&#34;方案二-使用cloudflare的代理实现https&#34;&gt;方案二 使用cloudflare的代理实现HTTPS
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;不推荐,以后再写&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>为Hexo博客安装评论系统(Gitalk)</title>
+        <link>https://hex.moe/p/gitalk2019/</link>
+        <pubDate>Fri, 23 Aug 2019 17:40:04 +0000</pubDate>
+        
+        <guid>https://hex.moe/p/gitalk2019/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;想给博客安装一个评论系统,我了解了许多评论插件多说,Disqus,Gitment和Gitalk等鉴于我已经把博客挂在Github上了,就打算用Github全家桶了,最后我选择了Gitalk,因为Gitment看了下好像挺久没更新了.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;顺便讲下遇到的坑&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;为博客安装gitalk&#34;&gt;为博客安装Gitalk
+&lt;/h1&gt;&lt;h2 id=&#34;申请github-application&#34;&gt;申请Github Application
+&lt;/h2&gt;&lt;p&gt;可以点击 &lt;strong&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/settings/applications/new&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;这里&lt;/a&gt;&lt;/strong&gt; 来新申请一个Github Application&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190823211342.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;按照这样的方式填写↑&lt;/p&gt;
+&lt;p&gt;填写好后会得到一个&lt;code&gt;Client ID&lt;/code&gt;和一个&lt;code&gt;Client Secret&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;配置主题&#34;&gt;配置主题
+&lt;/h2&gt;&lt;p&gt;若你使用的主题有自带Gitalk,你仅仅需要在主题的&lt;code&gt;config&lt;/code&gt;中你填入ID和Secret之类的值&lt;/p&gt;
+&lt;p&gt;若你是主题开发者或自己魔改的主题需要修改&lt;code&gt;new Gitalk&lt;/code&gt;中的参数&lt;/p&gt;
+&lt;p&gt;这部分建议参考&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://segmentfault.com/a/1190000014085547&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://segmentfault.com/a/1190000014085547&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;遇到的坑&#34;&gt;遇到的坑
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;del&gt;你若使用HTTP那就一切安好&lt;/del&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我之前的博客HTTPS方案是使用&lt;code&gt;cloudflare&lt;/code&gt;CDN的单向HTTPS,这种HTTPS实现方式是当你访问我的网址&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://hex.moe&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://hex.moe&lt;/a&gt; -&amp;gt; Proxies -&amp;gt; Source(github page)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;时先经过CDN反向代理服务器,CDN的反向代理服务器再用HTTP请求我的源网站&lt;/p&gt;
+&lt;p&gt;这样乍一看好像没有问题,但是使用上Gitalk的时候就出现问题了,似乎回调时Github认为域不相符,给我拒绝了&lt;/p&gt;
+&lt;p&gt;出现的情况:
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190823213528.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+打开页面时Gitalk无法正常加载&lt;/p&gt;
+&lt;p&gt;在排查了一个下午后,我选择放弃&lt;code&gt;cloudflare&lt;/code&gt;的单向HTTPS方案,转为使用Github自带的HTTPS,关于这一点我会在后面的文章中介绍&lt;/p&gt;
+&lt;p&gt;将&lt;code&gt;cloudflare&lt;/code&gt;的CDN卸下后再修改回调地址为HTTP&lt;/p&gt;
+&lt;p&gt;终于&lt;/p&gt;
+&lt;p&gt;Gitalk正常工作了
+&lt;img src=&#34;https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190823213709.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

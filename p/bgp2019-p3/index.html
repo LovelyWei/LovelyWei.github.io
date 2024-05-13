@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="BGP系列也好久没更新过了,最近放假放的有点久&hellip;干了点新的东西,让家里的网络用上自己的IP. 解决方案是 strongSwan IKEv2 VPN隧道到VPS服">
+<title>年轻人的第一个私人BGP(三) - 带入家中</title>
+
+<link rel='canonical' href='https://hex.moe/p/bgp2019-p3/'>
+
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="年轻人的第一个私人BGP(三) - 带入家中">
+<meta property='og:description' content="BGP系列也好久没更新过了,最近放假放的有点久&hellip;干了点新的东西,让家里的网络用上自己的IP. 解决方案是 strongSwan IKEv2 VPN隧道到VPS服">
+<meta property='og:url' content='https://hex.moe/p/bgp2019-p3/'>
+<meta property='og:site_name' content='Chocolate&#39;s 废纸篓'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Tech' /><meta property='article:tag' content='Network' /><meta property='article:tag' content='BGP' /><meta property='article:published_time' content='2020-02-28T19:56:38&#43;00:00'/><meta property='article:modified_time' content='2020-02-28T19:56:38&#43;00:00'/>
+<meta name="twitter:title" content="年轻人的第一个私人BGP(三) - 带入家中">
+<meta name="twitter:description" content="BGP系列也好久没更新过了,最近放假放的有点久&hellip;干了点新的东西,让家里的网络用上自己的IP. 解决方案是 strongSwan IKEv2 VPN隧道到VPS服">
+    <link rel="shortcut icon" href="/favicon.png" />
+
+  
+
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hue9b59569ad592f400a84e3bd0ed01a8b_4691_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍫</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Chocolate&#39;s 废纸篓</a></h1>
+            <h2 class="site-description">我是巧克力。我是可可。</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/LovelyWei'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/MoeLovelyWei'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>废纸篓</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>档案馆</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>你找啥</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/friends/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>朋友们</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+                
+                <span>了解我</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/bgp2019-p3/">年轻人的第一个私人BGP(三) - 带入家中</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 28, 2020</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>BGP系列也好久没更新过了,最近放假放的有点久&hellip;干了点新的东西,让家里的网络用上自己的IP.</p>
+<!-- more -->
+<p>解决方案是 strongSwan IKEv2 VPN隧道到VPS服务器上,IKEv2 的证书使用的是Let&rsquo;s encrypt的证书,域名挂在了<code>CloudFlare</code>上以便于调用api.</p>
+<h2 id="配置服务器环境">配置服务器环境
+</h2><p>博主这里使用了 香港阿里云的轻量VPS <code>CentOS7</code> (物理位置近+便宜) + HE.net 的BGP隧道,至于实现方案可以参考<a class="link" href="https://hex.moe/p/d6a20b99/"  target="_blank" rel="noopener"
+    >上一篇bgp系列的文章</a>.</p>
+<p>参考上一篇文章,这里在上一篇文章处做出一点修改.</p>
+<ul>
+<li>首先将需要留给客户端的IP段从dummy1的IP删除,并且可以将自己的IP设为出口IP</li>
+</ul>
+<blockquote>
+<p>之前的文章中配置并广播好了BGP但是出口ip还是 he.net 给的ip,并没有配置自己的IP为出口IP,解决这个问题其实很简单,只要将原有的<code>dummy1</code>配置好的IP删除,将IP配置到<code>sit1</code>接口上,并把默认路由的<code>src</code>配置为出口的ip即可 (多谢群友</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@host ~]# ip addr add dev sit1 2a0f:9400:8000::1/48
+</span></span><span class="line"><span class="cl">[root@host ~]# ip -6 route change default dev sit1  src 2a0f:9400:8000::1  metric 1
+</span></span><span class="line"><span class="cl">[root@host ~]# curl ipv6.ip.sb
+</span></span><span class="line"><span class="cl">2a0f:9400:8000::1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<ul>
+<li>
+<h3 id="安装并配置-acmesh-生成证书">安装并配置 acme.sh, 生成证书
+</h3><ol>
+<li>安装 <a class="link" href="http://acme.sh/"  target="_blank" rel="noopener"
+    >acme.sh</a> ,用于自助签发TLS证书,并创建一个<code>alias</code>方便使用.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">curl  https://get.acme.sh <span class="p">|</span> sh
+</span></span><span class="line"><span class="cl"><span class="nb">alias</span> acme.sh<span class="o">=</span>~/.acme.sh/acme.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>获取<code>CloudFlare</code>的<a class="link" href="https://dash.cloudflare.com/profile"  target="_blank" rel="noopener"
+    >Api</a></li>
+</ol>
+<blockquote>
+<p>至于详细的获取<code>CloudFlare Api Token</code>可以参考<a class="link" href="https://hex.moe/p/aaafb04f/"  target="_blank" rel="noopener"
+    >利用CloudFlare Api实现DDNS</a>.</p>
+</blockquote>
+<ol start="3">
+<li>写<code>Token</code>到环境变量</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">CF_Key</span><span class="o">=</span><span class="s2">&#34;sdfsdfsdfljlbjkljlkjsdfoiwje&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">CF_Email</span><span class="o">=</span><span class="s2">&#34;xxxx@sss.com&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>现在,可以用命令自动创建证书了</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">acme.sh --issue --dns dns_cf -d hex.moe -d vpn.hex.moe <span class="c1"># 记得替换域名</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>使用 <code>acme.sh --cron</code> 可以生成 cronjob 自动更新证书</li>
+</ol>
+<p>经过配置,应该可以在<code>/root/.acme.sh/vpn.hex.moe</code>中看到你的证书</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>root@host vpn.hex.moe<span class="o">]</span><span class="c1"># pwd</span>
+</span></span><span class="line"><span class="cl">/root/.acme.sh/vpn.hex.moe
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@host vpn.hex.moe<span class="o">]</span><span class="c1"># ls</span>
+</span></span><span class="line"><span class="cl">ca.cer         vpn.hex.moe.cer   vpn.hex.moe.csr       vpn.hex.moe.key
+</span></span><span class="line"><span class="cl">fullchain.cer  vpn.hex.moe.conf  vpn.hex.moe.csr.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<h3 id="然后安装并配置-strongswan">然后安装并配置 <code>strongswan</code>
+</h3><ol>
+<li>安装<code>strongswan</code></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">yum install strongswan
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>修改配置文件<code>ipsec.conf</code></li>
+</ol>
+<blockquote>
+<p>这里使用了旧版的配置文件,由于已经配置好了遂不再更变.( <del>又不是不能用</del></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">vim /etc/strongswan/ipsec.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以下是内容:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">conn setup
+</span></span><span class="line"><span class="cl">uniqueids = no
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">conn %default
+</span></span><span class="line"><span class="cl">    compress = yes
+</span></span><span class="line"><span class="cl">    keyexchange=ike
+</span></span><span class="line"><span class="cl">    ike=aes256-sha256-sha1-modp2048-modp1024,3des-sha256-sha1-modp2048-modp1024!
+</span></span><span class="line"><span class="cl">    esp=aes256-sha256-sha1,3des-sha256-sha1!
+</span></span><span class="line"><span class="cl">    leftdns=8.8.8.8,8.8.4.4,2001:4860:4860::8888 # 此处是dns
+</span></span><span class="line"><span class="cl">    rightdns=8.8.8.8,8.8.4.4,2001:4860:4860::8888
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">conn ikev2
+</span></span><span class="line"><span class="cl">    dpdaction=clear
+</span></span><span class="line"><span class="cl">    dpddelay=60s
+</span></span><span class="line"><span class="cl">    rekey=no
+</span></span><span class="line"><span class="cl">    fragmentation=yes
+</span></span><span class="line"><span class="cl">    eap_identity=%identity
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    left=%any
+</span></span><span class="line"><span class="cl">    leftid=&#34;vpn.hex.moe&#34; # 签发证书的域名
+</span></span><span class="line"><span class="cl">    leftsubnet=0.0.0.0/0,::/0
+</span></span><span class="line"><span class="cl">    leftauth=pubkey
+</span></span><span class="line"><span class="cl">    leftcert=fullchain.cer
+</span></span><span class="line"><span class="cl">    leftsendcert=always
+</span></span><span class="line"><span class="cl">    leftfirewall=yes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    right=%any
+</span></span><span class="line"><span class="cl">    rightid=%any
+</span></span><span class="line"><span class="cl">    rightsourceip=10.1.0.0/24,2a0e:b107:16::/48 # 要分配给客户端的ip,这里用了双栈
+</span></span><span class="line"><span class="cl">    rightauth=eap-mschapv2
+</span></span><span class="line"><span class="cl">    rightsendcert=never
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    auto=add
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>还有一套是<code>swanctl.conf</code>的新版配置文件,由于博主没有配置过所以不多做介绍.
+可参考这一位博主写的 <a class="link" href="https://m13253.blogspot.com/2018/07/strongswan-ikev2-vpn.html"  target="_blank" rel="noopener"
+    >用 strongSwan 配一个支持 AEAD 的远程访问 IKEv2 VPN</a>.</p>
+</blockquote>
+<ol start="3">
+<li>
+<p>配置<code>strongswan</code>的证书
+使用软连接方便更新<code>ln -s [源路径] [目标路径]</code> , 将<code>/root/.acme.sh/[域名]</code>中的</p>
+<ul>
+<li><code>fullchain.cer</code>放入<code>/etc/strongswan/ipsec.d/certs</code></li>
+<li><code>[域名].key</code>放入<code>/etc/strongswan/ipsec.d/private</code></li>
+<li><code>ca.cer</code>放入<code>/etc/strongswan/ipsec.d/cacerts</code></li>
+</ul>
+</li>
+<li>
+<p>配置<code>ipsec.secrets</code>,添加用户</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">vim /etc/strongswan/ipsec.secrets
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以下是我写的内容:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># ipsec.secrets - strongSwan IPsec secrets file
+</span></span><span class="line"><span class="cl">: RSA vpn.hex.moe.key # 这里是私钥的文件名
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#这里是用户名和密码,%any表示任意用户名均可,EAP后面的为密码
+</span></span><span class="line"><span class="cl">user1 %any : EAP &#34;123456&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+</li>
+<li>
+<p>配置<code>sysctl.conf</code> , 开启Linux的内核转发</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">/etc/sysctl.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在后面添加开启相关转发的内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">net.ipv4.ip_forward = 1
+</span></span><span class="line"><span class="cl">net.ipv4.conf.all.accept_redirects = 0
+</span></span><span class="line"><span class="cl">net.ipv4.conf.all.send_redirects = 0
+</span></span><span class="line"><span class="cl">net.ipv6.conf.all.forwarding=1
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>配置iptables防火墙</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">iptables -A INPUT -p ah -j ACCEPT
+</span></span><span class="line"><span class="cl">iptables -A INPUT -p esp -j ACCEPT
+</span></span><span class="line"><span class="cl">iptables -A INPUT -p udp -m udp --dport <span class="m">500</span> -j ACCEPT
+</span></span><span class="line"><span class="cl">iptables -A INPUT -p udp -m udp --dport <span class="m">4500</span> -j ACCEPT
+</span></span><span class="line"><span class="cl">iptables -A POSTROUTING -t nat -m policy --pol ipsec --dir out -j ACCEPT
+</span></span><span class="line"><span class="cl">iptables -A POSTROUTING -t nat -s 10.1.0.0/24 -o eth0 -j MASQUERADE
+</span></span><span class="line"><span class="cl">iptables -A FORWARD -t nat -i eth0 -m policy --pol ipsec --dir in -j ACCEPT
+</span></span><span class="line"><span class="cl">iptables-save
+</span></span><span class="line"><span class="cl">systemctl restart iptables
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>虽然说如果<code>ah</code>和<code>esp</code>头如果走不通的话会走<code>udp</code>协议,但是还是加上了</p>
+</blockquote>
+</li>
+<li>
+<p>在阿里云的防火墙中开启<code>udp500</code>和<code>udp4500</code>端口</p>
+<hr>
+<p>firewalld的防火墙类似,由于博主的centos默认是iptables的并没有实践过,所以这里贴出某位博主帖子里写的内容.</p>
+<blockquote>
+<p>允许 ‘AH’ 和 ‘ESP’ 身份验证协议和加密协议通过防火墙</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">firewall-cmd --zone<span class="o">=</span>public --permanent --add-rich-rule<span class="o">=</span><span class="s1">&#39;rule protocol value=&#34;esp&#34; accept&#39;</span>
+</span></span><span class="line"><span class="cl">firewall-cmd --zone<span class="o">=</span>public --permanent --add-rich-rule<span class="o">=</span><span class="s1">&#39;rule protocol value=&#34;ah&#34; accept&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>开放 ipsec 和相关端口</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">firewall-cmd --zone<span class="o">=</span>public --permanent --add-port<span class="o">=</span>500/udp
+</span></span><span class="line"><span class="cl">firewall-cmd --zone<span class="o">=</span>public --permanent --add-port<span class="o">=</span>4500/udp
+</span></span><span class="line"><span class="cl">firewall-cmd --zone<span class="o">=</span>public --permanent --add-service<span class="o">=</span><span class="s2">&#34;ipsec&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>允许 ip 伪装</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">firewall-cmd --zone<span class="o">=</span>public --permanent --add-masquerade
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>然后重新加载防火墙</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">firewall-cmd --reload
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+</li>
+<li>
+<p>启动<code>strongswan</code>服务 <code>systemctl restart strongswan</code></p>
+</li>
+</ul>
+<p>此时就能用Windows连接到IKEv2 VPN了!</p>
+<h2 id="连接vpn">连接VPN
+</h2><p>打开Win10的 <code>设置-&gt;网络和Internet-&gt;VPN</code> 并点击 <code>添加VPN连接</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301003025.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>写好配置并保存.</p>
+<p>然后点击 <code>状态-&gt;更改适配器选项</code> 右键 <code>VPN-&gt;属性-&gt;网络</code></p>
+<p>如果需要使用IPv4和IPv6流量都走VPN隧道的话你需要稍微调整下IPv4的设置</p>
+<p>点击<code>IPv4-&gt;属性-&gt;高级</code> 勾选 <code>在远程网络上使用默认网关</code>和 取消勾选 <code>自动跃点</code> 跃点数写一个相对小的数值,比如说,我写了<code>5</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301004612.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>当然,我现在并不需要(</p>
+<p>所以我将IPv4勾掉了,ipv4流量不走vpn,后来我连接上后&hellip;</p>
+<p>&hellip;</p>
+<blockquote>
+<p>IPv6检测失败</p>
+</blockquote>
+<p>后面了解到,虽然IPv6中也有一个 <code>在远程网络上使用默认网关</code> 但是那个完全没有用,也不知道微软阿三程序员怎么写的,总之就是没有用,需要手动配置一下路由</p>
+<p>所以,连接上VPN后,在<code>cmd</code>中敲入 <code>ipconfig</code> 查看分配到的ip</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301005308.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>并手动添加路由&hellip;</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301005426.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p><code>请求的操作需要提升</code>(权限) , 好吧 ,右键左下角的 <code>Win</code> 图标, 选择 <code>Windows Powershell (管理员)</code>,用打开的shell再次手动添加路由</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">route add ::/0 <span class="o">[</span>分配到的IP<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时再去测试一下&hellip;</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301005811.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>终于成功了,这也太累了&hellip;</p>
+<h2 id="后记">后记
+</h2><p>其实想做这个项目已经很久了,只是一直没有动力去做,刚好放假放了这么多天,游戏也玩腻了,刷各种网站也刷累了,看到了某篇 <a class="link" href="https://www.91yunbbs.com/discussion/641/drcais-noob-bgplayer-in-1hour-%E7%BB%9D%E8%B5%9E%E9%80%9F%E6%88%90%E7%8F%AD-%E9%80%83"  target="_blank" rel="noopener"
+    >Noob BGPlayer in 1hour 绝赞速成班</a> ,就来实现自己的方式了&quot;带入家中&quot;了,当成功的那一刻还是很开心的&hellip;</p>
+<p>最后感谢MoeQing动物园的各位dalao的答疑(</p>
+<p><del>什么?你说近期啊,近期还有一篇水文</del></p>
+<p>以上</p>
+<hr>
+<h4 id="参考">参考
+</h4><ul>
+<li><a class="link" href="https://blog.itnmg.net/2018/08/28/centos-7-ikev2-vpn-strongswan/"  target="_blank" rel="noopener"
+    >https://blog.itnmg.net/2018/08/28/centos-7-ikev2-vpn-strongswan/</a></li>
+<li><a class="link" href="https://www.91yunbbs.com/discussion/641/drcais-noob-bgplayer-in-1hour-%E7%BB%9D%E8%B5%9E%E9%80%9F%E6%88%90%E7%8F%AD-%E9%80%83"  target="_blank" rel="noopener"
+    >https://www.91yunbbs.com/discussion/641/drcais-noob-bgplayer-in-1hour-%E7%BB%9D%E8%B5%9E%E9%80%9F%E6%88%90%E7%8F%AD-%E9%80%83</a></li>
+<li><a class="link" href="https://recursiveg.me/2016/12/assign-ipv6-through-ipsec-and-strongswan/"  target="_blank" rel="noopener"
+    >https://recursiveg.me/2016/12/assign-ipv6-through-ipsec-and-strongswan/</a></li>
+<li><a class="link" href="https://m13253.blogspot.com/2018/07/strongswan-ikev2-vpn.html"  target="_blank" rel="noopener"
+    >https://m13253.blogspot.com/2018/07/strongswan-ikev2-vpn.html</a></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/tech/">Tech</a>
+        
+            <a href="/tags/network/">Network</a>
+        
+            <a href="/tags/bgp/">BGP</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/bgp2019-p2/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">年轻人的第一个私人BGP(二) - 广播你的IP</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/bgp2019-p1/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">年轻人的第一个私人BGP(一) - 注册一个ASN</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="LovelyWei/LovelyWei.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkyMDM3ODQ3OTk="
+    data-category="Announcements"
+    data-category-id="DIC_kwDODCWCX84CfStj"
+    data-mapping="title"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2019 - 
+        
+        2024 Chocolate&#39;s 废纸篓
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
