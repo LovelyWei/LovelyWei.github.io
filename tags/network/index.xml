@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Network on Chocolate's 废纸篓</title><link>https://hex.moe/tags/network/</link><description>Recent content in Network on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 28 Feb 2020 19:56:38 +0000</lastBuildDate><atom:link href="https://hex.moe/tags/network/index.xml" rel="self" type="application/rss+xml"/><item><title>年轻人的第一个私人BGP(三) - 带入家中</title><link>https://hex.moe/p/bgp2019-p3/</link><pubDate>Fri, 28 Feb 2020 19:56:38 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p3/</guid><description>&lt;p>BGP系列也好久没更新过了,最近放假放的有点久&amp;hellip;干了点新的东西,让家里的网络用上自己的IP.&lt;/p>
+&lt;!-- more -->
+&lt;p>解决方案是 strongSwan IKEv2 VPN隧道到VPS服务器上,IKEv2 的证书使用的是Let&amp;rsquo;s encrypt的证书,域名挂在了&lt;code>CloudFlare&lt;/code>上以便于调用api.&lt;/p>
+&lt;h2 id="配置服务器环境">配置服务器环境
+&lt;/h2>&lt;p>博主这里使用了 香港阿里云的轻量VPS &lt;code>CentOS7&lt;/code> (物理位置近+便宜) + HE.net 的BGP隧道,至于实现方案可以参考&lt;a class="link" href="https://hex.moe/p/d6a20b99/" target="_blank" rel="noopener"
+>上一篇bgp系列的文章&lt;/a>.&lt;/p>
+&lt;p>参考上一篇文章,这里在上一篇文章处做出一点修改.&lt;/p>
+&lt;ul>
+&lt;li>首先将需要留给客户端的IP段从dummy1的IP删除,并且可以将自己的IP设为出口IP&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>之前的文章中配置并广播好了BGP但是出口ip还是 he.net 给的ip,并没有配置自己的IP为出口IP,解决这个问题其实很简单,只要将原有的&lt;code>dummy1&lt;/code>配置好的IP删除,将IP配置到&lt;code>sit1&lt;/code>接口上,并把默认路由的&lt;code>src&lt;/code>配置为出口的ip即可 (多谢群友&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[root@host ~]# ip addr add dev sit1 2a0f:9400:8000::1/48
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[root@host ~]# ip -6 route change default dev sit1 src 2a0f:9400:8000::1 metric 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[root@host ~]# curl ipv6.ip.sb
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2a0f:9400:8000::1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;ul>
+&lt;li>
+&lt;h3 id="安装并配置-acmesh-生成证书">安装并配置 acme.sh, 生成证书
+&lt;/h3>&lt;ol>
+&lt;li>安装 &lt;a class="link" href="http://acme.sh/" target="_blank" rel="noopener"
+>acme.sh&lt;/a> ,用于自助签发TLS证书,并创建一个&lt;code>alias&lt;/code>方便使用.&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">curl https://get.acme.sh &lt;span class="p">|&lt;/span> sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">alias&lt;/span> acme.sh&lt;span class="o">=&lt;/span>~/.acme.sh/acme.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="2">
+&lt;li>获取&lt;code>CloudFlare&lt;/code>的&lt;a class="link" href="https://dash.cloudflare.com/profile" target="_blank" rel="noopener"
+>Api&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>至于详细的获取&lt;code>CloudFlare Api Token&lt;/code>可以参考&lt;a class="link" href="https://hex.moe/p/aaafb04f/" target="_blank" rel="noopener"
+>利用CloudFlare Api实现DDNS&lt;/a>.&lt;/p>
+&lt;/blockquote>
+&lt;ol start="3">
+&lt;li>写&lt;code>Token&lt;/code>到环境变量&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">CF_Key&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;sdfsdfsdfljlbjkljlkjsdfoiwje&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">CF_Email&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;xxxx@sss.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="4">
+&lt;li>现在,可以用命令自动创建证书了&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">acme.sh --issue --dns dns_cf -d hex.moe -d vpn.hex.moe &lt;span class="c1"># 记得替换域名&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="5">
+&lt;li>使用 &lt;code>acme.sh --cron&lt;/code> 可以生成 cronjob 自动更新证书&lt;/li>
+&lt;/ol>
+&lt;p>经过配置,应该可以在&lt;code>/root/.acme.sh/vpn.hex.moe&lt;/code>中看到你的证书&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>root@host vpn.hex.moe&lt;span class="o">]&lt;/span>&lt;span class="c1"># pwd&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/root/.acme.sh/vpn.hex.moe
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>root@host vpn.hex.moe&lt;span class="o">]&lt;/span>&lt;span class="c1"># ls&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ca.cer vpn.hex.moe.cer vpn.hex.moe.csr vpn.hex.moe.key
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fullchain.cer vpn.hex.moe.conf vpn.hex.moe.csr.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;h3 id="然后安装并配置-strongswan">然后安装并配置 &lt;code>strongswan&lt;/code>
+&lt;/h3>&lt;ol>
+&lt;li>安装&lt;code>strongswan&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">yum install strongswan
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="2">
+&lt;li>修改配置文件&lt;code>ipsec.conf&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>这里使用了旧版的配置文件,由于已经配置好了遂不再更变.( &lt;del>又不是不能用&lt;/del>&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">vim /etc/strongswan/ipsec.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>以下是内容:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">conn setup
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">uniqueids = no
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">conn %default
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> compress = yes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> keyexchange=ike
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ike=aes256-sha256-sha1-modp2048-modp1024,3des-sha256-sha1-modp2048-modp1024!
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> esp=aes256-sha256-sha1,3des-sha256-sha1!
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> leftdns=8.8.8.8,8.8.4.4,2001:4860:4860::8888 # 此处是dns
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> rightdns=8.8.8.8,8.8.4.4,2001:4860:4860::8888
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">conn ikev2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dpdaction=clear
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> dpddelay=60s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> rekey=no
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> fragmentation=yes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> eap_identity=%identity
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> left=%any
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> leftid=&amp;#34;vpn.hex.moe&amp;#34; # 签发证书的域名
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> leftsubnet=0.0.0.0/0,::/0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> leftauth=pubkey
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> leftcert=fullchain.cer
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> leftsendcert=always
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> leftfirewall=yes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> right=%any
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> rightid=%any
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> rightsourceip=10.1.0.0/24,2a0e:b107:16::/48 # 要分配给客户端的ip,这里用了双栈
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> rightauth=eap-mschapv2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> rightsendcert=never
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> auto=add
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>还有一套是&lt;code>swanctl.conf&lt;/code>的新版配置文件,由于博主没有配置过所以不多做介绍.
+可参考这一位博主写的 &lt;a class="link" href="https://m13253.blogspot.com/2018/07/strongswan-ikev2-vpn.html" target="_blank" rel="noopener"
+>用 strongSwan 配一个支持 AEAD 的远程访问 IKEv2 VPN&lt;/a>.&lt;/p>
+&lt;/blockquote>
+&lt;ol start="3">
+&lt;li>
+&lt;p>配置&lt;code>strongswan&lt;/code>的证书
+使用软连接方便更新&lt;code>ln -s [源路径] [目标路径]&lt;/code> , 将&lt;code>/root/.acme.sh/[域名]&lt;/code>中的&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>fullchain.cer&lt;/code>放入&lt;code>/etc/strongswan/ipsec.d/certs&lt;/code>&lt;/li>
+&lt;li>&lt;code>[域名].key&lt;/code>放入&lt;code>/etc/strongswan/ipsec.d/private&lt;/code>&lt;/li>
+&lt;li>&lt;code>ca.cer&lt;/code>放入&lt;code>/etc/strongswan/ipsec.d/cacerts&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>配置&lt;code>ipsec.secrets&lt;/code>,添加用户&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">vim /etc/strongswan/ipsec.secrets
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>以下是我写的内容:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># ipsec.secrets - strongSwan IPsec secrets file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">: RSA vpn.hex.moe.key # 这里是私钥的文件名
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#这里是用户名和密码,%any表示任意用户名均可,EAP后面的为密码
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">user1 %any : EAP &amp;#34;123456&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;p>配置&lt;code>sysctl.conf&lt;/code> , 开启Linux的内核转发&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">/etc/sysctl.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>在后面添加开启相关转发的内容&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">net.ipv4.ip_forward = 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">net.ipv4.conf.all.accept_redirects = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">net.ipv4.conf.all.send_redirects = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">net.ipv6.conf.all.forwarding=1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>配置iptables防火墙&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">iptables -A INPUT -p ah -j ACCEPT
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -A INPUT -p esp -j ACCEPT
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -A INPUT -p udp -m udp --dport &lt;span class="m">500&lt;/span> -j ACCEPT
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -A INPUT -p udp -m udp --dport &lt;span class="m">4500&lt;/span> -j ACCEPT
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -A POSTROUTING -t nat -m policy --pol ipsec --dir out -j ACCEPT
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -A POSTROUTING -t nat -s 10.1.0.0/24 -o eth0 -j MASQUERADE
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -A FORWARD -t nat -i eth0 -m policy --pol ipsec --dir in -j ACCEPT
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables-save
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">systemctl restart iptables
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>虽然说如果&lt;code>ah&lt;/code>和&lt;code>esp&lt;/code>头如果走不通的话会走&lt;code>udp&lt;/code>协议,但是还是加上了&lt;/p>
+&lt;/blockquote>
+&lt;/li>
+&lt;li>
+&lt;p>在阿里云的防火墙中开启&lt;code>udp500&lt;/code>和&lt;code>udp4500&lt;/code>端口&lt;/p>
+&lt;hr>
+&lt;p>firewalld的防火墙类似,由于博主的centos默认是iptables的并没有实践过,所以这里贴出某位博主帖子里写的内容.&lt;/p>
+&lt;blockquote>
+&lt;p>允许 ‘AH’ 和 ‘ESP’ 身份验证协议和加密协议通过防火墙&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">firewall-cmd --zone&lt;span class="o">=&lt;/span>public --permanent --add-rich-rule&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;rule protocol value=&amp;#34;esp&amp;#34; accept&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">firewall-cmd --zone&lt;span class="o">=&lt;/span>public --permanent --add-rich-rule&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;rule protocol value=&amp;#34;ah&amp;#34; accept&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>开放 ipsec 和相关端口&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">firewall-cmd --zone&lt;span class="o">=&lt;/span>public --permanent --add-port&lt;span class="o">=&lt;/span>500/udp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">firewall-cmd --zone&lt;span class="o">=&lt;/span>public --permanent --add-port&lt;span class="o">=&lt;/span>4500/udp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">firewall-cmd --zone&lt;span class="o">=&lt;/span>public --permanent --add-service&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;ipsec&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>允许 ip 伪装&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">firewall-cmd --zone&lt;span class="o">=&lt;/span>public --permanent --add-masquerade
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>然后重新加载防火墙&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">firewall-cmd --reload
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;/li>
+&lt;li>
+&lt;p>启动&lt;code>strongswan&lt;/code>服务 &lt;code>systemctl restart strongswan&lt;/code>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>此时就能用Windows连接到IKEv2 VPN了!&lt;/p>
+&lt;h2 id="连接vpn">连接VPN
+&lt;/h2>&lt;p>打开Win10的 &lt;code>设置-&amp;gt;网络和Internet-&amp;gt;VPN&lt;/code> 并点击 &lt;code>添加VPN连接&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301003025.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>写好配置并保存.&lt;/p>
+&lt;p>然后点击 &lt;code>状态-&amp;gt;更改适配器选项&lt;/code> 右键 &lt;code>VPN-&amp;gt;属性-&amp;gt;网络&lt;/code>&lt;/p>
+&lt;p>如果需要使用IPv4和IPv6流量都走VPN隧道的话你需要稍微调整下IPv4的设置&lt;/p>
+&lt;p>点击&lt;code>IPv4-&amp;gt;属性-&amp;gt;高级&lt;/code> 勾选 &lt;code>在远程网络上使用默认网关&lt;/code>和 取消勾选 &lt;code>自动跃点&lt;/code> 跃点数写一个相对小的数值,比如说,我写了&lt;code>5&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301004612.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>当然,我现在并不需要(&lt;/p>
+&lt;p>所以我将IPv4勾掉了,ipv4流量不走vpn,后来我连接上后&amp;hellip;&lt;/p>
+&lt;p>&amp;hellip;&lt;/p>
+&lt;blockquote>
+&lt;p>IPv6检测失败&lt;/p>
+&lt;/blockquote>
+&lt;p>后面了解到,虽然IPv6中也有一个 &lt;code>在远程网络上使用默认网关&lt;/code> 但是那个完全没有用,也不知道微软阿三程序员怎么写的,总之就是没有用,需要手动配置一下路由&lt;/p>
+&lt;p>所以,连接上VPN后,在&lt;code>cmd&lt;/code>中敲入 &lt;code>ipconfig&lt;/code> 查看分配到的ip&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301005308.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>并手动添加路由&amp;hellip;&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301005426.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>&lt;code>请求的操作需要提升&lt;/code>(权限) , 好吧 ,右键左下角的 &lt;code>Win&lt;/code> 图标, 选择 &lt;code>Windows Powershell (管理员)&lt;/code>,用打开的shell再次手动添加路由&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">route add ::/0 &lt;span class="o">[&lt;/span>分配到的IP&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>此时再去测试一下&amp;hellip;&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200301005811.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>终于成功了,这也太累了&amp;hellip;&lt;/p>
+&lt;h2 id="后记">后记
+&lt;/h2>&lt;p>其实想做这个项目已经很久了,只是一直没有动力去做,刚好放假放了这么多天,游戏也玩腻了,刷各种网站也刷累了,看到了某篇 &lt;a class="link" href="https://www.91yunbbs.com/discussion/641/drcais-noob-bgplayer-in-1hour-%E7%BB%9D%E8%B5%9E%E9%80%9F%E6%88%90%E7%8F%AD-%E9%80%83" target="_blank" rel="noopener"
+>Noob BGPlayer in 1hour 绝赞速成班&lt;/a> ,就来实现自己的方式了&amp;quot;带入家中&amp;quot;了,当成功的那一刻还是很开心的&amp;hellip;&lt;/p>
+&lt;p>最后感谢MoeQing动物园的各位dalao的答疑(&lt;/p>
+&lt;p>&lt;del>什么?你说近期啊,近期还有一篇水文&lt;/del>&lt;/p>
+&lt;p>以上&lt;/p>
+&lt;hr>
+&lt;h4 id="参考">参考
+&lt;/h4>&lt;ul>
+&lt;li>&lt;a class="link" href="https://blog.itnmg.net/2018/08/28/centos-7-ikev2-vpn-strongswan/" target="_blank" rel="noopener"
+>https://blog.itnmg.net/2018/08/28/centos-7-ikev2-vpn-strongswan/&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.91yunbbs.com/discussion/641/drcais-noob-bgplayer-in-1hour-%E7%BB%9D%E8%B5%9E%E9%80%9F%E6%88%90%E7%8F%AD-%E9%80%83" target="_blank" rel="noopener"
+>https://www.91yunbbs.com/discussion/641/drcais-noob-bgplayer-in-1hour-%E7%BB%9D%E8%B5%9E%E9%80%9F%E6%88%90%E7%8F%AD-%E9%80%83&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://recursiveg.me/2016/12/assign-ipv6-through-ipsec-and-strongswan/" target="_blank" rel="noopener"
+>https://recursiveg.me/2016/12/assign-ipv6-through-ipsec-and-strongswan/&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://m13253.blogspot.com/2018/07/strongswan-ikev2-vpn.html" target="_blank" rel="noopener"
+>https://m13253.blogspot.com/2018/07/strongswan-ikev2-vpn.html&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>年轻人的第一个私人BGP(二) - 广播你的IP</title><link>https://hex.moe/p/bgp2019-p2/</link><pubDate>Thu, 31 Oct 2019 19:06:15 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p2/</guid><description>&lt;p>接上篇BGP,这个时候已经拿下了自己ASN和IP,在RIPE中可以查询到,并且也添加了 &lt;code>Route6&lt;/code> 对象,接下来就把自己的IP广播出去&amp;hellip;.&lt;/p>
+&lt;p>在广播之前,需要寻找一家能为你做广播的电信运营商&amp;hellip;.Emm至少在国内是不可能了,不过还可以选择云服务器,Vultr 提供了广播BGP的服务,还有 he.net 家的BGP隧道..&lt;/p>
+&lt;blockquote>
+&lt;p>参考:
+&lt;a class="link" href="https://blog.yuzu.im/marchives/133" target="_blank" rel="noopener"
+>https://blog.yuzu.im/marchives/133&lt;/a>
+&lt;a class="link" href="https://blog.ni-co.moe/public/559.html" target="_blank" rel="noopener"
+>https://blog.ni-co.moe/public/559.html&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="开通vultr的bgp广播服务">开通Vultr的BGP广播服务
+&lt;/h2>&lt;blockquote>
+&lt;p>直达链接:https://my.vultr.com/bgp/&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>由于下面的过程博主没都截图,所以&amp;hellip;只好文字描述下了..&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>将 &lt;code>I have my own IP&lt;/code> 和 &lt;code>I have my own ASN&lt;/code> 修改为YES&lt;/li>
+&lt;li>&lt;code>My ASN&lt;/code> 填入ASN号码&lt;/li>
+&lt;li>&lt;code>BGP Password&lt;/code> 中填入自己想要的密码&lt;/li>
+&lt;li>&lt;code>IP Prefixes&lt;/code> 填入前缀&lt;/li>
+&lt;li>LOA文件可参考下图 &lt;del>瞎编一个&lt;/del>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191106084609.png"
+loading="lazy"
+>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Routes&lt;/code> 选择 &lt;code>Full Table&lt;/code>&lt;/li>
+&lt;li>然后点击&lt;code>Setup&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>接下来注意ASN和IP Prefixes Whois留下的邮箱,Vultr会发送邮件到邮箱,然后让你选择同意和不同意.&lt;/p>
+&lt;p>接下来就是等待客服人工开通了&lt;/p>
+&lt;h2 id="vultr下广播的的配置">Vultr下广播的的配置
+&lt;/h2>&lt;p>关于Linux的版本,博主选择的是CentOS 7&lt;/p>
+&lt;p>首先&lt;/p>
+&lt;ul>
+&lt;li>安装&lt;code>bird6&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>yum install bird6 -y&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>停止服务&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>service bird6 stop&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>
+&lt;p>修改 &lt;code>/etc/bird6.conf&lt;/code>的配置文件&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>修改配置中的 &lt;code>router id&lt;/code> 改为自己的IPv4地址&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">router id 198.51.100.1;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>在文件的最后添加上&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">protocol&lt;/span> &lt;span class="n">bgp&lt;/span> &lt;span class="n">vultr&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">local&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="err">你的&lt;/span>&lt;span class="n">asn&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">开头不带&lt;/span>&lt;span class="n">as&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">source&lt;/span> &lt;span class="n">address&lt;/span> &lt;span class="err">实例的&lt;/span>&lt;span class="n">ipv6&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">import&lt;/span> &lt;span class="n">none&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">export&lt;/span> &lt;span class="n">all&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">graceful&lt;/span> &lt;span class="n">restart&lt;/span> &lt;span class="n">on&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">multihop&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">neighbor&lt;/span> &lt;span class="mi">2001&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">19&lt;/span>&lt;span class="n">f0&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="n">ffff&lt;/span>&lt;span class="p">::&lt;/span>&lt;span class="mi">1&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="mi">64515&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">#这个是Vultr服务器的ip&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">password&lt;/span> &lt;span class="s2">&amp;#34;在申请广播的时候设置的bgp密码&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>寻找到&lt;code>protocol static&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">protocol static
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> route [v6前缀] via [实例的IPv6];
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #route 2001:2333:2333::/48 via 4096:4096:4096:338:5400:01ff:fecf:596c;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>vultr要求广播的ipv6最小block为/48,ipv4为/24&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>找到&lt;code>protocol direct&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">protocol direct
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> interface &amp;#34;dummy*&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> import all;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>保存配置&lt;/li>
+&lt;li>配置虚拟网卡以及ip地址&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">ip link add dev dummy1 &lt;span class="nb">type&lt;/span> dummy &lt;span class="c1"># 添加虚拟网卡&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ip link &lt;span class="nb">set&lt;/span> dummy1 up
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ip addr add dev dummy1 &lt;span class="o">[&lt;/span>前缀内的任意一个地址&lt;span class="o">]&lt;/span> &lt;span class="c1"># 添加地址&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>启动&lt;code>bird6&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>service bird6 restart&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>查看状态 &lt;code>birdc6 show route&lt;/code>/&lt;code>birdc6 show proto all&lt;/code>&lt;/li>
+&lt;li>完&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>在 &lt;a class="link" href="https://tools.ipip.net/traceroute.php?v=6" target="_blank" rel="noopener"
+>https://tools.ipip.net/traceroute.php?v=6&lt;/a> 中可以看traceroute&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="henet-的bgp隧道">he.net 的BGP隧道
+&lt;/h2>&lt;blockquote>
+&lt;p>直达链接: &lt;a class="link" href="https://tunnelbroker.net/new_tunnel.php?type=bgp" target="_blank" rel="noopener"
+>https://tunnelbroker.net/new_tunnel.php?type=bgp&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>该填写的还是类似上面Vultr中的内容&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191106093253.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>然后就是等待客服验证你的ASN和IP前缀&lt;/p>
+&lt;blockquote>
+&lt;p>建议先在Vultr做好广播后再找 he.net 开通隧道,博主和 he.net 的客服为了验证我的ASN是我的ASN,我的前缀IRR验证了这些问题扯皮了很久..&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>至于服务器,如果是在中国大陆境内的服务器不建议选择香港,博主在深圳ping HK的服务器延迟比JP的还高..&lt;/p>
+&lt;/blockquote>
+&lt;p>等待客服批准,就可以开始配置了(&lt;/p>
+&lt;h2 id="配置bgp隧道广播">配置BGP隧道广播
+&lt;/h2>&lt;p>总体来说,其实和上面的配置差不多,只不过要加一个建立隧道的过程(&lt;/p>
+&lt;p>当经过客服通过后,会看到下面的状态
+&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191106143512.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>状态变成 &lt;code>Available&lt;/code>&lt;/p>
+&lt;p>点击 &lt;code>Example Configurations&lt;/code> 复制一段 &lt;code>net-tools&lt;/code>的配置到服务器,建立隧道&lt;/p>
+&lt;blockquote>
+&lt;p>由于博主是在阿里云上的CentOS7,默认IPv6是关闭的,还需要开启下系统的IPv6,编辑&lt;code>/etc/sysctl.conf&lt;/code>(需要Root权限)&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">net.ipv6.conf.all.disable_ipv6 = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">net.ipv6.conf.default.disable_ipv6 = 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">net.ipv6.conf.lo.disable_ipv6 = 0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>保存,再运行 sysctl -p 的命令&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>参考:https://blog.csdn.net/ei__nino/article/details/71331717&lt;/p>
+&lt;/blockquote>
+&lt;p>类似&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">ifconfig sit0 up
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ifconfig sit0 inet6 tunnel ::216.218.221.2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ifconfig sit1 up
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ifconfig sit1 inet6 add 2001:470:17:10e::2/64
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">route -A inet6 add ::/0 dev sit1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>当隧道建立好后,&lt;code>sit1&lt;/code>中可以看到建立隧道后自己的ip地址&lt;/p>
+&lt;blockquote>
+&lt;p>尝试 curl ipv6.ip.sb,若能访问则有了公网IPv6&lt;/p>
+&lt;/blockquote>
+&lt;p>然后开始配置bird6,广播IP段&lt;/p>
+&lt;p>编辑&lt;code>/etc/bird6.conf&lt;/code> 嘛,博主直接贴出自己的配置&amp;hellip;&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">protocol&lt;/span> &lt;span class="n">bgp&lt;/span> &lt;span class="n">he&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">local&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="mi">208191&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">source&lt;/span> &lt;span class="n">address&lt;/span> &lt;span class="mi">2001&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">470&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">17&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="p">::&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">import&lt;/span> &lt;span class="n">none&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">export&lt;/span> &lt;span class="n">all&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">graceful&lt;/span> &lt;span class="n">restart&lt;/span> &lt;span class="n">on&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">multihop&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">neighbor&lt;/span> &lt;span class="mi">2001&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">470&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">17&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="p">::&lt;/span>&lt;span class="mi">1&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="mi">6939&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>source address&lt;/code>修改为 he.net 分配给的客户端ip&lt;/p>
+&lt;p>&lt;code>neighbor&lt;/code> 修改为 he.ne 给的服务器ip&lt;/p>
+&lt;p>然后就可以跳到上面Vultr &lt;code>protocol static&lt;/code> 内容了(&lt;/p>
+&lt;blockquote>
+&lt;p>之后就一样了,检查配置,配置好后就能ping通自己的地址了&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="end">END
+&lt;/h2>&lt;p>&lt;del>BGP坑就到这里,线路boy太难当了,之后再了解如何做Peer吧&lt;/del>&lt;/p></description></item><item><title>年轻人的第一个私人BGP(一) - 注册一个ASN</title><link>https://hex.moe/p/bgp2019-p1/</link><pubDate>Tue, 15 Oct 2019 19:06:15 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p1/</guid><description>&lt;p>很久以前就有这一个想法了,拥有一个自己的私人ASN,经过了一个多月的研究,现在博主终于拥有了年轻人的第一个ASN和网络段(&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;del>实名上网&lt;/del>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="0x00-介绍">0x00 介绍
+&lt;/h2>&lt;h3 id="bgp是什么">BGP是什么
+&lt;/h3>&lt;blockquote>
+&lt;p>边界网关协议（英语：Border Gateway Protocol，缩写：BGP）是互联网上一个核心的去中心化自治路由协议。它通过维护IP路由表或‘前缀’表来实现自治系统（AS）之间的可达性，属于矢量路由协议&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>&lt;a class="link" href="https://zh.wikipedia.org/wiki/%E8%BE%B9%E7%95%8C%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener"
+>https://zh.wikipedia.org/wiki/%E8%BE%B9%E7%95%8C%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AE&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="as是什么">AS是什么
+&lt;/h3>&lt;blockquote>
+&lt;p>自治系统（英文：Autonomous system, AS）是指在一个（有时是多个）实体管辖下的所有IP网络和路由器的全体，它们对互联网执行共同的路由策略。&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>&lt;a class="link" href="https://zh.wikipedia.org/wiki/%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener"
+>https://zh.wikipedia.org/wiki/%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="rir是什么">RIR是什么
+&lt;/h3>&lt;blockquote>
+&lt;p>区域互联网注册机构（Regional Internet Registry，RIR），是管理世界上某特定地区Internet资源的组织。Internet资源包括IP地址（包含IPv4和IPv6）和使用在BGP路由中的自治系统号（Autonomous System number）。&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>&lt;a class="link" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9F%9F%E4%BA%92%E8%81%94%E7%BD%91%E6%B3%A8%E5%86%8C%E7%AE%A1%E7%90%86%E6%9C%BA%E6%9E%84" target="_blank" rel="noopener"
+>https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9F%9F%E4%BA%92%E8%81%94%E7%BD%91%E6%B3%A8%E5%86%8C%E7%AE%A1%E7%90%86%E6%9C%BA%E6%9E%84&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="0x01-开始">0x01 开始
+&lt;/h2>&lt;p>想要拥有一个自己的BGP首先就需要有一个ASN,而注册ASN的一般流程是寻找APNIC,CNNIC等互联网注册管理机构注册会员然后申请,由于一般人不太可能注册这些机构的会员,加上注册这些会员的入会费也十分的昂贵&lt;/p>
+&lt;p>&lt;del>是APNIC还是CNNIC? 我记得入会费需要1w RMB左右&lt;/del>&lt;/p>
+&lt;p>所以就需要寻求LIR来帮忙申请ASN了&lt;/p>
+&lt;blockquote>
+&lt;p>Local Internet registry (LIR) is an organization that has been allocated a block of IP addresses by a RIR, and that assigns most parts of this block to its own customers.&lt;/p>
+&lt;/blockquote>
+&lt;p>总之&amp;hellip;就是RIR的会员,可以寻找他们去代理注册ASN和租借IP&lt;/p>
+&lt;p>关于各大LIR的价格不均一,下面贴出国外&lt;del>MJJ&lt;/del>论坛的一个帖子(&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;a class="link" href="https://www.lowendtalk.com/discussion/114478/the-aio-ip-related-thread-ipv4-ipv6-asn-only-providers-are-allowed-to-post-offers" target="_blank" rel="noopener"
+>https://www.lowendtalk.com/discussion/114478/the-aio-ip-related-thread-ipv4-ipv6-asn-only-providers-are-allowed-to-post-offers&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>在这个贴子里可以看到一些LIR的ASN注册服务和租借IP的价格.&lt;/p>
+&lt;p>关于注册ASN,虽说原本是就近注册,管理你所在区域的RIR,例如中国就是属于APNIC的管辖范围&lt;/p>
+&lt;p>但是建议选择RIPE注册,因为RIPE注册可以自行在网页操作管理ASN和IP,若类似APNIC之类的修改信息还需要再次联系LIR&lt;/p>
+&lt;p>这里注册以RIPE为例子 &lt;del>因为博主注册的就是RIPE&lt;/del>&lt;/p>
+&lt;p>RIPE的注册类型分为两种:&lt;/p>
+&lt;ul>
+&lt;li>个人:需要护照、地址、手机号、邮箱等&lt;/li>
+&lt;li>公司:需要公司注册证书（营业执照）、地址、手机号、邮箱等&lt;/li>
+&lt;/ul>
+&lt;p>注:未满十八岁注册需要监护人护照和监护人的同意书&lt;/p>
+&lt;p>&lt;strong>如果选择个人注册需要注意的一点是,个人类型注册的ASN在 bgp.he.net的&lt;code>descr&lt;/code> 是你的将会是你的姓名!!!&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>如下:&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191017193320.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>&lt;del>惨痛经历&lt;/del>&lt;/p>
+&lt;p>如果注册类型是公司则&lt;code>descr&lt;/code>是公司的名称&lt;/p>
+&lt;p>若实在不想挂个姓名在上面可以尝试以下两个方法:&lt;/p>
+&lt;ul>
+&lt;li>若是在校大学生可以申请校创业,还挺快的( 道听途说&lt;/li>
+&lt;li>可以&lt;a class="link" href="https://yourcompanyformations.co.uk" target="_blank" rel="noopener"
+>网上注册一个英国公司&lt;/a>带地址的那种&lt;/li>
+&lt;/ul>
+&lt;p>由于博主没有注册过,所以无法分享经验,还请自行实践了(&lt;/p>
+&lt;p>另外RIPE还有有一些要求,需要在RIPE注册ASN需要提供在欧洲提供服务的证明&lt;/p>
+&lt;p>所以,想想如何忽悠就好(&lt;/p>
+&lt;p>&lt;del>博主开了个英国的机器萌混过关了&lt;/del>&lt;/p>
+&lt;h2 id="0x02-注册ripe账号和需要进行的操作">0x02 注册RIPE账号和需要进行的操作
+&lt;/h2>&lt;p>这里引用一篇已经失联的夜空一篇文章&lt;/p>
+&lt;blockquote>
+&lt;p>存档: &lt;a class="link" href="https://web.archive.org/web/20190227042014/https:/www.ykhut.com/archives/72/" target="_blank" rel="noopener"
+>https://web.archive.org/web/20190227042014/https:/www.ykhut.com/archives/72/&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;!-- 进入 https://access.ripe.net/registration 注册一个RIPE账号.(注册账号时需要填写下姓名,使用拼音就好了)
+然后从首页中进入我的资源
+``下面那个齿轮``
+![](https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191017195921.png)
+然后点击左侧的 `RIPE Database` - `Create an Object`
+选择 `role and maintainer pair` 点击 `Create` 按钮
+> 直达链接：https://apps.db.ripe.net/db-web-ui/#/webupdates/create/person/self
+> mntner: 维护者的字段名，纯英文，可包含"-"和"_"，建议格式为*-MNT，例如YekongTAT-MNT
+person: 维护者的称呼，可以写全名或其他名称。可包含英文、数字和.`'_-
+address: 地址，
+phone: 手机号，建议格式为+国家区号.手机号，例如+86.16677778888
+-->
+&lt;h2 id="0x03-寻找lir购买并等待ripe下发asn">0x03 寻找LIR购买并等待RIPE下发ASN
+&lt;/h2>&lt;p>向LIR购买代理注册ASN服务,并提交个人信息,护照照片等&lt;/p>
+&lt;p>和关于你RIPE账号的一些信息&lt;/p>
+&lt;p>期间可能RIPE会询问你一些问题&lt;/p>
+&lt;h2 id="0x04-end">0x04 END
+&lt;/h2>&lt;p>之后再发一篇 注册RIPE账号和需要进行的操作 的详细介绍好了&lt;/p>
+&lt;p>&lt;del>其实上面已经很详细了&lt;/del>&lt;/p></description></item></channel></rss>

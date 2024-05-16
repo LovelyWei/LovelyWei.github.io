@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Email on Chocolate's 废纸篓</title><link>https://hex.moe/tags/email/</link><description>Recent content in Email on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 15 Nov 2019 19:37:08 +0000</lastBuildDate><atom:link href="https://hex.moe/tags/email/index.xml" rel="self" type="application/rss+xml"/><item><title>关于伪造邮件的简单研究</title><link>https://hex.moe/p/swaks2019/</link><pubDate>Fri, 15 Nov 2019 19:37:08 +0000</pubDate><guid>https://hex.moe/p/swaks2019/</guid><description>&lt;p>最近拿到了学校的邮箱,心血来潮想开始测试一下关于电子邮件安全之类的&amp;hellip;说干就干&amp;hellip;伪造一封退学通知书(雾&lt;/p>
+&lt;h2 id="伪造邮件的原理">伪造邮件的原理
+&lt;/h2>&lt;p>最初的SMTP 协议定义 (1982年&lt;a class="link" href="https://tools.ietf.org/html/rfc821" target="_blank" rel="noopener"
+>RFC 821&lt;/a>) 中并没有写如何对发件人进行身份验证,所以任何人都可以说我是 Alice (这就导致了垃圾邮件和虚假邮件的产生.&lt;/p>
+&lt;p>那&amp;hellip;.知道原理后先来伪造一封邮件(&lt;/p>
+&lt;h2 id="使用swaks伪造一封邮件">使用&lt;code>Swaks&lt;/code>伪造一封邮件
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;h3 id="swaks-是什么">Swaks 是什么?
+&lt;/h3>&lt;p>Swaks的全称是 &lt;code>Swiss Army Knife SMTP&lt;/code>(SMTP界的瑞士军刀),用于测试SMTP协议的各种操作.&lt;/p>
+&lt;p>附原文简介:&lt;/p>
+&lt;blockquote>
+&lt;p>swaks&amp;rsquo; primary design goal is to be a flexible, scriptable, transaction-oriented SMTP test tool. It handles SMTP features and extensions such as TLS , authentication, and pipelining; multiple version of the SMTP protocol including SMTP , ESMTP , and LMTP ; and multiple transport methods including unix-domain sockets, internet-domain sockets, and pipes to spawned processes. Options can be specified in environment variables, configuration files, and the command line allowing maximum configurability and ease of use for operators and scripters.&lt;/p>
+&lt;/blockquote>
+&lt;/li>
+&lt;li>
+&lt;h3 id="测试目标">测试目标
+&lt;/h3>&lt;p>首先直接输入了&lt;code>swaks&lt;/code>,在to中写入自己的邮箱,先尝试了qq邮箱,然后被550了&amp;hellip;.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">kali@kali:~$ swaks
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">To:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200228160018.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>没有关系,再测一下目标,试一下学校的邮箱,用的也是腾讯的企业邮箱&amp;hellip;
+&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/1582886911.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>成了,但是结果也没收到通知,翻了一下原来躺在垃圾箱里了&amp;hellip;&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;h3 id="进一步尝试">进一步尝试
+&lt;/h3>&lt;blockquote>
+&lt;p>这里博主用了之前的写法(几个月前),结果还是被拒了&amp;hellip;腾讯升级的也太快了吧&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">kali@kali:~$ swaks --to xxxxxxx@mail.xxx.edu.cn --from info@example.com --ehlo example.com --body hello --header &lt;span class="s2">&amp;#34;Subject: hello&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>第一次 550(我记得之前就是这样写的呀&amp;hellip;),怀疑是&lt;code>X-Mailer&lt;/code>挂着个swaks的问题,修改一下swaks&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">kali@kali:~$ swaks --to xxxxxxx@mail.xxx.edu.cn --from info@example.com --ehlo example.com --body hello --header &lt;span class="s2">&amp;#34;Subject: hello&amp;#34;&lt;/span> --header-X-Mailer SMTP
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>难不成还是&lt;code>Message-Id&lt;/code>有kali的问题吗,也改一下吧&amp;hellip;&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">kali@kali:~$ swaks --to xxxxxx@mail.xxxx.edu.cn --from info@example.com --ehlo example.com --body hello --header &lt;span class="s2">&amp;#34;Subject: hello&amp;#34;&lt;/span> --header-X-Mailer SMTP --header-Message-Id &lt;span class="s1">&amp;#39;&amp;lt;51891223094431836868@example.com&amp;gt;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>也被拒了&amp;hellip;.没办法了,用个跳板吧.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;h3 id="邮件托管平台">邮件托管平台
+&lt;/h3>&lt;p>这里使用了&lt;a class="link" href="https://support.smtp2go.com/hc/en-gb" target="_blank" rel="noopener"
+>Smtp2go&lt;/a>这个平台作为一个跳板,用有信誉的SMTP服务器转发邮件会增加可信度(吧)&lt;/p>
+&lt;p>注册邮箱,注册时候需要有一个自己域名的邮件地址&amp;hellip;注册好后免费的用户能发1000封邮件,足够了&lt;/p>
+&lt;p>初次登陆进去会让你设置用户名和密码,设置好后就可以使用Swaks+Smtp2go来伪造邮件了&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">swaks --to id@xxx.edu.cn --from root@xxx.edu.cn\
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> --header-X-Mailer SMTP --ehlo xxx.edu.cn --body &amp;#39;test&amp;#39;\
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> --server mail.smtp2go.com -p 2525 -au username -ap passwd
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>发送后就能在收件箱收到了&amp;hellip;稍加修改,加上附件和主题&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> swaks --to id@xxx.edu.cn --from root@xxx.edu.cn\
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> --header-X-Mailer SMTP --ehlo xxx.edu.cn --body &amp;#39;退学通知&amp;#39;\
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> --server mail.smtp2go.com -p 2525 -au username -ap passwd \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> --attach /home/kali/Desktop/Notice.docx --header &amp;#34;Subject:退学通知&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>就&amp;hellip;完成啦&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200228191934.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>效果图&lt;/p>
+&lt;p>但是其实还是有一些问题的,比如发件人处并不是伪造的邮箱名称&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200228192125.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>加上Mail.from即可显示名称了&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> swaks --to id@xxx.edu.cn --from root@xxx.edu.cn\
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> --header-X-Mailer SMTP --ehlo xxx.edu.cn --body &amp;#39;退学通知&amp;#39;\
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> --server mail.smtp2go.com -p 2525 -au username -ap passwd \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> --attach /home/kali/Desktop/Notice.docx --header &amp;#34;Subject:退学通知&amp;#34; \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> --h-From: &amp;#39;教务处&amp;lt;admin@xxx.edu.cn&amp;gt;&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>最终效果
+&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20200228192546.png"
+loading="lazy"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;h3 id="附加绕过spf">附加:绕过SPF
+&lt;/h3>&lt;p>SMTP出来了这么长时间里,其实伪造邮件一直都存在,如何解决这个问题呢?&lt;/p>
+&lt;p>早在2006年的&lt;a class="link" href="https://tools.ietf.org/html/rfc4408" target="_blank" rel="noopener"
+>RFC 4408&lt;/a>中提出了Sender Policy Framework (SPF)发件人政策框架 规定了如何验证发件人身份.&lt;/p>
+&lt;p>通过域名DNS TXT记录中的一段SPF文字 来验证发件人的SMTP服务器IP地址是不是属于当前域的IP.如果发件IP无法通过SPF验证则会降低邮件的可信度(有可能被拒信).&lt;/p>
+&lt;p>虽然QQ邮箱的安全性已经做的不错了,但是上面的邮件没有通过SPF记录的还是能正常的发送到收件人的邮箱中.&lt;/p>
+&lt;p>而其实绕过SPF记录也挺简单的,在使用了第三方SMTP服务器转发的情况下,将&lt;code>from&lt;/code>写为第三方发件的域,如:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">swaks --to id@xxx.edu.cn --from info@smtp2go.com\
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">--header-X-Mailer SMTP --ehlo xxx.edu.cn --body &amp;#39;退学通知&amp;#39;\
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">--server mail.smtp2go.com -p 2525 -au username -ap passwd \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">--attach /home/kali/Desktop/Notice.docx --header &amp;#34;Subject:退学通知&amp;#34; \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">--h-From: &amp;#39;教务处&amp;lt;admin@xxx.edu.cn&amp;gt;&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>由于各种邮箱显示的发件人都是&lt;code>Header中的From&lt;/code>,所以这样做既通过了SPF验证也显示的是伪造的名字.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="结尾">结尾
+&lt;/h2>&lt;p>其实一早就构思好了文章怎么写的了(在几个月前),结果因为咕咕太久了被腾讯升级邮箱的安全性后整个想好的都被打乱了&amp;hellip;最终&amp;quot;简单研究&amp;quot;变得复杂了起来&lt;/p>
+&lt;p>&lt;del>我再也不敢咕咕了&lt;/del>&lt;/p>
+&lt;p>以上&lt;/p>
+&lt;hr>
+&lt;h4 id="参考">参考
+&lt;/h4>&lt;blockquote>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://linux.die.net/man/1/swaks" target="_blank" rel="noopener"
+>https://linux.die.net/man/1/swaks&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://payloads.online/archivers/2019-05-09/1" target="_blank" rel="noopener"
+>https://payloads.online/archivers/2019-05-09/1&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol" target="_blank" rel="noopener"
+>https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://en.wikipedia.org/wiki/Sender_Policy_Framework" target="_blank" rel="noopener"
+>https://en.wikipedia.org/wiki/Sender_Policy_Framework&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.freebuf.com/sectool/92397.html" target="_blank" rel="noopener"
+>https://www.freebuf.com/sectool/92397.html&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.freebuf.com/articles/web/133689.html" target="_blank" rel="noopener"
+>https://www.freebuf.com/articles/web/133689.html&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.freebuf.com/articles/web/138764.html" target="_blank" rel="noopener"
+>https://www.freebuf.com/articles/web/138764.html&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/blockquote></description></item></channel></rss>

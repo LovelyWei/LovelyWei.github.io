@@ -1,765 +1,179 @@
-<!DOCTYPE html>
-<html lang="en-us" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="最近感觉没什么好写的,把以前练习Python写的东西记录一下.关于SadPanda和某泥潭的. 没啥技术含量( Stage1st挂机脚本 某知名 巨">
-<title>Python爬虫练习</title>
-
-<link rel='canonical' href='https://hex.moe/p/python2019/'>
-
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="Python爬虫练习">
-<meta property='og:description' content="最近感觉没什么好写的,把以前练习Python写的东西记录一下.关于SadPanda和某泥潭的. 没啥技术含量( Stage1st挂机脚本 某知名 巨">
-<meta property='og:url' content='https://hex.moe/p/python2019/'>
-<meta property='og:site_name' content='Chocolate&#39;s 废纸篓'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Tech' /><meta property='article:tag' content='Python' /><meta property='article:published_time' content='2019-08-25T12:18:41&#43;00:00'/><meta property='article:modified_time' content='2019-08-25T12:18:41&#43;00:00'/>
-<meta name="twitter:title" content="Python爬虫练习">
-<meta name="twitter:description" content="最近感觉没什么好写的,把以前练习Python写的东西记录一下.关于SadPanda和某泥潭的. 没啥技术含量( Stage1st挂机脚本 某知名 巨">
-    <link rel="shortcut icon" href="/favicon.png" />
-
-  
-
-
-    </head>
-    <body class="
-    article-page
-    ">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
-            }
-        })();
-    </script><script>
-    (function() {
-        const colorSchemeKey = 'StackColorScheme';
-        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
-        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
-        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
-            
-
-            document.documentElement.dataset.scheme = 'dark';
-        } else {
-            document.documentElement.dataset.scheme = 'light';
-        }
-    })();
-</script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
-            
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    
-                    
-                    
-                        
-                        <img src="/img/avatar_hue9b59569ad592f400a84e3bd0ed01a8b_4691_300x0_resize_q75_box.jpg" width="300"
-                            height="300" class="site-logo" loading="lazy" alt="Avatar">
-                    
-                
-                </a>
-                
-                    <span class="emoji">🍫</span>
-                
-            </figure>
-            
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">Chocolate&#39;s 废纸篓</a></h1>
-            <h2 class="site-description">我是巧克力。我是可可。</h2>
-        </div>
-    </header><ol class="menu-social">
-            
-                <li>
-                    <a 
-                        href='https://github.com/LovelyWei'
-                        target="_blank"
-                        title="GitHub"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://twitter.com/MoeLovelyWei'
-                        target="_blank"
-                        title="Twitter"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>废纸篓</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>档案馆</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/search/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>你找啥</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/friends/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>朋友们</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/about/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
-                
-                <span>了解我</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>暗色模式</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/python2019/">Python爬虫练习</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">Aug 25, 2019</time>
-            </div>
-        
-
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-                <time class="article-time--reading">
-                    阅读时长: 2 分钟
-                </time>
-            </div>
-        
-    </footer>
-    
-
-    
-</div>
-
-</header>
-
-    <section class="article-content">
-    
-    
-    <blockquote>
-<p>最近感觉没什么好写的,把以前练习Python写的东西记录一下.关于SadPanda和某泥潭的.
-没啥技术含量(</p>
-</blockquote>
-<h2 id="stage1st挂机脚本">Stage1st挂机脚本
-</h2><blockquote>
-<p>某知名 <del>巨魔钓鱼</del> 泥潭需要访问几十个小时才能升级加权限,又刚好有闲置的服务器,所以想想办法实现挂机功能</p>
-</blockquote>
-<p>科技就是力量,分析是如何判断登陆的</p>
-<p>打开 <code>Edit This Cookie</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190827144046.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p>Emm Cookie有点多,不管了 先全部复制进去尝试一下</p>
-<p>用<code>requests</code>跑下结果是能用的,登陆状态正常</p>
-<p>但是,得分析下哪个Cookie才是真正的身份信息</p>
-<p>像一些<code>lastact</code>看起来就没什么用</p>
-<p>笨方法,虽然<code>cookie</code>多但是也不是很多</p>
-<p>逐个删除,当删了<code>auth</code>后登陆掉了,留下<code>auth</code>,继续操作</p>
-<p>发现登陆身份信息判断是用 <code>auth</code>和 <code>slatkey</code> 判断的</p>
-<p>request一把梭</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">error</span><span class="o">=</span><span class="mi">0</span>
-</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cookie</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;B7Y9_2132_auth&#39;</span><span class="p">:</span><span class="s1">&#39;This is your auth&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;B7Y9_2132_saltkey&#39;</span><span class="p">:</span><span class="s1">&#39;This is your slatkey&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://bbs.saraba1st.com/2b/forum-75-1.html&#39;</span><span class="p">,</span><span class="n">cookies</span><span class="o">=</span><span class="n">cookie</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&#34;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">    <span class="k">except</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Aisina&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="o">+</span><span class="n">now</span><span class="o">+</span><span class="s1">&#39;] &#39;</span><span class="o">+</span><span class="s1">&#39;Logined&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">480</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">error</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">error</span><span class="o">=</span><span class="mi">0</span>
-</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="o">+</span><span class="n">now</span><span class="o">+</span><span class="s1">&#39;] &#39;</span><span class="o">+</span><span class="s1">&#39;Login failed!&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">error</span><span class="o">=</span><span class="n">error</span><span class="o">+</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">error</span><span class="o">&gt;=</span><span class="mi">3</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="k">break</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p><a class="link" href="https://github.com/LovelyWei/stage1stKeepLogin"  target="_blank" rel="noopener"
-    >https://github.com/LovelyWei/stage1stKeepLogin</a></p>
-</blockquote>
-<p>加点random和等候时间,防止被防火墙拦了</p>
-<p>测试有效,完</p>
-<h2 id="获取sadpanda收藏的磁力链接">获取SadPanda收藏的磁力链接
-</h2><blockquote>
-<p>这个项目当时是Ex要倒闭的时候为了抢救下我的收藏写下的(</p>
-</blockquote>
-<p>首先判断Ex是什么方式获取数据的,按下F12,发现是服务端渲染,所以我使用了bs4来解析html数据</p>
-<p>先填入 <code>cookie</code> 上<code>requests</code>测试,发现登陆成功</p>
-<p>然后就是获取收藏列表里的本子有没有磁力,之前Ex改版过一次,有磁力的在评分右边会有一个绿色的下载箭头</p>
-<p><img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190827145816.png"
-	
-	
-	
-	loading="lazy"
-	
-	
-></p>
-<p>通过这个判断是否有磁力链接,对比两个元素发现可以下载的有<code>title=&quot;Show torrents&quot;</code>不能下载的是 <code>title=&quot;No torrents available&quot;</code></p>
-<p>bs4 解析搜索获取到下载页面</p>
-<p>进入到了下载页面本来想的是做下载种子的,结果发现下载链接长这样</p>
-<blockquote>
-<p><a class="link" href="https://sadpanda.org/torrent/1472720/9f195ee0788a64322c2f04e3a608a991cb1f10f.torrent"  target="_blank" rel="noopener"
-    >https://sadpanda.org/torrent/1472720/9f195ee0788a64322c2f04e3a608a991cb1f10f.torrent</a></p>
-</blockquote>
-<p>后面那个明显是磁力链接,所以用 <del>正则匹配一下</del> 用了<code>os.path.splitext</code>和<code>os.path.basename</code>截取下文件名</p>
-<p>由于当时赶时间就直接使用print输出了</p>
-<p>(后面有加了个多线程</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">threading</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">header</span><span class="o">=</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="s1">&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl"><span class="s1">&#39;Cookie&#39;</span><span class="p">:</span><span class="s1">&#39;THIS IS YOUR COOKIE&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">getPage</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">header</span><span class="p">,</span><span class="n">page</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ret</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">+</span><span class="s1">&#39;?page=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">page</span><span class="p">),</span><span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ret</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">apparent_encoding</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">ret</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">ret</span>
-</span></span><span class="line"><span class="cl">        <span class="k">except</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">getList</span><span class="p">(</span><span class="n">header</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">subRes</span> <span class="o">=</span> <span class="n">getPage</span><span class="p">(</span><span class="s1">&#39;https://exhentai.org/favorites.php&#39;</span><span class="p">,</span><span class="n">header</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">subSoup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">subRes</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">findArrary</span> <span class="o">=</span> <span class="n">subSoup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&#34;Show torrents&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">findArrary</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">getMagnet</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">parent</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">],</span><span class="n">header</span><span class="p">,))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">getMagnet</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">header</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ret</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">ret</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="n">link</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">a</span>
-</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;magnet:?xt=urn:btih:&#39;</span><span class="o">+</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">link</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">+</span><span class="s2">&#34;</span><span class="se">\t</span><span class="s2">&#34;</span><span class="o">+</span><span class="n">link</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span>
-</span></span><span class="line"><span class="cl">        <span class="k">except</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">res</span> <span class="o">=</span> <span class="n">getPage</span><span class="p">(</span><span class="s1">&#39;https://exhentai.org/favorites.php&#39;</span><span class="p">,</span><span class="n">header</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">page</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s2">&#34;ptt&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Page:&#34;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">page</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">page</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">getList</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">header</span><span class="p">,</span><span class="n">i</span><span class="p">,))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p><a class="link" href="https://github.com/LovelyWei/EhMagnet"  target="_blank" rel="noopener"
-    >https://github.com/LovelyWei/EhMagnet</a></p>
-</blockquote>
-<p>测试能用,完</p>
-
-</section>
-
-
-    <footer class="article-footer">
-    
-    <section class="article-tags">
-        
-            <a href="/tags/tech/">Tech</a>
-        
-            <a href="/tags/python/">Python</a>
-        
-    </section>
-
-
-    
-    <section class="article-copyright">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
-</svg>
-
-
-
-        <span>Licensed under CC BY-NC-SA 4.0</span>
-    </section>
-    </footer>
-
-
-    
-</article>
-
-    
-
-    
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">相关文章</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
-            
-                
-<article class="">
-    <a href="/p/girls2019/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">按名字判断班级小姐姐的数量</h2>
-        </div>
-    </a>
-</article>
-
-            
-        </div>
-    </div>
-</aside>
-
-     
-    
-        
-    <script
-    src="https://giscus.app/client.js"
-    data-repo="LovelyWei/LovelyWei.github.io"
-    data-repo-id="MDEwOlJlcG9zaXRvcnkyMDM3ODQ3OTk="
-    data-category="Announcements"
-    data-category-id="DIC_kwDODCWCX84CfStj"
-    data-mapping="title"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="top"
-    data-theme="light"
-    data-lang="en"
-    crossorigin="anonymous"
-    async
-></script>
-<script>
-    function setGiscusTheme(theme) {
-        let giscus = document.querySelector("iframe.giscus-frame");
-        if (giscus) {
-            giscus.contentWindow.postMessage(
-                {
-                    giscus: {
-                        setConfig: {
-                            theme: theme,
-                        },
-                    },
-                },
-                "https://giscus.app"
-            );
-        }
-    }
-
-    (function () {
-        addEventListener("message", (e) => {
-            if (event.origin !== "https://giscus.app") return;
-            handler();
-        });
-        window.addEventListener("onColorSchemeChange", handler);
-
-        function handler() {
-            if (document.documentElement.dataset.scheme === "light") {
-                setGiscusTheme('light');
-            } else {
-                setGiscusTheme('dark_dimmed');
-            }
-        }
-    })();
-</script>
-
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2019 - 
-        
-        2024 Chocolate&#39;s 废纸篓
-    </section>
-    
-    <section class="powerby">
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
-    </section>
-</footer>
-
-
-    
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    
-    <div class="pswp__bg"></div>
-
-    
-    <div class="pswp__scroll-wrap">
-
-        
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                
-                
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer
-                >
-            </script><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
-            ><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
-            >
-
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
-                
-                >
-            </script><script type="text/javascript" src="/ts/main.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
-
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
-
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
-</html>
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="最近感觉没什么好写的,把以前练习Python写的东西记录一下.关于SadPanda和某泥潭的. 没啥技术含量( Stage1st挂机脚本 某知名 巨"><title>Python爬虫练习</title>
+<link rel=canonical href=https://hex.moe/p/python2019/><link rel=stylesheet href=/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css><meta property='og:title' content="Python爬虫练习"><meta property='og:description' content="最近感觉没什么好写的,把以前练习Python写的东西记录一下.关于SadPanda和某泥潭的. 没啥技术含量( Stage1st挂机脚本 某知名 巨"><meta property='og:url' content='https://hex.moe/p/python2019/'><meta property='og:site_name' content="Chocolate's 废纸篓"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Tech'><meta property='article:tag' content='Python'><meta property='article:published_time' content='2019-08-25T12:18:41+00:00'><meta property='article:modified_time' content='2019-08-25T12:18:41+00:00'><meta name=twitter:title content="Python爬虫练习"><meta name=twitter:description content="最近感觉没什么好写的,把以前练习Python写的东西记录一下.关于SadPanda和某泥潭的. 没啥技术含量( Stage1st挂机脚本 某知名 巨"><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hue9b59569ad592f400a84e3bd0ed01a8b_4691_300x0_resize_q75_box.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🍫</span></figure><div class=site-meta><h1 class=site-name><a href=/>Chocolate's 废纸篓</a></h1><h2 class=site-description>我是巧克力。我是可可。</h2></div></header><ol class=menu-social><li><a href=https://github.com/LovelyWei target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com/MoeLovelyWei target=_blank title=Twitter rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>废纸篓</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>档案馆</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>你找啥</span></a></li><li><a href=/friends/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>朋友们</span></a></li><li><a href=/about/><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="#5f6368"><path d="M440-280h80v-240h-80v240zm40-320q17 0 28.5-11.5T520-640t-11.5-28.5T480-680t-28.5 11.5T440-640t11.5 28.5T480-6e2zm0 520q-83 0-156-31.5T197-197t-85.5-127T80-480t31.5-156T197-763t127-85.5T480-880t156 31.5T763-763t85.5 127T880-480t-31.5 156T763-197t-127 85.5T480-80zm0-80q134 0 227-93t93-227-93-227-227-93-227 93-93 227 93 227 227 93zm0-320z"/></svg>
+<span>了解我</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/python2019/>Python爬虫练习</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Aug 25, 2019</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 2 分钟</time></div></footer></div></header><section class=article-content><blockquote><p>最近感觉没什么好写的,把以前练习Python写的东西记录一下.关于SadPanda和某泥潭的.
+没啥技术含量(</p></blockquote><h2 id=stage1st挂机脚本>Stage1st挂机脚本</h2><blockquote><p>某知名 <del>巨魔钓鱼</del> 泥潭需要访问几十个小时才能升级加权限,又刚好有闲置的服务器,所以想想办法实现挂机功能</p></blockquote><p>科技就是力量,分析是如何判断登陆的</p><p>打开 <code>Edit This Cookie</code></p><p><img src=https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190827144046.png loading=lazy></p><p>Emm Cookie有点多,不管了 先全部复制进去尝试一下</p><p>用<code>requests</code>跑下结果是能用的,登陆状态正常</p><p>但是,得分析下哪个Cookie才是真正的身份信息</p><p>像一些<code>lastact</code>看起来就没什么用</p><p>笨方法,虽然<code>cookie</code>多但是也不是很多</p><p>逐个删除,当删了<code>auth</code>后登陆掉了,留下<code>auth</code>,继续操作</p><p>发现登陆身份信息判断是用 <code>auth</code>和 <code>slatkey</code> 判断的</p><p>request一把梭</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>time</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>random</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>error</span><span class=o>=</span><span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=k>while</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>cookie</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;B7Y9_2132_auth&#39;</span><span class=p>:</span><span class=s1>&#39;This is your auth&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;B7Y9_2132_saltkey&#39;</span><span class=p>:</span><span class=s1>&#39;This is your slatkey&#39;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>res</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s1>&#39;https://bbs.saraba1st.com/2b/forum-75-1.html&#39;</span><span class=p>,</span><span class=n>cookies</span><span class=o>=</span><span class=n>cookie</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>now</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>strftime</span><span class=p>(</span><span class=s2>&#34;%Y-%m-</span><span class=si>%d</span><span class=s2> %H:%M:%S&#34;</span><span class=p>,</span> <span class=n>time</span><span class=o>.</span><span class=n>localtime</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>    <span class=k>except</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>60</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>res</span><span class=o>.</span><span class=n>text</span><span class=o>.</span><span class=n>find</span><span class=p>(</span><span class=s1>&#39;Aisina&#39;</span><span class=p>)</span> <span class=o>!=</span> <span class=o>-</span><span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;[&#39;</span><span class=o>+</span><span class=n>now</span><span class=o>+</span><span class=s1>&#39;] &#39;</span><span class=o>+</span><span class=s1>&#39;Logined&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=n>random</span><span class=o>.</span><span class=n>randint</span><span class=p>(</span><span class=mi>120</span><span class=p>,</span><span class=mi>480</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>error</span><span class=o>!=</span><span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>error</span><span class=o>=</span><span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;[&#39;</span><span class=o>+</span><span class=n>now</span><span class=o>+</span><span class=s1>&#39;] &#39;</span><span class=o>+</span><span class=s1>&#39;Login failed!&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>error</span><span class=o>=</span><span class=n>error</span><span class=o>+</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>300</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>error</span><span class=o>&gt;=</span><span class=mi>3</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>break</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p><a class=link href=https://github.com/LovelyWei/stage1stKeepLogin target=_blank rel=noopener>https://github.com/LovelyWei/stage1stKeepLogin</a></p></blockquote><p>加点random和等候时间,防止被防火墙拦了</p><p>测试有效,完</p><h2 id=获取sadpanda收藏的磁力链接>获取SadPanda收藏的磁力链接</h2><blockquote><p>这个项目当时是Ex要倒闭的时候为了抢救下我的收藏写下的(</p></blockquote><p>首先判断Ex是什么方式获取数据的,按下F12,发现是服务端渲染,所以我使用了bs4来解析html数据</p><p>先填入 <code>cookie</code> 上<code>requests</code>测试,发现登陆成功</p><p>然后就是获取收藏列表里的本子有没有磁力,之前Ex改版过一次,有磁力的在评分右边会有一个绿色的下载箭头</p><p><img src=https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190827145816.png loading=lazy></p><p>通过这个判断是否有磁力链接,对比两个元素发现可以下载的有<code>title="Show torrents"</code>不能下载的是 <code>title="No torrents available"</code></p><p>bs4 解析搜索获取到下载页面</p><p>进入到了下载页面本来想的是做下载种子的,结果发现下载链接长这样</p><blockquote><p><a class=link href=https://sadpanda.org/torrent/1472720/9f195ee0788a64322c2f04e3a608a991cb1f10f.torrent target=_blank rel=noopener>https://sadpanda.org/torrent/1472720/9f195ee0788a64322c2f04e3a608a991cb1f10f.torrent</a></p></blockquote><p>后面那个明显是磁力链接,所以用 <del>正则匹配一下</del> 用了<code>os.path.splitext</code>和<code>os.path.basename</code>截取下文件名</p><p>由于当时赶时间就直接使用print输出了</p><p>(后面有加了个多线程</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>bs4</span> <span class=kn>import</span> <span class=n>BeautifulSoup</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>time</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>os</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>threading</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>header</span><span class=o>=</span><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;User-Agent&#39;</span><span class=p>:</span> <span class=s1>&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;Cookie&#39;</span><span class=p>:</span><span class=s1>&#39;THIS IS YOUR COOKIE&#39;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>getPage</span><span class=p>(</span><span class=n>url</span><span class=p>,</span><span class=n>header</span><span class=p>,</span><span class=n>page</span><span class=o>=</span><span class=mi>0</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>ret</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>url</span><span class=o>+</span><span class=s1>&#39;?page=&#39;</span><span class=o>+</span><span class=nb>str</span><span class=p>(</span><span class=n>page</span><span class=p>),</span><span class=n>headers</span><span class=o>=</span><span class=n>header</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>ret</span><span class=o>.</span><span class=n>encoding</span> <span class=o>=</span> <span class=n>ret</span><span class=o>.</span><span class=n>apparent_encoding</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>ret</span><span class=o>.</span><span class=n>status_code</span> <span class=o>!=</span> <span class=mi>200</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mf>0.3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=n>ret</span>
+</span></span><span class=line><span class=cl>        <span class=k>except</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mf>0.3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>getList</span><span class=p>(</span><span class=n>header</span><span class=p>,</span><span class=n>i</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>subRes</span> <span class=o>=</span> <span class=n>getPage</span><span class=p>(</span><span class=s1>&#39;https://exhentai.org/favorites.php&#39;</span><span class=p>,</span><span class=n>header</span><span class=p>,</span><span class=n>i</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>subSoup</span> <span class=o>=</span> <span class=n>BeautifulSoup</span><span class=p>(</span><span class=n>subRes</span><span class=o>.</span><span class=n>text</span><span class=p>,</span><span class=s1>&#39;lxml&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>findArrary</span> <span class=o>=</span> <span class=n>subSoup</span><span class=o>.</span><span class=n>find_all</span><span class=p>(</span><span class=n>title</span><span class=o>=</span><span class=s2>&#34;Show torrents&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>r</span> <span class=ow>in</span> <span class=n>findArrary</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>getMagnet</span><span class=p>,</span><span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>parent</span><span class=p>[</span><span class=s1>&#39;href&#39;</span><span class=p>],</span><span class=n>header</span><span class=p>,))</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>getMagnet</span><span class=p>(</span><span class=n>url</span><span class=p>,</span><span class=n>header</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>ret</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>url</span><span class=p>,</span><span class=n>headers</span><span class=o>=</span><span class=n>header</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>ret</span><span class=o>.</span><span class=n>status_code</span> <span class=o>!=</span> <span class=mi>200</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mf>0.3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>soup</span> <span class=o>=</span> <span class=n>BeautifulSoup</span><span class=p>(</span><span class=n>ret</span><span class=o>.</span><span class=n>text</span><span class=p>,</span><span class=s1>&#39;lxml&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=n>link</span> <span class=o>=</span> <span class=n>soup</span><span class=o>.</span><span class=n>form</span><span class=o>.</span><span class=n>a</span>
+</span></span><span class=line><span class=cl>                <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;magnet:?xt=urn:btih:&#39;</span><span class=o>+</span><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>splitext</span><span class=p>(</span><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>basename</span><span class=p>(</span><span class=n>link</span><span class=p>[</span><span class=s1>&#39;href&#39;</span><span class=p>]))[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>upper</span><span class=p>()</span><span class=o>+</span><span class=s2>&#34;</span><span class=se>\t</span><span class=s2>&#34;</span><span class=o>+</span><span class=n>link</span><span class=o>.</span><span class=n>text</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span>
+</span></span><span class=line><span class=cl>        <span class=k>except</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mf>0.3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>getPage</span><span class=p>(</span><span class=s1>&#39;https://exhentai.org/favorites.php&#39;</span><span class=p>,</span><span class=n>header</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>soup</span> <span class=o>=</span> <span class=n>BeautifulSoup</span><span class=p>(</span><span class=n>res</span><span class=o>.</span><span class=n>text</span><span class=p>,</span><span class=s1>&#39;lxml&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>page</span> <span class=o>=</span> <span class=nb>int</span><span class=p>(</span><span class=n>soup</span><span class=o>.</span><span class=n>find</span><span class=p>(</span><span class=n>class_</span><span class=o>=</span><span class=s2>&#34;ptt&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>find_all</span><span class=p>(</span><span class=s1>&#39;a&#39;</span><span class=p>)[</span><span class=o>-</span><span class=mi>2</span><span class=p>]</span><span class=o>.</span><span class=n>text</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Page:&#34;</span><span class=o>+</span><span class=nb>str</span><span class=p>(</span><span class=n>page</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span><span class=n>page</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>getList</span><span class=p>,</span><span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=n>header</span><span class=p>,</span><span class=n>i</span><span class=p>,))</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p><a class=link href=https://github.com/LovelyWei/EhMagnet target=_blank rel=noopener>https://github.com/LovelyWei/EhMagnet</a></p></blockquote><p>测试能用,完</p></section><footer class=article-footer><section class=article-tags><a href=/tags/tech/>Tech</a>
+<a href=/tags/python/>Python</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/girls2019/><div class=article-details><h2 class=article-title>按名字判断班级小姐姐的数量</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=LovelyWei/LovelyWei.github.io data-repo-id="MDEwOlJlcG9zaXRvcnkyMDM3ODQ3OTk=" data-category=Announcements data-category-id=DIC_kwDODCWCX84CfStj data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark_dimmed")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2019 -
+2024 Chocolate's 废纸篓</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.26.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

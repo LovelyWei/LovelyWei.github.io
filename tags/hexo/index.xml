@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hexo on Chocolate's 废纸篓</title><link>https://hex.moe/tags/hexo/</link><description>Recent content in Hexo on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 24 Aug 2019 14:24:36 +0000</lastBuildDate><atom:link href="https://hex.moe/tags/hexo/index.xml" rel="self" type="application/rss+xml"/><item><title>再次重建博客(建立一个Hexo博客)</title><link>https://hex.moe/p/rebulid-hexo2019/</link><pubDate>Sat, 24 Aug 2019 14:24:36 +0000</pubDate><guid>https://hex.moe/p/rebulid-hexo2019/</guid><description>&lt;p>&amp;lt;关于我博客又丢档案了这件事&amp;gt;&lt;/p>
+&lt;!-- more -->
+&lt;p>时隔 &lt;del>多年&lt;/del> 几个月 我突然发现好像有个博客已经吃灰很久了,开始想更新下内容,结果发现又又又 &lt;del>丢人&lt;/del> 丢档了(Hexo博客的源文件丢了)&lt;/p>
+&lt;h2 id="这篇文章就讲下重建博客的时候干的一些事情吧">这篇文章就讲下重建博客的时候干的一些事情吧.
+&lt;/h2>&lt;blockquote>
+&lt;p>同时也是一个教萌新搭建博客的教程&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="1-装hexo">1. 装Hexo
+&lt;/h3>&lt;p>首先Node Js 肯定是必须的&lt;/p>
+&lt;p>&lt;a class="link" href="https://nodejs.org/en/" target="_blank" rel="noopener"
+>NodeJs官网&lt;/a>&lt;/p>
+&lt;p>下载其中任意一个版本安装,装好后在命令行中敲&lt;/p>
+&lt;blockquote>
+&lt;p>npm version&lt;/p>
+&lt;/blockquote>
+&lt;p>会看到 NodeJs的版本 如:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span> &lt;span class="err">npm:&lt;/span> &lt;span class="err">&amp;#39;6.5.0&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">ares:&lt;/span> &lt;span class="err">&amp;#39;1.15.0&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">brotli:&lt;/span> &lt;span class="err">&amp;#39;1.0.7&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">cldr:&lt;/span> &lt;span class="err">&amp;#39;34.0&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">http_parser:&lt;/span> &lt;span class="err">&amp;#39;2.8.0&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">icu:&lt;/span> &lt;span class="err">&amp;#39;63.1&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">llhttp:&lt;/span> &lt;span class="err">&amp;#39;1.0.1&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">modules:&lt;/span> &lt;span class="err">&amp;#39;67&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">napi:&lt;/span> &lt;span class="err">&amp;#39;4&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">nghttp2:&lt;/span> &lt;span class="err">&amp;#39;1.34.0&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">node:&lt;/span> &lt;span class="err">&amp;#39;11.8.0&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">openssl:&lt;/span> &lt;span class="err">&amp;#39;1.1.0j&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">tz:&lt;/span> &lt;span class="err">&amp;#39;2018e&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">unicode:&lt;/span> &lt;span class="err">&amp;#39;11.0&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">uv:&lt;/span> &lt;span class="err">&amp;#39;1.25.0&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">v8:&lt;/span> &lt;span class="err">&amp;#39;7.0.276.38-node.16&amp;#39;,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">zlib:&lt;/span> &lt;span class="err">&amp;#39;1.2.11&amp;#39;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>接下来安装&lt;/p>
+&lt;p>&lt;a class="link" href="https://git-scm.com/" target="_blank" rel="noopener"
+>Git&lt;/a>&lt;/p>
+&lt;p>关于Git就不再多做介绍了,安装的方法可以在网上搜索到&lt;/p>
+&lt;p>Git安装完后&lt;/p>
+&lt;p>接下来可以开始安装Hexo了.&lt;/p>
+&lt;p>不过 在这之前,由于国内网络的种种原因,先在安装之前调整一些配置&lt;/p>
+&lt;p>调整npm的源为淘宝镜像&lt;/p>
+&lt;blockquote>
+&lt;p>npm config set registry &lt;a class="link" href="http://registry.npm.taobao.org/" target="_blank" rel="noopener"
+>http://registry.npm.taobao.org/&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>为Git设置代理(可选,&lt;strong>如果你不知道这里在设置什么就不用设置了&lt;/strong>)&lt;/p>
+&lt;blockquote>
+&lt;p>git config &amp;ndash;global http.proxy &amp;lsquo;socks5://127.0.0.1:1080&amp;rsquo;
+git config &amp;ndash;global https.proxy &amp;lsquo;socks5://127.0.0.1:1080&amp;rsquo;&lt;/p>
+&lt;/blockquote>
+&lt;p>接下来就可以正式开始安装Hexo了&lt;/p>
+&lt;p>先下载Hexo程序&lt;/p>
+&lt;blockquote>
+&lt;p>npm install hexo-cli -g&lt;/p>
+&lt;/blockquote>
+&lt;p>接下来,打开命令行到你想安装博客的目录,运行&lt;/p>
+&lt;blockquote>
+&lt;p>hexo init&lt;/p>
+&lt;/blockquote>
+&lt;p>就开始自动化的初始化Hexo了&lt;/p>
+&lt;p>初始化结束后会看到目录结构如下&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Mode LastWriteTime Length Name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">---- ------------- ------ ----
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">d----- 2019/8/21 13:53 node_modules
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">d----- 2019/8/21 1:25 scaffolds
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">d----- 2019/8/21 14:23 source
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">d----- 2019/8/21 13:16 themes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-a---- 2019/8/21 1:25 71 .gitignore
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-a---- 2019/8/21 15:02 64543 db.json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-a---- 2019/8/21 13:53 135764 package-lock.json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-a---- 2019/8/21 13:53 629 package.json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-a---- 2019/8/21 14:17 1962 _config.yml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>接下来运行&lt;/p>
+&lt;blockquote>
+&lt;p>hexo server&lt;/p>
+&lt;/blockquote>
+&lt;p>会见到类似&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">INFO Start processing
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">INFO Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>此时打开 https://localhost:4000 就能看到一个新的博客了
+(因每个人的环境不同所以地址可能有出入,以命令行显示的为准
+)&lt;/p>
+&lt;p>打开网址见到Hello World 安装Hexo就结束了&lt;/p>
+&lt;h3 id="2-安装-material-主题">2. 安装 Material 主题
+&lt;/h3>&lt;p>安装好博客后可以自行安装主题来美化博客,我选了Material 感觉这个主题的简约风格挺好看的&lt;/p>
+&lt;blockquote>
+&lt;p>可以选择自己喜欢的主题 大体安装方式都类似&lt;/p>
+&lt;/blockquote>
+&lt;p>打开 &lt;a class="link" href="https://github.com/viosey/hexo-theme-material" target="_blank" rel="noopener"
+>https://github.com/viosey/hexo-theme-material&lt;/a>&lt;/p>
+&lt;p>点击 Release 下载 1.5.2 的版本&lt;/p>
+&lt;blockquote>
+&lt;p>新版本的我安装了报错,不知道为什么 2019-9-21&lt;/p>
+&lt;/blockquote>
+&lt;p>下载完成后打开压缩包将其中的文件夹解压至 /themes&lt;/p>
+&lt;p>将解压的文件夹名称修改为 material&lt;/p>
+&lt;p>进入 material文件夹 将 &lt;code>_config.template.yml&lt;/code> 文件重命名为 &lt;code>_config.yml&lt;/code>&lt;/p>
+&lt;p>回到博客根目录 打开博客根目录的配置文件 &lt;code>_config.yml&lt;/code> 将其中 &lt;code>theme&lt;/code> 值修改为 &lt;code>theme: material&lt;/code>&lt;/p>
+&lt;p>重新运行 &lt;code>hexo s&lt;/code> 可以看到主题已经安装成功了&lt;/p>
+&lt;h3 id="3-安装插件">3. 安装插件
+&lt;/h3>&lt;p>虽然Hexo已经集成了许多东西,但是我觉得还是缺了点什么,例如文章的URL不是很好之类,我选择安装了&lt;/p>
+&lt;h4 id="a-url永久化">A. URL永久化
+&lt;/h4>&lt;blockquote>
+&lt;p>Hexo安装完成发表文章的时URL看起来不美观,特别是标题是中文时,URL直接就写上了中文URL,不利于SEO,所以得想优化下URL.&lt;/p>
+&lt;/blockquote>
+&lt;p>后面选择了 &lt;code>hexo-abbrlink&lt;/code> 这个插件,这个插件可以在你让你的文章获得唯一的 ID.&lt;/p>
+&lt;p>在接下来的设置中就可以将URL设置为例如 &lt;code>http://example.com/p/:UID/&lt;/code>&lt;/p>
+&lt;p>操作方式如下:&lt;/p>
+&lt;p>安装 &lt;a class="link" href="https://github.com/rozbo/hexo-abbrlink" target="_blank" rel="noopener"
+>hexo-abbrlink&lt;/a>,在网页根目录下插入&lt;/p>
+&lt;blockquote>
+&lt;p>npm install hexo-abbrlink &amp;ndash;save&lt;/p>
+&lt;/blockquote>
+&lt;p>接下调整博客的配置&lt;code>_config.yml&lt;/code>(根目录下的,不是主题那个),在配置中添加&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">abbrlink&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">alg&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">crc32 &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 算法：crc16(default) and crc32&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">rep&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">hex &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 进制：dec(default) and hex&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>然后修改&lt;code>permalink&lt;/code>如&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">permalink&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">p/:abbrlink/&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>运行&lt;/p>
+&lt;blockquote>
+&lt;p>hexo server&lt;/p>
+&lt;/blockquote>
+&lt;p>可以看到文章的链接变成了&lt;/p>
+&lt;blockquote>
+&lt;p>http://localhost:4000/p/9b3fb8b9/&lt;/p>
+&lt;/blockquote>
+&lt;h4 id="b-为网站添加rss订阅">B. 为网站添加RSS订阅
+&lt;/h4>&lt;blockquote>
+&lt;p>虽然9012了,但是还是有许多人喜欢RSS的方式阅读信息,加上最近也多了一些好用的RSS阅读器&lt;/p>
+&lt;/blockquote>
+&lt;p>所以决定还是弄上RSS,&lt;del>反正也很简单&lt;/del>&lt;/p>
+&lt;p>首先到博客的根目录运行&lt;/p>
+&lt;blockquote>
+&lt;p>npm install hexo-generator-feed &amp;ndash;save&lt;/p>
+&lt;/blockquote>
+&lt;p>安装完成后我们开始修改根目录下的配置文件&lt;code>_config.yml&lt;/code>加入&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">feed&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">type&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">atom&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">path&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">atom.xml&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">limit&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">20&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>接下来到主题目录下的&lt;code>_config.yml&lt;/code> 将&lt;code>rss&lt;/code>设置如&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yml" data-lang="yml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">rss&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">/atom.xml&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>运行本地服务&lt;/p>
+&lt;blockquote>
+&lt;p>hexo s&lt;/p>
+&lt;/blockquote>
+&lt;p>打开&lt;/p>
+&lt;blockquote>
+&lt;p>http://localhost:4000/atom.xml&lt;/p>
+&lt;/blockquote>
+&lt;p>可以看到RSS xml已经有了.&lt;/p>
+&lt;h4 id="c-给网站添加sitemapxml">C. 给网站添加sitemap.xml
+&lt;/h4>&lt;blockquote>
+&lt;p>虽然这个网站现在没有什么干活,但是SEO还是要做一下的.&lt;/p>
+&lt;/blockquote>
+&lt;p>其实添加sitemap也很简单&lt;/p>
+&lt;blockquote>
+&lt;p>npm install hexo-generator-sitemap
+npm install hexo-generator-sitemap &amp;ndash;save-dev
+npm install hexo-generator-baidu-sitemap &amp;ndash;save-dev&lt;/p>
+&lt;/blockquote>
+&lt;p>然后就可以放着不管了,当然你也可以想搜索引擎主动的提交你的sitemap.&lt;/p>
+&lt;h3 id="4-发布到-githubio">4. 发布到 github.io
+&lt;/h3>&lt;blockquote>
+&lt;p>按照传统的方式建立一个网站是要有一个服务器的,但是github有一个服务可以直接挂上你的静态网站,这就是github.io 这也是我选择hexo的原因 &lt;del>能白嫖&lt;/del>&lt;/p>
+&lt;/blockquote>
+&lt;p>首先需要建立一个github账号 这点不详细阐述了&lt;/p>
+&lt;p>创建好github账号后开始新建一个仓库(repository)&lt;/p>
+&lt;p>仓库的名字命名为你的 &lt;code>ID.github.io&lt;/code>&lt;/p>
+&lt;blockquote>
+&lt;p>以我为例 我的github地址 &lt;a class="link" href="https://github.com/LovelyWei" target="_blank" rel="noopener"
+>https://github.com/LovelyWei&lt;/a>
+创建仓库的时候就创建为 &lt;code>LovelyWei.github.io&lt;/code>&lt;/p>
+&lt;/blockquote>
+&lt;p>接下来不用调整什么 直接确定就能建立好一个仓库了&lt;/p>
+&lt;p>建立好仓库后开始配置Hexo 让Hexo能推送到Github仓库&lt;/p>
+&lt;p>先安装&lt;code>hexo-deployer-git&lt;/code>&lt;/p>
+&lt;blockquote>
+&lt;p>npm install hexo-deployer-git &amp;ndash;save&lt;/p>
+&lt;/blockquote>
+&lt;p>安装好后打开根目录的配置文件 &lt;code>_config.yml&lt;/code>&lt;/p>
+&lt;p>配置&lt;code>deploy&lt;/code>选项如&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yml" data-lang="yml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">type&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">git&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">repo&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">https://github.com/LovelyWei/LovelyWei.github.io.git&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">branch&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">master&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>repo&lt;/code>处的值修改为你的推送地址&lt;/p>
+&lt;p>接下来尝试&lt;/p>
+&lt;blockquote>
+&lt;p>hexo g
+hexo d&lt;/p>
+&lt;/blockquote>
+&lt;p>中间可能需要你输入你的Github账号和密码,上传完成后就能看到仓库里已经有静态文件了&lt;/p>
+&lt;p>访问github.io网址就能看到blog了&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;a class="link" href="https://lovelywei.github.io/" target="_blank" rel="noopener"
+>https://lovelywei.github.io/&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="5-博客绑定域名">5. 博客绑定域名
+&lt;/h3>&lt;blockquote>
+&lt;p>挂着xxx.github.io 似乎不是那么的好看,我自己又去买了一个域名,用自己的域名访问会更加个性一点?&lt;/p>
+&lt;/blockquote>
+&lt;p>在购买域名的服务商上设置到ID.github.io的别名,如&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">CNAME @ LovelyWei.github.io
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>设置好后在 &lt;code>source&lt;/code> 文件夹中新建&lt;code>CNAME&lt;/code>文件,里面写上你设置的域名如&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">hex.moe
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>若你设置的别名是带了&lt;code>www&lt;/code>之类的,如&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">CNAME www LovelyWei.github.io
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>CNAME&lt;/code>文件中的内容就要修改为&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">www.hex.moe
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>重新发布&lt;/p>
+&lt;blockquote>
+&lt;p>hexo cl
+hexo g
+hexo d&lt;/p>
+&lt;/blockquote>
+&lt;p>等待数分钟后访问网址(如 &lt;a class="link" href="http://hex.moe" target="_blank" rel="noopener"
+>http://hex.moe&lt;/a> ),就能看到博客了&lt;/p>
+&lt;p>完&lt;/p></description></item><item><title>用Github来当博客图床</title><link>https://hex.moe/p/picgo2019/</link><pubDate>Sat, 24 Aug 2019 13:44:09 +0000</pubDate><guid>https://hex.moe/p/picgo2019/</guid><description>&lt;blockquote>
+&lt;p>之前试过 sm.ms 觉得还不错,不过最近发现这个图床处于墙与不墙的薛定谔状态,而且也不是很好留档,所以决定使用Github来当作博客的图床&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="一个图床软件-picgo">一个图床软件 PicGo
+&lt;/h1>&lt;h2 id="下载-picgo">下载 PicGo
+&lt;/h2>&lt;p>在这里&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;a class="link" href="https://github.com/Molunerfinn/PicGo/releases" target="_blank" rel="noopener"
+>https://github.com/Molunerfinn/PicGo/releases&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>可以下载到PicGo的安装包&lt;/p>
+&lt;h2 id="配置picgo">配置PicGo
+&lt;/h2>&lt;p>首先 新建一个仓库 名字随意&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824135003.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>不用修改任何配置 创建&lt;/p>
+&lt;p>创建完成后点击 &lt;code>头像&lt;/code> 进入我的 &lt;code>Settings&lt;/code> 点击 &lt;code>Developer settings&lt;/code> 点击 &lt;code>Personal access tokens&lt;/code>&lt;/p>
+&lt;blockquote>
+&lt;p>点击这里可以直接进入: &lt;a class="link" href="https://github.com/settings/tokens" target="_blank" rel="noopener"
+>https://github.com/settings/tokens&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>新建一个 &lt;code>token&lt;/code> 点击 &lt;code>Generate new token&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824135507.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>&lt;code>Note&lt;/code> 处填入名字 勾选 &lt;code>repo&lt;/code> 让其有仓库管理权限 然后即可 点击&lt;code>Generate token&lt;/code> 新建 &lt;code>token&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824135716.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>如图所示&lt;/p>
+&lt;p>复制下 &lt;code>token&lt;/code> 的值&lt;/p>
+&lt;p>打开 &lt;code>PicGo&lt;/code> 软件&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824135856.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>点击Github设置&lt;/p>
+&lt;p>设定仓库名设置为 &lt;code>用户名/仓库名&lt;/code>&lt;/p>
+&lt;p>设定分支名设置为 &lt;code>master&lt;/code>&lt;/p>
+&lt;p>设定Token设置为你刚刚复制下的Token&lt;/p>
+&lt;p>设为默认图床 点击确定&lt;/p>
+&lt;p>回到上传区 尝试上传图片 图片上传成功后 会自动将Markdown格式的图片链接放在你的剪贴板&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824140141.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>完&lt;/p></description></item><item><title>为Hexo博客配置上HTTPS</title><link>https://hex.moe/p/blog-https-2019/</link><pubDate>Sat, 24 Aug 2019 11:30:39 +0000</pubDate><guid>https://hex.moe/p/blog-https-2019/</guid><description>&lt;blockquote>
+&lt;p>9012年了,Chrome纷纷给各种HTTP网站打上不安全,由于我用了自定义域名,所以并没有小绿锁,为了&amp;quot;安全&amp;quot;一点,把博客也加上小绿锁好了&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="为博客添加https">为博客添加HTTPS
+&lt;/h1>&lt;h2 id="方案一-github-page-自带的证书">方案一 Github Page 自带的证书
+&lt;/h2>&lt;p>在去年六月,Github宣布支持自定义域的HTTPS了,下面来讲讲如何配置&lt;/p>
+&lt;h3 id="首先到的域名提供商处修改的记录">首先到的域名提供商处修改的记录
+&lt;/h3>&lt;p>Github称,如果需要为自定义域加上HTTPS,域名需要设置为A记录并指向下面几个地址其中一个 (&lt;del>不要问我为什么&lt;/del>)&lt;/p>
+&lt;blockquote>
+&lt;p>185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824120540.png"
+loading="lazy"
+>
+类似这样 (我其实设置的是@ 帮我显示成了域名)&lt;/p>
+&lt;p>如果域名设置为CNAME的话,证书到期了无法自动续签 (没错 Github使用的是Let&amp;rsquo;s Encrypt的证书)&lt;/p>
+&lt;p>网上搜索了相关案例,这是案例中客服的回复&lt;/p>
+&lt;blockquote>
+&lt;p>Hello,
+Thanks for writing in! I took a look and it appears that your custom domain is set up using a CNAME record. You&amp;rsquo;ll need to make some changes to your DNS settings before we&amp;rsquo;ll be able to renew the HTTPS certificate for your custom domain.
+You&amp;rsquo;ll need to remove your existing CNAME record, and replace it with at least one A record that points to one of the following IP addresses:
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+Optionally, you can create additional A records that point to the other IP addresses from the list. Additional records essentially act as a backup in case of DNS or CDN issues, so having at least two is best practice, though your site will still function with just one.
+Once you&amp;rsquo;ve replaced the CNAME record, you&amp;rsquo;ll need to visit your repository&amp;rsquo;s settings page, remove your custom domain and click save, then re-add it again. This will kick off the process of provisioning an HTTPS certificate for your domain name.
+Once your certificate has been provisioned, you&amp;rsquo;ll then be able to enforce HTTPS by checking the &amp;ldquo;Enforce HTTPS&amp;rdquo; checkbox.
+Bear in mind that it can take up for 24 hours for DNS changes to take full effect, and up to an hour for an HTTPS certificate to be requested, so if you follow these steps but are still having trouble, that&amp;rsquo;s usually why.
+Cheers,
+Steven&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="然后设置的cname文件">然后设置的CNAME文件
+&lt;/h3>&lt;p>将CNAME文件放在网站的根目录(也就是Github Page 仓库的根目录中),配合设置域名的DNS解析,可以达到使用你自己的域名访问到博客的效果. (而不是 xxx.github.io)&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824121410.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>这里讲Hexo博客设置&lt;code>CNAME&lt;/code>文件时的一些坑&lt;/p>
+&lt;p>当我生成完文件,然后把&lt;code>CNAME&lt;/code>丢入public,然后上传到GitHub仓库,嗯,设置好了&lt;/p>
+&lt;p>可是问题来了,我每次生成CNAME文件都会不见,消失&lt;/p>
+&lt;p>后面发现Hexo &lt;code>source&lt;/code>文件夹中自己写入的内容都会原封不动的复制到&lt;code>public&lt;/code>中&lt;/p>
+&lt;p>于是&lt;strong>在&lt;code>source&lt;/code>文件夹中添加一个&lt;code>CNAME&lt;/code>文件,在文件中写入你配置的好的域&lt;/strong>就好了&lt;/p>
+&lt;blockquote>
+&lt;p>注意:不是&lt;code>CNAME.txt&lt;/code>,&lt;code>CNAME&lt;/code>文件中只能有一个自定义域&lt;/p>
+&lt;/blockquote>
+&lt;p>如&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824122245.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>(当然,不一定需要在根域,看个人喜好)&lt;/p>
+&lt;h3 id="设置github仓库">设置Github仓库
+&lt;/h3>&lt;p>打开网页Github仓库,点击&lt;code>Settings&lt;/code>,向下拉,会发现&lt;code>Github Page&lt;/code>的相关设定&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190824122915.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>在&lt;code>Custom domain&lt;/code>中填入刚刚在CNAME填写的域名提交,约要十几分钟后,使用HTTPS协议访问的域名,就看到小绿锁了&lt;/p>
+&lt;h2 id="方案二-使用cloudflare的代理实现https">方案二 使用cloudflare的代理实现HTTPS
+&lt;/h2>&lt;blockquote>
+&lt;p>不推荐,以后再写&lt;/p>
+&lt;/blockquote></description></item><item><title>为Hexo博客安装评论系统(Gitalk)</title><link>https://hex.moe/p/gitalk2019/</link><pubDate>Fri, 23 Aug 2019 17:40:04 +0000</pubDate><guid>https://hex.moe/p/gitalk2019/</guid><description>&lt;blockquote>
+&lt;p>想给博客安装一个评论系统,我了解了许多评论插件多说,Disqus,Gitment和Gitalk等鉴于我已经把博客挂在Github上了,就打算用Github全家桶了,最后我选择了Gitalk,因为Gitment看了下好像挺久没更新了.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>顺便讲下遇到的坑&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="为博客安装gitalk">为博客安装Gitalk
+&lt;/h1>&lt;h2 id="申请github-application">申请Github Application
+&lt;/h2>&lt;p>可以点击 &lt;strong>&lt;a class="link" href="https://github.com/settings/applications/new" target="_blank" rel="noopener"
+>这里&lt;/a>&lt;/strong> 来新申请一个Github Application&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190823211342.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>按照这样的方式填写↑&lt;/p>
+&lt;p>填写好后会得到一个&lt;code>Client ID&lt;/code>和一个&lt;code>Client Secret&lt;/code>&lt;/p>
+&lt;h2 id="配置主题">配置主题
+&lt;/h2>&lt;p>若你使用的主题有自带Gitalk,你仅仅需要在主题的&lt;code>config&lt;/code>中你填入ID和Secret之类的值&lt;/p>
+&lt;p>若你是主题开发者或自己魔改的主题需要修改&lt;code>new Gitalk&lt;/code>中的参数&lt;/p>
+&lt;p>这部分建议参考&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;a class="link" href="https://segmentfault.com/a/1190000014085547" target="_blank" rel="noopener"
+>https://segmentfault.com/a/1190000014085547&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="遇到的坑">遇到的坑
+&lt;/h2>&lt;blockquote>
+&lt;p>&lt;del>你若使用HTTP那就一切安好&lt;/del>&lt;/p>
+&lt;/blockquote>
+&lt;p>我之前的博客HTTPS方案是使用&lt;code>cloudflare&lt;/code>CDN的单向HTTPS,这种HTTPS实现方式是当你访问我的网址&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;a class="link" href="https://hex.moe" target="_blank" rel="noopener"
+>https://hex.moe&lt;/a> -&amp;gt; Proxies -&amp;gt; Source(github page)&lt;/p>
+&lt;/blockquote>
+&lt;p>时先经过CDN反向代理服务器,CDN的反向代理服务器再用HTTP请求我的源网站&lt;/p>
+&lt;p>这样乍一看好像没有问题,但是使用上Gitalk的时候就出现问题了,似乎回调时Github认为域不相符,给我拒绝了&lt;/p>
+&lt;p>出现的情况:
+&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190823213528.png"
+loading="lazy"
+>
+打开页面时Gitalk无法正常加载&lt;/p>
+&lt;p>在排查了一个下午后,我选择放弃&lt;code>cloudflare&lt;/code>的单向HTTPS方案,转为使用Github自带的HTTPS,关于这一点我会在后面的文章中介绍&lt;/p>
+&lt;p>将&lt;code>cloudflare&lt;/code>的CDN卸下后再修改回调地址为HTTP&lt;/p>
+&lt;p>终于&lt;/p>
+&lt;p>Gitalk正常工作了
+&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20190823213709.png"
+loading="lazy"
+>&lt;/p></description></item></channel></rss>

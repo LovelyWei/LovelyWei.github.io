@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Virtualization on Chocolate's 废纸篓</title><link>https://hex.moe/tags/virtualization/</link><description>Recent content in Virtualization on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 12 Oct 2019 20:05:02 +0000</lastBuildDate><atom:link href="https://hex.moe/tags/virtualization/index.xml" rel="self" type="application/rss+xml"/><item><title>记一次修好VMware突然无法打开的问题</title><link>https://hex.moe/p/vmware2019/</link><pubDate>Sat, 12 Oct 2019 20:05:02 +0000</pubDate><guid>https://hex.moe/p/vmware2019/</guid><description>&lt;p>今天Vmware Workstation突然就打不开了(&lt;/p>
+&lt;p>记一下症状和解决方法&lt;/p>
+&lt;h2 id="0x0-症状">0x0 症状
+&lt;/h2>&lt;p>今晚打开Vmware Workstation时 突然间开不了了 Windows 的通知栏弹出如下图&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/LovelyWei/PicGoData/20191012200904.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="0x1-尝试解决">0x1 尝试解决
+&lt;/h2>&lt;p>重启 无解&lt;/p>
+&lt;p>使用Vmware自带的修复 无解&lt;/p>
+&lt;p>使用旧版本Vmware 无解&lt;/p>
+&lt;h2 id="0x2-解决办法">0x2 解决办法
+&lt;/h2>&lt;ul>
+&lt;li>卸载Vmware&lt;/li>
+&lt;li>打开&lt;code>注册表(regedit)&lt;/code>&lt;/li>
+&lt;li>&lt;code>搜索(Ctrl + F)&lt;/code> &lt;code>VMware&lt;/code> 相关的项&lt;/li>
+&lt;li>删除相关项&lt;/li>
+&lt;li>重启&lt;/li>
+&lt;li>重新安装VMware&lt;/li>
+&lt;/ul>
+&lt;h2 id="0x3-后记">0x3 后记
+&lt;/h2>&lt;blockquote>
+&lt;p>&lt;del>绝对不是因为我不知道为什么怎么解决的但是我就是想水一篇文章然后写出来的&lt;/del>&lt;/p>
+&lt;/blockquote></description></item></channel></rss>
