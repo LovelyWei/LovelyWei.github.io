@@ -9,7 +9,6 @@
 &lt;p>&lt;img src="https://hex.moe/p/actionops2024/main-page.png"
 width="932"
 height="693"
-srcset="https://hex.moe/p/actionops2024/main-page_huccfe94ea68a4edca51ae7240fe5b11fe_42071_480x0_resize_box_3.png 480w, https://hex.moe/p/actionops2024/main-page_huccfe94ea68a4edca51ae7240fe5b11fe_42071_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="首页"
 class="gallery-image"
@@ -19,7 +18,6 @@ data-flex-basis="322px"
 &lt;img src="https://hex.moe/p/actionops2024/github-profile.png"
 width="932"
 height="693"
-srcset="https://hex.moe/p/actionops2024/github-profile_hu04c9e25005d3e1fd814684f669b5e6ff_63396_480x0_resize_box_3.png 480w, https://hex.moe/p/actionops2024/github-profile_hu04c9e25005d3e1fd814684f669b5e6ff_63396_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="用户页"
 class="gallery-image"
@@ -29,7 +27,6 @@ data-flex-basis="322px"
 &lt;img src="https://hex.moe/p/actionops2024/repositories.png"
 width="932"
 height="693"
-srcset="https://hex.moe/p/actionops2024/repositories_hud6d032d13117c20e363d2c1a6dd13f08_77495_480x0_resize_box_3.png 480w, https://hex.moe/p/actionops2024/repositories_hud6d032d13117c20e363d2c1a6dd13f08_77495_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="仓库页"
 class="gallery-image"
@@ -42,7 +39,6 @@ data-flex-basis="322px"
 &lt;p>&lt;img src="https://hex.moe/p/actionops2024/actionops.github.io.png"
 width="979"
 height="490"
-srcset="https://hex.moe/p/actionops2024/actionops.github.io_hub8e4e5faa4be3953b0b25d776a94dcbb_57016_480x0_resize_box_3.png 480w, https://hex.moe/p/actionops2024/actionops.github.io_hub8e4e5faa4be3953b0b25d776a94dcbb_57016_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="actionops.github.io 仓库"
 class="gallery-image"
@@ -122,7 +118,6 @@ data-flex-basis="479px"
 &lt;p>&lt;img src="https://hex.moe/p/actionops2024/compare.png"
 width="846"
 height="904"
-srcset="https://hex.moe/p/actionops2024/compare_hu7c2914d072f9dbc568e894c45ecbfda6_72953_480x0_resize_box_3.png 480w, https://hex.moe/p/actionops2024/compare_hu7c2914d072f9dbc568e894c45ecbfda6_72953_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="根本就只是依赖更新！"
 class="gallery-image"
@@ -193,12 +188,21 @@ data-flex-basis="224px"
 &lt;/div>&lt;p>为什么不是将容器run起来而是保存镜像文件呢？这里其实是怕作者在代码里面加了不干净的东西。&lt;/p>
 &lt;blockquote>
 &lt;p>Update 1：这波也确实是预判作者的预判了&lt;/p>
+&lt;p>&lt;img src="https://hex.moe/p/actionops2024/update1.png"
+width="729"
+height="626"
+loading="lazy"
+alt="更新"
+class="gallery-image"
+data-flex-grow="116"
+data-flex-basis="279px"
+>&lt;/p>
+&lt;p>在最近的一次更新中，特别强调地删除了 .git 文件夹，但是是在容器运行后删除的，对直接分析镜像文件无效 &lt;del>要是我早一点看到也不用想着去翻垃圾了&lt;/del>&lt;/p>
 &lt;/blockquote>
 &lt;p>将image保存为tar包后，拖到Windows进行7z大法。&lt;/p>
 &lt;p>&lt;img src="https://hex.moe/p/actionops2024/7z.png"
 width="791"
 height="660"
-srcset="https://hex.moe/p/actionops2024/7z_hud03f2c44b5fd41b1d36c731e0fa86287_103429_480x0_resize_box_3.png 480w, https://hex.moe/p/actionops2024/7z_hud03f2c44b5fd41b1d36c731e0fa86287_103429_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="7z大法"
 class="gallery-image"
@@ -209,7 +213,6 @@ data-flex-basis="287px"
 &lt;p>&lt;img src="https://hex.moe/p/actionops2024/wa.png"
 width="1096"
 height="747"
-srcset="https://hex.moe/p/actionops2024/wa_hu3c3c2cd81cada33e4ae7203667fa23ed_184037_480x0_resize_box_3.png 480w, https://hex.moe/p/actionops2024/wa_hu3c3c2cd81cada33e4ae7203667fa23ed_184037_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="错误的答案1"
 class="gallery-image"
@@ -245,26 +248,24 @@ data-flex-basis="352px"
 &lt;p>&lt;img src="https://hex.moe/p/actionops2024/image-ok-log.png"
 width="1355"
 height="732"
-srcset="https://hex.moe/p/actionops2024/image-ok-log_hu7321a1be6e5a8efe6f78cbbd73832a74_93605_480x0_resize_box_3.png 480w, https://hex.moe/p/actionops2024/image-ok-log_hu7321a1be6e5a8efe6f78cbbd73832a74_93605_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="Checkout！"
 class="gallery-image"
 data-flex-grow="185"
 data-flex-basis="444px"
 >&lt;/p>
-&lt;p>发现 &lt;code>Checkout&lt;/code> 其实是个在容器中用来拉取仓库资源并使用 &lt;strong>传入的Token，写入本地Git仓库，作为Github权限校验的凭据&lt;/strong>。&lt;/p>
+&lt;p>通过分析测试日志，发现 &lt;code>Checkout&lt;/code> 其实是个在容器中用来拉取仓库资源并使用 &lt;strong>传入的Token，写入本地Git仓库，作为Github权限校验的凭据&lt;/strong>，以便后续进行一系列的Git操作。&lt;/p>
 &lt;p>这下一目了然了，首先找到这个 &lt;code>git --local&lt;/code> 的配置存储在哪里。&lt;/p>
 &lt;p>&lt;img src="https://hex.moe/p/actionops2024/7z-2.png"
 width="769"
 height="548"
-srcset="https://hex.moe/p/actionops2024/7z-2_hu459c5de373fdd48b073c160bda4385ef_52705_480x0_resize_box_3.png 480w, https://hex.moe/p/actionops2024/7z-2_hu459c5de373fdd48b073c160bda4385ef_52705_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="还是7z大法"
 class="gallery-image"
 data-flex-grow="140"
 data-flex-basis="336px"
 >&lt;/p>
-&lt;p>直接看到&lt;/p>
+&lt;p>直接看到 &lt;code>.git/config&lt;/code> 中有&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -279,12 +280,11 @@ data-flex-basis="336px"
 >CyberChef&lt;/a> 解一下。&lt;/p>
 &lt;p>解出来是 &lt;code>x-access-token:ghp_T4gj3Le1**********BHHN&lt;/code>，拿去咕咕噜一搜，搜出来是 &lt;a class="link" href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#using-a-personal-access-token-on-the-command-line" target="_blank" rel="noopener"
 >GitHub Personal Access Tokens&lt;/a>，基本上有这个就有一部分的权限了。&lt;/p>
-&lt;p>尝试将 Github Pages 的仓库 &lt;code>clone&lt;/code> 到本地，自己 &lt;code>commit&lt;/code> 个提交，再在 .git/config 中写入 &lt;code>extraheader&lt;/code> 的配置。&lt;/p>
+&lt;p>尝试将 Github Pages 的仓库 &lt;code>clone&lt;/code> 到本地，自己 &lt;code>commit&lt;/code> 个提交，再修改clone下来的本地repo &lt;code>.git/config&lt;/code> ，写入镜像中泄露出的 &lt;code>extraheader&lt;/code> 配置。&lt;/p>
 &lt;p>一顿 &lt;code>git push&lt;/code> 成了！&lt;/p>
 &lt;p>&lt;img src="https://hex.moe/p/actionops2024/fin.png"
 width="696"
 height="638"
-srcset="https://hex.moe/p/actionops2024/fin_hu465ccc4810060d76224c9d2921080f92_47589_480x0_resize_box_3.png 480w, https://hex.moe/p/actionops2024/fin_hu465ccc4810060d76224c9d2921080f92_47589_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="Finfish"
 class="gallery-image"
@@ -293,13 +293,12 @@ data-flex-basis="261px"
 >&lt;/p>
 &lt;h1 id="结束后思考">结束后思考
 &lt;/h1>&lt;p>不知道 &lt;a class="link" href="https://github.com/Esonhugh" target="_blank" rel="noopener"
->@Esonhugh&lt;/a> 是从哪里看到这个 Workflow 的呢，存在问题的主要地方还是 Checkout 后，将不必要的文件打包成为了镜像，并传到了 Docker Hub，看了几个大的项目，基本上都只是通过Docker Hub分发编译完的二进制文件&lt;code>dist/ output/&lt;/code>，杜绝了将Checkout后的&lt;code>.git&lt;/code>文件夹打包进镜像，从而防止了Github PAT泄露。&lt;/p>
+>@Esonhugh&lt;/a> 是从哪里看到这个 Workflow 的呢，存在问题的主要地方还是 Checkout 后，将不必要的文件打包成为了镜像，并传到了 Docker Hub，看了几个大的项目，基本上都只是通过Docker Hub分发 &lt;code>dist/ output/&lt;/code> 目录下的文件，杜绝了将敏感信息打包进镜像（比如 Checkout 后的 &lt;code>.git&lt;/code> 文件夹），从而防止泄露。&lt;/p>
 &lt;p>&lt;img src="https://hex.moe/p/actionops2024/workflow.png"
 width="947"
 height="725"
-srcset="https://hex.moe/p/actionops2024/workflow_huc0a6a42bc902a3baafd50828024841f8_54095_480x0_resize_box_3.png 480w, https://hex.moe/p/actionops2024/workflow_huc0a6a42bc902a3baafd50828024841f8_54095_1024x0_resize_box_3.png 1024w"
 loading="lazy"
-alt="使用的范围不是很广泛"
+alt="这个Action使用的范围不是很广泛"
 class="gallery-image"
 data-flex-grow="130"
 data-flex-basis="313px"
