@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>C++ on Chocolate's 废纸篓</title><link>https://hex.moe/tags/c++/</link><description>Recent content in C++ on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 17 Sep 2019 16:26:17 +0000</lastBuildDate><atom:link href="https://hex.moe/tags/c++/index.xml" rel="self" type="application/rss+xml"/><item><title>cpp学习笔记(scanf与getline)</title><link>https://hex.moe/p/cpp2019/</link><pubDate>Tue, 17 Sep 2019 16:26:17 +0000</pubDate><guid>https://hex.moe/p/cpp2019/</guid><description>&lt;blockquote>
-&lt;p>蒟蒻萌新的 C 与 C++学习笔记.&lt;/p>
-&lt;/blockquote>
+&lt;p>蒟蒻萌新的 C 与 C++学习笔记.&lt;/p>&lt;/blockquote>
 &lt;blockquote>
-&lt;p>&lt;strong>任何一个伟大的目标,都有一个微不足道的开始.&lt;/strong> —— 洛谷&lt;/p>
-&lt;/blockquote>
+&lt;p>&lt;strong>任何一个伟大的目标,都有一个微不足道的开始.&lt;/strong> —— 洛谷&lt;/p>&lt;/blockquote>
 &lt;blockquote>
 &lt;p>最近在学习一些 OI 的知识，其实以前是学过 C++的但是, &lt;del>Python 实在是太香了&lt;/del>
 由于太久没用过全部白给了，但是由于了解到比赛 C++可以用 STL &lt;del>真香&lt;/del>

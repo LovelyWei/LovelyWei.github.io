@@ -3,8 +3,7 @@
 &lt;p>解决方案是 strongSwan IKEv2 VPN隧道到VPS服务器上,IKEv2 的证书使用的是Let&amp;rsquo;s encrypt的证书,域名挂在了&lt;code>CloudFlare&lt;/code>上以便于调用api.&lt;/p></description></item><item><title>年轻人的第一个私人BGP(二) - 广播你的IP</title><link>https://hex.moe/p/bgp2019-p2/</link><pubDate>Thu, 31 Oct 2019 19:06:15 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p2/</guid><description>&lt;p>接上篇BGP,这个时候已经拿下了自己ASN和IP,在RIPE中可以查询到,并且也添加了 &lt;code>Route6&lt;/code> 对象,接下来就把自己的IP广播出去&amp;hellip;.&lt;/p>
 &lt;p>在广播之前,需要寻找一家能为你做广播的电信运营商&amp;hellip;.Emm至少在国内是不可能了,不过还可以选择云服务器,Vultr 提供了广播BGP的服务,还有 he.net 家的BGP隧道..&lt;/p></description></item><item><title>年轻人的第一个私人BGP(一) - 注册一个ASN</title><link>https://hex.moe/p/bgp2019-p1/</link><pubDate>Tue, 15 Oct 2019 19:06:15 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p1/</guid><description>&lt;p>很久以前就有这一个想法了,拥有一个自己的私人ASN,经过了一个多月的研究,现在博主终于拥有了年轻人的第一个ASN和网络段(&lt;/p>
 &lt;blockquote>
-&lt;p>&lt;del>实名上网&lt;/del>&lt;/p>
-&lt;/blockquote>
+&lt;p>&lt;del>实名上网&lt;/del>&lt;/p>&lt;/blockquote>
 &lt;h2 id="0x00-介绍">0x00 介绍
 &lt;/h2>&lt;h3 id="bgp是什么">BGP是什么
 &lt;/h3>&lt;blockquote>
