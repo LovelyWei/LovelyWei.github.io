@@ -1,107 +1,220 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Chocolate's 废纸篓</title><link>https://hex.moe/</link><description>Recent content on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 29 Mar 2025 17:00:00 +0800</lastBuildDate><atom:link href="https://hex.moe/index.xml" rel="self" type="application/rss+xml"/><item><title>HTB-Code</title><link>https://hex.moe/p/htb-code/</link><pubDate>Sat, 29 Mar 2025 17:00:00 +0800</pubDate><guid>https://hex.moe/p/htb-code/</guid><description>&lt;!-- more -->
-&lt;div class="hugo-encrypt" data-error-msg="The password is incorrect." data-id="fb915460e8829cf24f6e49bfe2e1b142">
-&lt;p class="hugo-encrypt-info">
-&lt;svg aria-hidden="true" class="bi bi-file-earmark-lock hi-svg-inline hugo-encrypt-icon" fill="currentColor" height="1em" viewBox="0 0 16 16" width="1em" xmlns="http://www.w3.org/2000/svg">
-&lt;path d="M10 7v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V9.3c0-.627.46-1.058 1-1.224V7a2 2 0 1 1 4 0M7 7v1h2V7a1 1 0 0 0-2 0M6 9.3v2.4c0 .042.02.107.105.175A.64.64 0 0 0 6.5 12h3a.64.64 0 0 0 .395-.125c.085-.068.105-.133.105-.175V9.3c0-.042-.02-.107-.105-.175A.64.64 0 0 0 9.5 9h-3a.64.64 0 0 0-.395.125C6.02 9.193 6 9.258 6 9.3"/>
-&lt;path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
-&lt;/svg>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Chocolate's 废纸篓</title><link>https://hex.moe/</link><description>Recent content on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 12 Nov 2025 23:00:00 +0800</lastBuildDate><atom:link href="https://hex.moe/index.xml" rel="self" type="application/rss+xml"/><item><title>Ureport2 "savePreviewData" Endpoint XXE</title><link>https://hex.moe/p/cve-2025-61151/</link><pubDate>Wed, 12 Nov 2025 23:00:00 +0800</pubDate><guid>https://hex.moe/p/cve-2025-61151/</guid><description>&lt;h1 id="ureport2-savepreviewdata-endpoint-xxe"&gt;Ureport2 &amp;ldquo;savePreviewData&amp;rdquo; Endpoint XXE
+&lt;/h1&gt;&lt;h2 id="setting-up-the-environment"&gt;Setting up the environment
+&lt;/h2&gt;&lt;p&gt;Download Spring Boot 2 and Ureport 2.2.9 via Maven.
+&lt;img src="https://hex.moe/p/cve-2025-61151/pomxml.png"
+width="1270"
+height="1097"
+loading="lazy"
+alt="pomxml"
+class="gallery-image"
+data-flex-grow="115"
+data-flex-basis="277px"
+&gt;&lt;/p&gt;
+&lt;p&gt;Configuring Ureport2 Servlet.
+&lt;img src="https://hex.moe/p/cve-2025-61151/UReportConfig.png"
+width="2014"
+height="859"
+loading="lazy"
+alt="UReportConfig"
+class="gallery-image"
+data-flex-grow="234"
+data-flex-basis="562px"
+&gt;&lt;/p&gt;
+&lt;p&gt;Browse the designer page.
+&lt;img src="https://hex.moe/p/cve-2025-61151/BrowsePage.png"
+width="2292"
+height="1197"
+loading="lazy"
+alt="BrowsePage"
+class="gallery-image"
+data-flex-grow="191"
+data-flex-basis="459px"
+&gt;&lt;/p&gt;
+&lt;h2 id="poc"&gt;POC
+&lt;/h2&gt;&lt;p&gt;Try to preview the data.
+&lt;img src="https://hex.moe/p/cve-2025-61151/preview-button.png"
+width="1048"
+height="498"
+loading="lazy"
+alt="preview-button"
+class="gallery-image"
+data-flex-grow="210"
+data-flex-basis="505px"
+&gt;&lt;/p&gt;
+&lt;p&gt;Modify the request data sent to savePreviewData.
+&lt;img src="https://hex.moe/p/cve-2025-61151/savePreviewData.png"
+width="1881"
+height="1280"
+loading="lazy"
+alt="savePreviewData"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="352px"
+&gt;&lt;/p&gt;
+&lt;p&gt;Raw:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;POST /ureport/designer/savePreviewData HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Host: 127.0.0.1:8080
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Content-Length: 5569
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sec-ch-ua-platform: &amp;#34;Windows&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Accept-Language: zh-CN,zh;q=0.9
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sec-ch-ua: &amp;#34;Chromium&amp;#34;;v=&amp;#34;139&amp;#34;, &amp;#34;Not;A=Brand&amp;#34;;v=&amp;#34;99&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sec-ch-ua-mobile: ?0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;X-Requested-With: XMLHttpRequest
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Accept: */*
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Origin: http://127.0.0.1:8080
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Sec-Fetch-Site: same-origin
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Sec-Fetch-Mode: cors
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Sec-Fetch-Dest: empty
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Referer: http://127.0.0.1:8080/ureport/designer
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Accept-Encoding: gzip, deflate, br
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Cookie: JSESSIONID=92753162E993D1A4CAD989B0141164BA
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Connection: keep-alive
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;content=%253C%253Fxml%2520version%253D%25221.0%2522%2520encoding%253D%2522UTF-8%2522%253F%253E%253Cureport%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522A1%2522%2520row%253D%25221%2522%2520col%253D%25221%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255Btest%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522B1%2522%2520row%253D%25221%2522%2520col%253D%25222%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522C1%2522%2520row%253D%25221%2522%2520col%253D%25223%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522D1%2522%2520row%253D%25221%2522%2520col%253D%25224%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522A2%2522%2520row%253D%25222%2522%2520col%253D%25221%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522B2%2522%2520row%253D%25222%2522%2520col%253D%25222%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522C2%2522%2520row%253D%25222%2522%2520col%253D%25223%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522D2%2522%2520row%253D%25222%2522%2520col%253D%25224%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522A3%2522%2520row%253D%25223%2522%2520col%253D%25221%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522B3%2522%2520row%253D%25223%2522%2520col%253D%25222%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522C3%2522%2520row%253D%25223%2522%2520col%253D%25223%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522D3%2522%2520row%253D%25223%2522%2520col%253D%25224%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Crow%2520row-number%253D%25221%2522%2520height%253D%252218%2522%252F%253E%253Crow%2520row-number%253D%25222%2522%2520height%253D%252218%2522%252F%253E%253Crow%2520row-number%253D%25223%2522%2520height%253D%252218%2522%252F%253E%253Ccolumn%2520col-number%253D%25221%2522%2520width%253D%252280%2522%252F%253E%253Ccolumn%2520col-number%253D%25222%2522%2520width%253D%252280%2522%252F%253E%253Ccolumn%2520col-number%253D%25223%2522%2520width%253D%252280%2522%252F%253E%253Ccolumn%2520col-number%253D%25224%2522%2520width%253D%252280%2522%252F%253E%253Cpaper%2520type%253D%2522A4%2522%2520left-margin%253D%252290%2522%2520right-margin%253D%252290%2522%250A%2520%2520%2520%2520top-margin%253D%252272%2522%2520bottom-margin%253D%252272%2522%2520paging-mode%253D%2522fitpage%2522%2520fixrows%253D%25220%2522%250A%2520%2520%2520%2520width%253D%2522595%2522%2520height%253D%2522842%2522%2520orientation%253D%2522portrait%2522%2520html-report-align%253D%2522left%2522%2520bg-image%253D%2522%2522%2520html-interval-refresh-value%253D%25220%2522%2520column-enabled%253D%2522false%2522%253E%253C%252Fpaper%253E%253C%252Fureport%253E
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Modified:&lt;/p&gt;</description></item><item><title>HTB-Code</title><link>https://hex.moe/p/htb-code/</link><pubDate>Sat, 29 Mar 2025 17:00:00 +0800</pubDate><guid>https://hex.moe/p/htb-code/</guid><description>&lt;!-- more --&gt;
+&lt;div class="hugo-encrypt" data-error-msg="The password is incorrect." data-id="fb915460e8829cf24f6e49bfe2e1b142"&gt;
+&lt;p class="hugo-encrypt-info"&gt;
+&lt;svg aria-hidden="true" class="bi bi-file-earmark-lock hi-svg-inline hugo-encrypt-icon" fill="currentColor" height="1em" viewBox="0 0 16 16" width="1em" xmlns="http://www.w3.org/2000/svg"&gt;
+&lt;path d="M10 7v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V9.3c0-.627.46-1.058 1-1.224V7a2 2 0 1 1 4 0M7 7v1h2V7a1 1 0 0 0-2 0M6 9.3v2.4c0 .042.02.107.105.175A.64.64 0 0 0 6.5 12h3a.64.64 0 0 0 .395-.125c.085-.068.105-.133.105-.175V9.3c0-.042-.02-.107-.105-.175A.64.64 0 0 0 9.5 9h-3a.64.64 0 0 0-.395.125C6.02 9.193 6 9.258 6 9.3"/&gt;
+&lt;path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/&gt;
+&lt;/svg&gt;
 The following content is protected.
-&lt;/p></description></item><item><title>HTB-UnderPass</title><link>https://hex.moe/p/htb-underpass/</link><pubDate>Fri, 10 Jan 2025 12:00:00 +0800</pubDate><guid>https://hex.moe/p/htb-underpass/</guid><description>&lt;!-- more -->
-&lt;div class="hugo-encrypt" data-error-msg="The password is incorrect." data-id="73482f940f7bcff9122a59a9198acf90">
-&lt;p class="hugo-encrypt-info">
-&lt;svg aria-hidden="true" class="bi bi-file-earmark-lock hi-svg-inline hugo-encrypt-icon" fill="currentColor" height="1em" viewBox="0 0 16 16" width="1em" xmlns="http://www.w3.org/2000/svg">
-&lt;path d="M10 7v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V9.3c0-.627.46-1.058 1-1.224V7a2 2 0 1 1 4 0M7 7v1h2V7a1 1 0 0 0-2 0M6 9.3v2.4c0 .042.02.107.105.175A.64.64 0 0 0 6.5 12h3a.64.64 0 0 0 .395-.125c.085-.068.105-.133.105-.175V9.3c0-.042-.02-.107-.105-.175A.64.64 0 0 0 9.5 9h-3a.64.64 0 0 0-.395.125C6.02 9.193 6 9.258 6 9.3"/>
-&lt;path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
-&lt;/svg>
+&lt;/p&gt;</description></item><item><title>HTB-UnderPass</title><link>https://hex.moe/p/htb-underpass/</link><pubDate>Fri, 10 Jan 2025 12:00:00 +0800</pubDate><guid>https://hex.moe/p/htb-underpass/</guid><description>&lt;!-- more --&gt;
+&lt;div class="hugo-encrypt" data-error-msg="The password is incorrect." data-id="73482f940f7bcff9122a59a9198acf90"&gt;
+&lt;p class="hugo-encrypt-info"&gt;
+&lt;svg aria-hidden="true" class="bi bi-file-earmark-lock hi-svg-inline hugo-encrypt-icon" fill="currentColor" height="1em" viewBox="0 0 16 16" width="1em" xmlns="http://www.w3.org/2000/svg"&gt;
+&lt;path d="M10 7v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V9.3c0-.627.46-1.058 1-1.224V7a2 2 0 1 1 4 0M7 7v1h2V7a1 1 0 0 0-2 0M6 9.3v2.4c0 .042.02.107.105.175A.64.64 0 0 0 6.5 12h3a.64.64 0 0 0 .395-.125c.085-.068.105-.133.105-.175V9.3c0-.042-.02-.107-.105-.175A.64.64 0 0 0 9.5 9h-3a.64.64 0 0 0-.395.125C6.02 9.193 6 9.258 6 9.3"/&gt;
+&lt;path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/&gt;
+&lt;/svg&gt;
 The following content is protected.
-&lt;/p></description></item><item><title>HTB-Administrator</title><link>https://hex.moe/p/htb-administrator/</link><pubDate>Thu, 09 Jan 2025 21:40:00 +0800</pubDate><guid>https://hex.moe/p/htb-administrator/</guid><description>&lt;!-- more -->
-&lt;div class="hugo-encrypt" data-error-msg="The password is incorrect." data-id="1593569e38a1509ab50291cec43fae3e">
-&lt;p class="hugo-encrypt-info">
-&lt;svg aria-hidden="true" class="bi bi-file-earmark-lock hi-svg-inline hugo-encrypt-icon" fill="currentColor" height="1em" viewBox="0 0 16 16" width="1em" xmlns="http://www.w3.org/2000/svg">
-&lt;path d="M10 7v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V9.3c0-.627.46-1.058 1-1.224V7a2 2 0 1 1 4 0M7 7v1h2V7a1 1 0 0 0-2 0M6 9.3v2.4c0 .042.02.107.105.175A.64.64 0 0 0 6.5 12h3a.64.64 0 0 0 .395-.125c.085-.068.105-.133.105-.175V9.3c0-.042-.02-.107-.105-.175A.64.64 0 0 0 9.5 9h-3a.64.64 0 0 0-.395.125C6.02 9.193 6 9.258 6 9.3"/>
-&lt;path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
-&lt;/svg>
+&lt;/p&gt;</description></item><item><title>HTB-Administrator</title><link>https://hex.moe/p/htb-administrator/</link><pubDate>Thu, 09 Jan 2025 21:40:00 +0800</pubDate><guid>https://hex.moe/p/htb-administrator/</guid><description>&lt;!-- more --&gt;
+&lt;div class="hugo-encrypt" data-error-msg="The password is incorrect." data-id="1593569e38a1509ab50291cec43fae3e"&gt;
+&lt;p class="hugo-encrypt-info"&gt;
+&lt;svg aria-hidden="true" class="bi bi-file-earmark-lock hi-svg-inline hugo-encrypt-icon" fill="currentColor" height="1em" viewBox="0 0 16 16" width="1em" xmlns="http://www.w3.org/2000/svg"&gt;
+&lt;path d="M10 7v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V9.3c0-.627.46-1.058 1-1.224V7a2 2 0 1 1 4 0M7 7v1h2V7a1 1 0 0 0-2 0M6 9.3v2.4c0 .042.02.107.105.175A.64.64 0 0 0 6.5 12h3a.64.64 0 0 0 .395-.125c.085-.068.105-.133.105-.175V9.3c0-.042-.02-.107-.105-.175A.64.64 0 0 0 9.5 9h-3a.64.64 0 0 0-.395.125C6.02 9.193 6 9.258 6 9.3"/&gt;
+&lt;path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/&gt;
+&lt;/svg&gt;
 The following content is protected.
-&lt;/p></description></item><item><title>通过 JARM 识别 CobaltStrike TeamServer</title><link>https://hex.moe/p/detect-cs-by-jarm2024/</link><pubDate>Sun, 10 Nov 2024 12:50:00 +0800</pubDate><guid>https://hex.moe/p/detect-cs-by-jarm2024/</guid><description>&lt;p>不是什么新鲜东西，仅作为记录。&lt;/p>
-&lt;h2 id="jarm">JARM
-&lt;/h2>&lt;p>不依靠证书的TLS服务端指纹工具。&lt;/p>
-&lt;p>原版实现：&lt;a class="link" href="https://github.com/salesforce/jarm" target="_blank" rel="noopener"
->https://github.com/salesforce/jarm&lt;/a>&lt;/p>
-&lt;h2 id="teamserver-默认端口-50050-jarm-指纹">TeamServer 默认端口 50050 JARM 指纹
-&lt;/h2>&lt;p>提取自 cobalt strike 4.9.1 (pwn3rs ver.) 的 TeamServer&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-txt" data-lang="txt">&lt;span class="line">&lt;span class="cl">Domain: 127.0.0.1
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Resolved IP: 127.0.0.1
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">JARM: 2ad2ad16d2ad2ad00042d42d00042ddb04deffa1705e2edc44cae1ed24a4da
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h2 id="通过-shodanio-等空间测绘引擎搜索">通过 Shodan.io 等空间测绘引擎搜索
-&lt;/h2>&lt;p>语法：&lt;code>ssl.jarm:2ad2ad16d2ad2ad00042d42d00042ddb04deffa1705e2edc44cae1ed24a4da&lt;/code>&lt;/p></description></item><item><title>ActionOPs - WriteUp</title><link>https://hex.moe/p/actionops2024/</link><pubDate>Sat, 18 May 2024 14:54:26 +0800</pubDate><guid>https://hex.moe/p/actionops2024/</guid><description>&lt;img src="https://hex.moe/p/actionops2024/cover.png" alt="Featured image of post ActionOPs - WriteUp" />&lt;p>&lt;del>紧急插播一条受害者新闻&lt;/del>&lt;/p>
-&lt;h2 id="介绍">介绍
-&lt;/h2>&lt;p>这是一道由裙友 &lt;a class="link" href="https://github.com/Esonhugh" target="_blank" rel="noopener"
->@Esonhugh&lt;/a> 出的益智Quiz，趁着最近也有空，就打着看一下。在流程中一边看边学 Github Action/Authentication 相关的知识也是非常的寓教于乐了。&lt;/p></description></item><item><title>了解我</title><link>https://hex.moe/about/</link><pubDate>Thu, 16 May 2024 00:00:00 +0000</pubDate><guid>https://hex.moe/about/</guid><description>&lt;p>工事中&lt;/p></description></item><item><title>边缘行者</title><link>https://hex.moe/p/edgerunners/</link><pubDate>Sun, 04 Dec 2022 14:25:42 +0000</pubDate><guid>https://hex.moe/p/edgerunners/</guid><description>&lt;img src="https://hex.moe/p/edgerunners/cover.jpg" alt="Featured image of post 边缘行者" />&lt;h4 id="0x00">0x00
-&lt;/h4>&lt;p>&lt;del>《赛博朋克：阴沟里的老鼠》是由CD PROJEKT&amp;hellip;&lt;/del>&lt;/p>
-&lt;h4 id="0x01">0x01
-&lt;/h4>&lt;p>不扯了，最近这两天看完了边缘行者感触还蛮多的。首先，2077的世界观我一直是蛮喜欢的，游戏虽然没玩但是剧情大部分在首发线下云完成了大部分的主线剧情内容，可以说，背景带入感很深(划)，非常的吸引我。这两天也是在思考许多许多的问题，以至于 &lt;del>软体不稳定&lt;/del> 精神状态不佳，恰巧的是边缘行者这部片 &lt;del>在发病后几天&lt;/del> 也是开学一周后没这么忙碌从而进入了我的视野中。 &lt;em>接下来可能有剧透&lt;/em> 再看之前对具体的剧情并不是很了解，听到传闻十分的治愈，加上世界观本身也喜欢，就开始看了起来。谁想到第一集就开始放刀子（x&lt;/p></description></item><item><title>档案馆</title><link>https://hex.moe/archives/</link><pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate><guid>https://hex.moe/archives/</guid><description/></item><item><title>我的2020(下)</title><link>https://hex.moe/p/2020-p2/</link><pubDate>Tue, 02 Feb 2021 16:42:00 +0000</pubDate><guid>https://hex.moe/p/2020-p2/</guid><description>&lt;p>[已完坑]&lt;/p>
-&lt;h2 id="前言">前言
-&lt;/h2>&lt;p>下半年也没有学到什么,甚至一篇Blog也没有发&amp;hellip;虽然已经如此糟糕了,但是年末总结还是要写下的. 证明自己还活着和写下对未来的少许期望.&lt;/p></description></item><item><title>上海之旅</title><link>https://hex.moe/p/shanghai2019/</link><pubDate>Mon, 01 Feb 2021 23:00:10 +0000</pubDate><guid>https://hex.moe/p/shanghai2019/</guid><description>&lt;img src="https://hex.moe/p/shanghai2019/cover.jpg" alt="Featured image of post 上海之旅" />&lt;blockquote>
-&lt;p>&lt;strong>璀璨不夜城，繁华梦一场&lt;/strong>&lt;/p>&lt;/blockquote>
-&lt;!-- more -->
-&lt;h2 id="起因">起因
-&lt;/h2>&lt;p>一个星期前看到朋友圈的人都去了上海玩，正好又有两个同学陪同，&lt;del>脑子一热&lt;/del>就决定去上海看看了。&lt;/p>
-&lt;h4 id="计划">计划
-&lt;/h4>&lt;p>时间转眼到了七月份,国内的疫情也控制的很好,朋友圈中掀起了旅游的热潮,当时的机票也挺便宜,但之前一直都没怎么出过远门 &lt;del>主要是没钱&lt;/del> 在预算 1500CNY(实际上后面还是超额了) 左右构思了一个星期的行程计划后,决定约上了几个朋友前往上海.&lt;/p></description></item><item><title>我的2020(上)</title><link>https://hex.moe/p/2020-p1/</link><pubDate>Thu, 04 Jun 2020 20:18:46 +0000</pubDate><guid>https://hex.moe/p/2020-p1/</guid><description>&lt;h3 id="前言">前言
-&lt;/h3>&lt;p>上半年一直在忙碌，到头来却不知道忙了什么，博客也有一段时间没更新了，再一看时间，一年已经过去一半了。打算写一篇给自己看的毫无营养流水账总结下自己杂乱无章的上半年&amp;hellip;&lt;/p></description></item><item><title>年轻人的第一个私人BGP(三) - 带入家中</title><link>https://hex.moe/p/bgp2019-p3/</link><pubDate>Fri, 28 Feb 2020 19:56:38 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p3/</guid><description>&lt;p>BGP系列也好久没更新过了,最近放假放的有点久&amp;hellip;干了点新的东西,让家里的网络用上自己的IP.&lt;/p>
-&lt;!-- more -->
-&lt;p>解决方案是 strongSwan IKEv2 VPN隧道到VPS服务器上,IKEv2 的证书使用的是Let&amp;rsquo;s encrypt的证书,域名挂在了&lt;code>CloudFlare&lt;/code>上以便于调用api.&lt;/p></description></item><item><title>Goodbye,2019</title><link>https://hex.moe/p/goodbye2019/</link><pubDate>Tue, 31 Dec 2019 12:13:39 +0000</pubDate><guid>https://hex.moe/p/goodbye2019/</guid><description>&lt;p>一年到了尾声，是时候该做些总结了&amp;hellip;&lt;/p>
-&lt;h2 id="今年的经历">今年的经历
-&lt;/h2>&lt;p>&lt;em>不是很想过多的暴露个人信息，模糊细节了&amp;hellip;.&lt;/em>&lt;/p>
-&lt;h3 id="0x01-上半年">0x01 上半年
-&lt;/h3>&lt;p>今年三月份参加了个比赛拿了个二等奖,然后开始准备考试,准备一个多月后考上了位处深圳的一个大专,虽然留下的许多遗憾与不甘,但还是算给自己的上半年交上的一份及格答卷.&lt;/p></description></item><item><title>关于伪造邮件的简单研究</title><link>https://hex.moe/p/swaks2019/</link><pubDate>Fri, 15 Nov 2019 19:37:08 +0000</pubDate><guid>https://hex.moe/p/swaks2019/</guid><description>&lt;p>最近拿到了学校的邮箱,心血来潮想开始测试一下关于电子邮件安全之类的&amp;hellip;说干就干&amp;hellip;伪造一封退学通知书(雾&lt;/p>
-&lt;h2 id="伪造邮件的原理">伪造邮件的原理
-&lt;/h2>&lt;p>最初的SMTP 协议定义 (1982年&lt;a class="link" href="https://tools.ietf.org/html/rfc821" target="_blank" rel="noopener"
->RFC 821&lt;/a>) 中并没有写如何对发件人进行身份验证,所以任何人都可以说我是 Alice (这就导致了垃圾邮件和虚假邮件的产生.&lt;/p></description></item><item><title>年轻人的第一个私人BGP(二) - 广播你的IP</title><link>https://hex.moe/p/bgp2019-p2/</link><pubDate>Thu, 31 Oct 2019 19:06:15 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p2/</guid><description>&lt;p>接上篇BGP,这个时候已经拿下了自己ASN和IP,在RIPE中可以查询到,并且也添加了 &lt;code>Route6&lt;/code> 对象,接下来就把自己的IP广播出去&amp;hellip;.&lt;/p>
-&lt;p>在广播之前,需要寻找一家能为你做广播的电信运营商&amp;hellip;.Emm至少在国内是不可能了,不过还可以选择云服务器,Vultr 提供了广播BGP的服务,还有 he.net 家的BGP隧道..&lt;/p></description></item><item><title>年轻人的第一个私人BGP(一) - 注册一个ASN</title><link>https://hex.moe/p/bgp2019-p1/</link><pubDate>Tue, 15 Oct 2019 19:06:15 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p1/</guid><description>&lt;p>很久以前就有这一个想法了,拥有一个自己的私人ASN,经过了一个多月的研究,现在博主终于拥有了年轻人的第一个ASN和网络段(&lt;/p>
-&lt;blockquote>
-&lt;p>&lt;del>实名上网&lt;/del>&lt;/p>&lt;/blockquote>
-&lt;h2 id="0x00-介绍">0x00 介绍
-&lt;/h2>&lt;h3 id="bgp是什么">BGP是什么
-&lt;/h3>&lt;blockquote>
-&lt;p>边界网关协议（英语：Border Gateway Protocol，缩写：BGP）是互联网上一个核心的去中心化自治路由协议。它通过维护IP路由表或‘前缀’表来实现自治系统（AS）之间的可达性，属于矢量路由协议&lt;/p></description></item><item><title>记一次修好VMware突然无法打开的问题</title><link>https://hex.moe/p/vmware2019/</link><pubDate>Sat, 12 Oct 2019 20:05:02 +0000</pubDate><guid>https://hex.moe/p/vmware2019/</guid><description>&lt;p>今天Vmware Workstation突然就打不开了(&lt;/p>
-&lt;p>记一下症状和解决方法&lt;/p>
-&lt;h2 id="0x0-症状">0x0 症状
-&lt;/h2>&lt;p>今晚打开Vmware Workstation时 突然间开不了了 Windows 的通知栏弹出如下图&lt;/p></description></item><item><title>大学入学一个月总结</title><link>https://hex.moe/p/freshman/</link><pubDate>Sat, 28 Sep 2019 23:30:57 +0000</pubDate><guid>https://hex.moe/p/freshman/</guid><description>&lt;p>大学开学已经有一个月了,半夜自闭蒟蒻来写下总结.&lt;/p>
-&lt;h2 id="0x0-入学">0x0 入学
-&lt;/h2>&lt;p>没有达到某乎平均水准,来了深圳某大专,开学感觉挺好的,课程也挺少的,但是接下来就是一堆一堆活动活动还有活动,感觉就是 &lt;strong>十分的忙&lt;/strong>.&lt;/p></description></item><item><title>cpp学习笔记(scanf与getline)</title><link>https://hex.moe/p/cpp2019/</link><pubDate>Tue, 17 Sep 2019 16:26:17 +0000</pubDate><guid>https://hex.moe/p/cpp2019/</guid><description>&lt;blockquote>
-&lt;p>蒟蒻萌新的 C 与 C++学习笔记.&lt;/p>&lt;/blockquote>
-&lt;blockquote>
-&lt;p>&lt;strong>任何一个伟大的目标,都有一个微不足道的开始.&lt;/strong> —— 洛谷&lt;/p>&lt;/blockquote>
-&lt;blockquote>
-&lt;p>最近在学习一些 OI 的知识，其实以前是学过 C++的但是, &lt;del>Python 实在是太香了&lt;/del>
-由于太久没用过全部白给了，但是由于了解到比赛 C++可以用 STL &lt;del>真香&lt;/del>
-所以开了一个从 C 转换到 C++的一些笔记. &lt;del>天坑&lt;/del> &amp;gt; &lt;del>什么时候支持 C++11&lt;/del>&lt;/p></description></item><item><title>按名字判断班级小姐姐的数量</title><link>https://hex.moe/p/girls2019/</link><pubDate>Thu, 29 Aug 2019 19:22:48 +0000</pubDate><guid>https://hex.moe/p/girls2019/</guid><description>&lt;blockquote>
-&lt;p>大学快要开学了,我通过py关系弄到了一份班级的列表,但是没有性别,正好这几天看到一个通过名字猜测性别的库&lt;/p>&lt;/blockquote>
-&lt;h1 id="通过姓名猜测性别">通过姓名猜测性别
-&lt;/h1>&lt;blockquote>
-&lt;p>&lt;a class="link" href="https://github.com/observerss/ngender" target="_blank" rel="noopener"
->https://github.com/observerss/ngender&lt;/a>&lt;/p>&lt;/blockquote>
-&lt;p>在最近,发现了一个&lt;code>ngender&lt;/code>库,作用只有一个 通过姓名猜测性别,使用方式也很简单&lt;/p></description></item><item><title>Python爬虫练习</title><link>https://hex.moe/p/python2019/</link><pubDate>Sun, 25 Aug 2019 12:18:41 +0000</pubDate><guid>https://hex.moe/p/python2019/</guid><description>&lt;blockquote>
-&lt;p>最近感觉没什么好写的,把以前练习Python写的东西记录一下.关于SadPanda和某泥潭的.
-没啥技术含量(&lt;/p>&lt;/blockquote>
-&lt;h2 id="stage1st挂机脚本">Stage1st挂机脚本
-&lt;/h2>&lt;blockquote>
-&lt;p>某知名 &lt;del>巨魔钓鱼&lt;/del> 泥潭需要访问几十个小时才能升级加权限,又刚好有闲置的服务器,所以想想办法实现挂机功能&lt;/p></description></item><item><title>再次重建博客(建立一个Hexo博客)</title><link>https://hex.moe/p/rebulid-hexo2019/</link><pubDate>Sat, 24 Aug 2019 14:24:36 +0000</pubDate><guid>https://hex.moe/p/rebulid-hexo2019/</guid><description>&lt;p>&amp;lt;关于我博客又丢档案了这件事&amp;gt;&lt;/p>
-&lt;!-- more -->
-&lt;p>时隔 &lt;del>多年&lt;/del> 几个月 我突然发现好像有个博客已经吃灰很久了,开始想更新下内容,结果发现又又又 &lt;del>丢人&lt;/del> 丢档了(Hexo博客的源文件丢了)&lt;/p></description></item><item><title>用Github来当博客图床</title><link>https://hex.moe/p/picgo2019/</link><pubDate>Sat, 24 Aug 2019 13:44:09 +0000</pubDate><guid>https://hex.moe/p/picgo2019/</guid><description>&lt;blockquote>
-&lt;p>之前试过 sm.ms 觉得还不错,不过最近发现这个图床处于墙与不墙的薛定谔状态,而且也不是很好留档,所以决定使用Github来当作博客的图床&lt;/p>&lt;/blockquote>
-&lt;h1 id="一个图床软件-picgo">一个图床软件 PicGo
-&lt;/h1>&lt;h2 id="下载-picgo">下载 PicGo
-&lt;/h2>&lt;p>在这里&lt;/p></description></item><item><title>为Hexo博客配置上HTTPS</title><link>https://hex.moe/p/blog-https-2019/</link><pubDate>Sat, 24 Aug 2019 11:30:39 +0000</pubDate><guid>https://hex.moe/p/blog-https-2019/</guid><description>&lt;blockquote>
-&lt;p>9012年了,Chrome纷纷给各种HTTP网站打上不安全,由于我用了自定义域名,所以并没有小绿锁,为了&amp;quot;安全&amp;quot;一点,把博客也加上小绿锁好了&lt;/p></description></item><item><title>为Hexo博客安装评论系统(Gitalk)</title><link>https://hex.moe/p/gitalk2019/</link><pubDate>Fri, 23 Aug 2019 17:40:04 +0000</pubDate><guid>https://hex.moe/p/gitalk2019/</guid><description>&lt;blockquote>
-&lt;p>想给博客安装一个评论系统,我了解了许多评论插件多说,Disqus,Gitment和Gitalk等鉴于我已经把博客挂在Github上了,就打算用Github全家桶了,最后我选择了Gitalk,因为Gitment看了下好像挺久没更新了.&lt;/p></description></item><item><title>你找啥</title><link>https://hex.moe/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hex.moe/search/</guid><description/></item><item><title>朋友们</title><link>https://hex.moe/friends/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hex.moe/friends/</guid><description>&lt;p>友链页暂时只留下平时交流较多的朋友们了，如果你也想了解我 &lt;strong>快来找我聊天！&lt;/strong>&lt;/p></description></item></channel></rss>
+&lt;/p&gt;</description></item><item><title>通过 JARM 识别 CobaltStrike TeamServer</title><link>https://hex.moe/p/detect-cs-by-jarm2024/</link><pubDate>Sun, 10 Nov 2024 12:50:00 +0800</pubDate><guid>https://hex.moe/p/detect-cs-by-jarm2024/</guid><description>&lt;p&gt;不是什么新鲜东西，仅作为记录。&lt;/p&gt;
+&lt;h2 id="jarm"&gt;JARM
+&lt;/h2&gt;&lt;p&gt;不依靠证书的TLS服务端指纹工具。&lt;/p&gt;
+&lt;p&gt;原版实现：&lt;a class="link" href="https://github.com/salesforce/jarm" target="_blank" rel="noopener"
+&gt;https://github.com/salesforce/jarm&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="teamserver-默认端口-50050-jarm-指纹"&gt;TeamServer 默认端口 50050 JARM 指纹
+&lt;/h2&gt;&lt;p&gt;提取自 cobalt strike 4.9.1 (pwn3rs ver.) 的 TeamServer&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-txt" data-lang="txt"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Domain: 127.0.0.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Resolved IP: 127.0.0.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;JARM: 2ad2ad16d2ad2ad00042d42d00042ddb04deffa1705e2edc44cae1ed24a4da
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="通过-shodanio-等空间测绘引擎搜索"&gt;通过 Shodan.io 等空间测绘引擎搜索
+&lt;/h2&gt;&lt;p&gt;语法：&lt;code&gt;ssl.jarm:2ad2ad16d2ad2ad00042d42d00042ddb04deffa1705e2edc44cae1ed24a4da&lt;/code&gt;&lt;/p&gt;</description></item><item><title>ActionOPs - WriteUp</title><link>https://hex.moe/p/actionops2024/</link><pubDate>Sat, 18 May 2024 14:54:26 +0800</pubDate><guid>https://hex.moe/p/actionops2024/</guid><description>&lt;img src="https://hex.moe/p/actionops2024/cover.png" alt="Featured image of post ActionOPs - WriteUp" /&gt;&lt;p&gt;&lt;del&gt;紧急插播一条受害者新闻&lt;/del&gt;&lt;/p&gt;
+&lt;h2 id="介绍"&gt;介绍
+&lt;/h2&gt;&lt;p&gt;这是一道由裙友 &lt;a class="link" href="https://github.com/Esonhugh" target="_blank" rel="noopener"
+&gt;@Esonhugh&lt;/a&gt; 出的益智Quiz，趁着最近也有空，就打着看一下。在流程中一边看边学 Github Action/Authentication 相关的知识也是非常的寓教于乐了。&lt;/p&gt;</description></item><item><title>了解我</title><link>https://hex.moe/about/</link><pubDate>Thu, 16 May 2024 00:00:00 +0000</pubDate><guid>https://hex.moe/about/</guid><description>&lt;p&gt;工事中&lt;/p&gt;</description></item><item><title>边缘行者</title><link>https://hex.moe/p/edgerunners/</link><pubDate>Sun, 04 Dec 2022 14:25:42 +0000</pubDate><guid>https://hex.moe/p/edgerunners/</guid><description>&lt;img src="https://hex.moe/p/edgerunners/cover.jpg" alt="Featured image of post 边缘行者" /&gt;&lt;h4 id="0x00"&gt;0x00
+&lt;/h4&gt;&lt;p&gt;&lt;del&gt;《赛博朋克：阴沟里的老鼠》是由CD PROJEKT&amp;hellip;&lt;/del&gt;&lt;/p&gt;
+&lt;h4 id="0x01"&gt;0x01
+&lt;/h4&gt;&lt;p&gt;不扯了，最近这两天看完了边缘行者感触还蛮多的。首先，2077的世界观我一直是蛮喜欢的，游戏虽然没玩但是剧情大部分在首发线下云完成了大部分的主线剧情内容，可以说，背景带入感很深(划)，非常的吸引我。这两天也是在思考许多许多的问题，以至于 &lt;del&gt;软体不稳定&lt;/del&gt; 精神状态不佳，恰巧的是边缘行者这部片 &lt;del&gt;在发病后几天&lt;/del&gt; 也是开学一周后没这么忙碌从而进入了我的视野中。 &lt;em&gt;接下来可能有剧透&lt;/em&gt; 再看之前对具体的剧情并不是很了解，听到传闻十分的治愈，加上世界观本身也喜欢，就开始看了起来。谁想到第一集就开始放刀子（x&lt;/p&gt;</description></item><item><title>档案馆</title><link>https://hex.moe/archives/</link><pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate><guid>https://hex.moe/archives/</guid><description/></item><item><title>我的2020(下)</title><link>https://hex.moe/p/2020-p2/</link><pubDate>Tue, 02 Feb 2021 16:42:00 +0000</pubDate><guid>https://hex.moe/p/2020-p2/</guid><description>&lt;p&gt;[已完坑]&lt;/p&gt;
+&lt;h2 id="前言"&gt;前言
+&lt;/h2&gt;&lt;p&gt;下半年也没有学到什么,甚至一篇Blog也没有发&amp;hellip;虽然已经如此糟糕了,但是年末总结还是要写下的. 证明自己还活着和写下对未来的少许期望.&lt;/p&gt;</description></item><item><title>上海之旅</title><link>https://hex.moe/p/shanghai2019/</link><pubDate>Mon, 01 Feb 2021 23:00:10 +0000</pubDate><guid>https://hex.moe/p/shanghai2019/</guid><description>&lt;img src="https://hex.moe/p/shanghai2019/cover.jpg" alt="Featured image of post 上海之旅" /&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;璀璨不夜城，繁华梦一场&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;!-- more --&gt;
+&lt;h2 id="起因"&gt;起因
+&lt;/h2&gt;&lt;p&gt;一个星期前看到朋友圈的人都去了上海玩，正好又有两个同学陪同，&lt;del&gt;脑子一热&lt;/del&gt;就决定去上海看看了。&lt;/p&gt;
+&lt;h4 id="计划"&gt;计划
+&lt;/h4&gt;&lt;p&gt;时间转眼到了七月份,国内的疫情也控制的很好,朋友圈中掀起了旅游的热潮,当时的机票也挺便宜,但之前一直都没怎么出过远门 &lt;del&gt;主要是没钱&lt;/del&gt; 在预算 1500CNY(实际上后面还是超额了) 左右构思了一个星期的行程计划后,决定约上了几个朋友前往上海.&lt;/p&gt;</description></item><item><title>我的2020(上)</title><link>https://hex.moe/p/2020-p1/</link><pubDate>Thu, 04 Jun 2020 20:18:46 +0000</pubDate><guid>https://hex.moe/p/2020-p1/</guid><description>&lt;h3 id="前言"&gt;前言
+&lt;/h3&gt;&lt;p&gt;上半年一直在忙碌，到头来却不知道忙了什么，博客也有一段时间没更新了，再一看时间，一年已经过去一半了。打算写一篇给自己看的毫无营养流水账总结下自己杂乱无章的上半年&amp;hellip;&lt;/p&gt;</description></item><item><title>年轻人的第一个私人BGP(三) - 带入家中</title><link>https://hex.moe/p/bgp2019-p3/</link><pubDate>Fri, 28 Feb 2020 19:56:38 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p3/</guid><description>&lt;p&gt;BGP系列也好久没更新过了,最近放假放的有点久&amp;hellip;干了点新的东西,让家里的网络用上自己的IP.&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;解决方案是 strongSwan IKEv2 VPN隧道到VPS服务器上,IKEv2 的证书使用的是Let&amp;rsquo;s encrypt的证书,域名挂在了&lt;code&gt;CloudFlare&lt;/code&gt;上以便于调用api.&lt;/p&gt;</description></item><item><title>Goodbye,2019</title><link>https://hex.moe/p/goodbye2019/</link><pubDate>Tue, 31 Dec 2019 12:13:39 +0000</pubDate><guid>https://hex.moe/p/goodbye2019/</guid><description>&lt;p&gt;一年到了尾声，是时候该做些总结了&amp;hellip;&lt;/p&gt;
+&lt;h2 id="今年的经历"&gt;今年的经历
+&lt;/h2&gt;&lt;p&gt;&lt;em&gt;不是很想过多的暴露个人信息，模糊细节了&amp;hellip;.&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id="0x01-上半年"&gt;0x01 上半年
+&lt;/h3&gt;&lt;p&gt;今年三月份参加了个比赛拿了个二等奖,然后开始准备考试,准备一个多月后考上了位处深圳的一个大专,虽然留下的许多遗憾与不甘,但还是算给自己的上半年交上的一份及格答卷.&lt;/p&gt;</description></item><item><title>关于伪造邮件的简单研究</title><link>https://hex.moe/p/swaks2019/</link><pubDate>Fri, 15 Nov 2019 19:37:08 +0000</pubDate><guid>https://hex.moe/p/swaks2019/</guid><description>&lt;p&gt;最近拿到了学校的邮箱,心血来潮想开始测试一下关于电子邮件安全之类的&amp;hellip;说干就干&amp;hellip;伪造一封退学通知书(雾&lt;/p&gt;
+&lt;h2 id="伪造邮件的原理"&gt;伪造邮件的原理
+&lt;/h2&gt;&lt;p&gt;最初的SMTP 协议定义 (1982年&lt;a class="link" href="https://tools.ietf.org/html/rfc821" target="_blank" rel="noopener"
+&gt;RFC 821&lt;/a&gt;) 中并没有写如何对发件人进行身份验证,所以任何人都可以说我是 Alice (这就导致了垃圾邮件和虚假邮件的产生.&lt;/p&gt;</description></item><item><title>年轻人的第一个私人BGP(二) - 广播你的IP</title><link>https://hex.moe/p/bgp2019-p2/</link><pubDate>Thu, 31 Oct 2019 19:06:15 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p2/</guid><description>&lt;p&gt;接上篇BGP,这个时候已经拿下了自己ASN和IP,在RIPE中可以查询到,并且也添加了 &lt;code&gt;Route6&lt;/code&gt; 对象,接下来就把自己的IP广播出去&amp;hellip;.&lt;/p&gt;
+&lt;p&gt;在广播之前,需要寻找一家能为你做广播的电信运营商&amp;hellip;.Emm至少在国内是不可能了,不过还可以选择云服务器,Vultr 提供了广播BGP的服务,还有 he.net 家的BGP隧道..&lt;/p&gt;</description></item><item><title>年轻人的第一个私人BGP(一) - 注册一个ASN</title><link>https://hex.moe/p/bgp2019-p1/</link><pubDate>Tue, 15 Oct 2019 19:06:15 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p1/</guid><description>&lt;p&gt;很久以前就有这一个想法了,拥有一个自己的私人ASN,经过了一个多月的研究,现在博主终于拥有了年轻人的第一个ASN和网络段(&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;del&gt;实名上网&lt;/del&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="0x00-介绍"&gt;0x00 介绍
+&lt;/h2&gt;&lt;h3 id="bgp是什么"&gt;BGP是什么
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;边界网关协议（英语：Border Gateway Protocol，缩写：BGP）是互联网上一个核心的去中心化自治路由协议。它通过维护IP路由表或‘前缀’表来实现自治系统（AS）之间的可达性，属于矢量路由协议&lt;/p&gt;</description></item><item><title>记一次修好VMware突然无法打开的问题</title><link>https://hex.moe/p/vmware2019/</link><pubDate>Sat, 12 Oct 2019 20:05:02 +0000</pubDate><guid>https://hex.moe/p/vmware2019/</guid><description>&lt;p&gt;今天Vmware Workstation突然就打不开了(&lt;/p&gt;
+&lt;p&gt;记一下症状和解决方法&lt;/p&gt;
+&lt;h2 id="0x0-症状"&gt;0x0 症状
+&lt;/h2&gt;&lt;p&gt;今晚打开Vmware Workstation时 突然间开不了了 Windows 的通知栏弹出如下图&lt;/p&gt;</description></item><item><title>大学入学一个月总结</title><link>https://hex.moe/p/freshman/</link><pubDate>Sat, 28 Sep 2019 23:30:57 +0000</pubDate><guid>https://hex.moe/p/freshman/</guid><description>&lt;p&gt;大学开学已经有一个月了,半夜自闭蒟蒻来写下总结.&lt;/p&gt;
+&lt;h2 id="0x0-入学"&gt;0x0 入学
+&lt;/h2&gt;&lt;p&gt;没有达到某乎平均水准,来了深圳某大专,开学感觉挺好的,课程也挺少的,但是接下来就是一堆一堆活动活动还有活动,感觉就是 &lt;strong&gt;十分的忙&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>cpp学习笔记(scanf与getline)</title><link>https://hex.moe/p/cpp2019/</link><pubDate>Tue, 17 Sep 2019 16:26:17 +0000</pubDate><guid>https://hex.moe/p/cpp2019/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;蒟蒻萌新的 C 与 C++学习笔记.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;任何一个伟大的目标,都有一个微不足道的开始.&lt;/strong&gt; —— 洛谷&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;最近在学习一些 OI 的知识，其实以前是学过 C++的但是, &lt;del&gt;Python 实在是太香了&lt;/del&gt;
+由于太久没用过全部白给了，但是由于了解到比赛 C++可以用 STL &lt;del&gt;真香&lt;/del&gt;
+所以开了一个从 C 转换到 C++的一些笔记. &lt;del&gt;天坑&lt;/del&gt; &amp;gt; &lt;del&gt;什么时候支持 C++11&lt;/del&gt;&lt;/p&gt;</description></item><item><title>按名字判断班级小姐姐的数量</title><link>https://hex.moe/p/girls2019/</link><pubDate>Thu, 29 Aug 2019 19:22:48 +0000</pubDate><guid>https://hex.moe/p/girls2019/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;大学快要开学了,我通过py关系弄到了一份班级的列表,但是没有性别,正好这几天看到一个通过名字猜测性别的库&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id="通过姓名猜测性别"&gt;通过姓名猜测性别
+&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;a class="link" href="https://github.com/observerss/ngender" target="_blank" rel="noopener"
+&gt;https://github.com/observerss/ngender&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在最近,发现了一个&lt;code&gt;ngender&lt;/code&gt;库,作用只有一个 通过姓名猜测性别,使用方式也很简单&lt;/p&gt;</description></item><item><title>Python爬虫练习</title><link>https://hex.moe/p/python2019/</link><pubDate>Sun, 25 Aug 2019 12:18:41 +0000</pubDate><guid>https://hex.moe/p/python2019/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;最近感觉没什么好写的,把以前练习Python写的东西记录一下.关于SadPanda和某泥潭的.
+没啥技术含量(&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="stage1st挂机脚本"&gt;Stage1st挂机脚本
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;某知名 &lt;del&gt;巨魔钓鱼&lt;/del&gt; 泥潭需要访问几十个小时才能升级加权限,又刚好有闲置的服务器,所以想想办法实现挂机功能&lt;/p&gt;</description></item><item><title>再次重建博客(建立一个Hexo博客)</title><link>https://hex.moe/p/rebulid-hexo2019/</link><pubDate>Sat, 24 Aug 2019 14:24:36 +0000</pubDate><guid>https://hex.moe/p/rebulid-hexo2019/</guid><description>&lt;p&gt;&amp;lt;关于我博客又丢档案了这件事&amp;gt;&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;时隔 &lt;del&gt;多年&lt;/del&gt; 几个月 我突然发现好像有个博客已经吃灰很久了,开始想更新下内容,结果发现又又又 &lt;del&gt;丢人&lt;/del&gt; 丢档了(Hexo博客的源文件丢了)&lt;/p&gt;</description></item><item><title>用Github来当博客图床</title><link>https://hex.moe/p/picgo2019/</link><pubDate>Sat, 24 Aug 2019 13:44:09 +0000</pubDate><guid>https://hex.moe/p/picgo2019/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;之前试过 sm.ms 觉得还不错,不过最近发现这个图床处于墙与不墙的薛定谔状态,而且也不是很好留档,所以决定使用Github来当作博客的图床&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id="一个图床软件-picgo"&gt;一个图床软件 PicGo
+&lt;/h1&gt;&lt;h2 id="下载-picgo"&gt;下载 PicGo
+&lt;/h2&gt;&lt;p&gt;在这里&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class="link" href="https://github.com/Molunerfinn/PicGo/releases" target="_blank" rel="noopener"
+&gt;https://github.com/Molunerfinn/PicGo/releases&lt;/a&gt;&lt;/p&gt;</description></item><item><title>为Hexo博客配置上HTTPS</title><link>https://hex.moe/p/blog-https-2019/</link><pubDate>Sat, 24 Aug 2019 11:30:39 +0000</pubDate><guid>https://hex.moe/p/blog-https-2019/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;9012年了,Chrome纷纷给各种HTTP网站打上不安全,由于我用了自定义域名,所以并没有小绿锁,为了&amp;quot;安全&amp;quot;一点,把博客也加上小绿锁好了&lt;/p&gt;</description></item><item><title>为Hexo博客安装评论系统(Gitalk)</title><link>https://hex.moe/p/gitalk2019/</link><pubDate>Fri, 23 Aug 2019 17:40:04 +0000</pubDate><guid>https://hex.moe/p/gitalk2019/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;想给博客安装一个评论系统,我了解了许多评论插件多说,Disqus,Gitment和Gitalk等鉴于我已经把博客挂在Github上了,就打算用Github全家桶了,最后我选择了Gitalk,因为Gitment看了下好像挺久没更新了.&lt;/p&gt;</description></item><item><title>你找啥</title><link>https://hex.moe/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hex.moe/search/</guid><description/></item><item><title>朋友们</title><link>https://hex.moe/friends/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hex.moe/friends/</guid><description>&lt;p&gt;友链页暂时只留下平时交流较多的朋友们了，如果你也想了解我 &lt;strong&gt;快来找我聊天！&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>

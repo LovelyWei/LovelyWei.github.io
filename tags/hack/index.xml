@@ -1,24 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hack on Chocolate's 废纸篓</title><link>https://hex.moe/tags/hack/</link><description>Recent content in Hack on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 10 Nov 2024 12:50:00 +0800</lastBuildDate><atom:link href="https://hex.moe/tags/hack/index.xml" rel="self" type="application/rss+xml"/><item><title>通过 JARM 识别 CobaltStrike TeamServer</title><link>https://hex.moe/p/detect-cs-by-jarm2024/</link><pubDate>Sun, 10 Nov 2024 12:50:00 +0800</pubDate><guid>https://hex.moe/p/detect-cs-by-jarm2024/</guid><description>&lt;p>不是什么新鲜东西，仅作为记录。&lt;/p>
-&lt;h2 id="jarm">JARM
-&lt;/h2>&lt;p>不依靠证书的TLS服务端指纹工具。&lt;/p>
-&lt;p>原版实现：&lt;a class="link" href="https://github.com/salesforce/jarm" target="_blank" rel="noopener"
->https://github.com/salesforce/jarm&lt;/a>&lt;/p>
-&lt;h2 id="teamserver-默认端口-50050-jarm-指纹">TeamServer 默认端口 50050 JARM 指纹
-&lt;/h2>&lt;p>提取自 cobalt strike 4.9.1 (pwn3rs ver.) 的 TeamServer&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-txt" data-lang="txt">&lt;span class="line">&lt;span class="cl">Domain: 127.0.0.1
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Resolved IP: 127.0.0.1
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">JARM: 2ad2ad16d2ad2ad00042d42d00042ddb04deffa1705e2edc44cae1ed24a4da
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;h2 id="通过-shodanio-等空间测绘引擎搜索">通过 Shodan.io 等空间测绘引擎搜索
-&lt;/h2>&lt;p>语法：&lt;code>ssl.jarm:2ad2ad16d2ad2ad00042d42d00042ddb04deffa1705e2edc44cae1ed24a4da&lt;/code>&lt;/p></description></item><item><title>关于伪造邮件的简单研究</title><link>https://hex.moe/p/swaks2019/</link><pubDate>Fri, 15 Nov 2019 19:37:08 +0000</pubDate><guid>https://hex.moe/p/swaks2019/</guid><description>&lt;p>最近拿到了学校的邮箱,心血来潮想开始测试一下关于电子邮件安全之类的&amp;hellip;说干就干&amp;hellip;伪造一封退学通知书(雾&lt;/p>
-&lt;h2 id="伪造邮件的原理">伪造邮件的原理
-&lt;/h2>&lt;p>最初的SMTP 协议定义 (1982年&lt;a class="link" href="https://tools.ietf.org/html/rfc821" target="_blank" rel="noopener"
->RFC 821&lt;/a>) 中并没有写如何对发件人进行身份验证,所以任何人都可以说我是 Alice (这就导致了垃圾邮件和虚假邮件的产生.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hack on Chocolate's 废纸篓</title><link>https://hex.moe/tags/hack/</link><description>Recent content in Hack on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 10 Nov 2024 12:50:00 +0800</lastBuildDate><atom:link href="https://hex.moe/tags/hack/index.xml" rel="self" type="application/rss+xml"/><item><title>通过 JARM 识别 CobaltStrike TeamServer</title><link>https://hex.moe/p/detect-cs-by-jarm2024/</link><pubDate>Sun, 10 Nov 2024 12:50:00 +0800</pubDate><guid>https://hex.moe/p/detect-cs-by-jarm2024/</guid><description>&lt;p&gt;不是什么新鲜东西，仅作为记录。&lt;/p&gt;
+&lt;h2 id="jarm"&gt;JARM
+&lt;/h2&gt;&lt;p&gt;不依靠证书的TLS服务端指纹工具。&lt;/p&gt;
+&lt;p&gt;原版实现：&lt;a class="link" href="https://github.com/salesforce/jarm" target="_blank" rel="noopener"
+&gt;https://github.com/salesforce/jarm&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="teamserver-默认端口-50050-jarm-指纹"&gt;TeamServer 默认端口 50050 JARM 指纹
+&lt;/h2&gt;&lt;p&gt;提取自 cobalt strike 4.9.1 (pwn3rs ver.) 的 TeamServer&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-txt" data-lang="txt"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Domain: 127.0.0.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Resolved IP: 127.0.0.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;JARM: 2ad2ad16d2ad2ad00042d42d00042ddb04deffa1705e2edc44cae1ed24a4da
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id="通过-shodanio-等空间测绘引擎搜索"&gt;通过 Shodan.io 等空间测绘引擎搜索
+&lt;/h2&gt;&lt;p&gt;语法：&lt;code&gt;ssl.jarm:2ad2ad16d2ad2ad00042d42d00042ddb04deffa1705e2edc44cae1ed24a4da&lt;/code&gt;&lt;/p&gt;</description></item><item><title>关于伪造邮件的简单研究</title><link>https://hex.moe/p/swaks2019/</link><pubDate>Fri, 15 Nov 2019 19:37:08 +0000</pubDate><guid>https://hex.moe/p/swaks2019/</guid><description>&lt;p&gt;最近拿到了学校的邮箱,心血来潮想开始测试一下关于电子邮件安全之类的&amp;hellip;说干就干&amp;hellip;伪造一封退学通知书(雾&lt;/p&gt;
+&lt;h2 id="伪造邮件的原理"&gt;伪造邮件的原理
+&lt;/h2&gt;&lt;p&gt;最初的SMTP 协议定义 (1982年&lt;a class="link" href="https://tools.ietf.org/html/rfc821" target="_blank" rel="noopener"
+&gt;RFC 821&lt;/a&gt;) 中并没有写如何对发件人进行身份验证,所以任何人都可以说我是 Alice (这就导致了垃圾邮件和虚假邮件的产生.&lt;/p&gt;</description></item></channel></rss>

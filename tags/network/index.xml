@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Network on Chocolate's 废纸篓</title><link>https://hex.moe/tags/network/</link><description>Recent content in Network on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 28 Feb 2020 19:56:38 +0000</lastBuildDate><atom:link href="https://hex.moe/tags/network/index.xml" rel="self" type="application/rss+xml"/><item><title>年轻人的第一个私人BGP(三) - 带入家中</title><link>https://hex.moe/p/bgp2019-p3/</link><pubDate>Fri, 28 Feb 2020 19:56:38 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p3/</guid><description>&lt;p>BGP系列也好久没更新过了,最近放假放的有点久&amp;hellip;干了点新的东西,让家里的网络用上自己的IP.&lt;/p>
-&lt;!-- more -->
-&lt;p>解决方案是 strongSwan IKEv2 VPN隧道到VPS服务器上,IKEv2 的证书使用的是Let&amp;rsquo;s encrypt的证书,域名挂在了&lt;code>CloudFlare&lt;/code>上以便于调用api.&lt;/p></description></item><item><title>年轻人的第一个私人BGP(二) - 广播你的IP</title><link>https://hex.moe/p/bgp2019-p2/</link><pubDate>Thu, 31 Oct 2019 19:06:15 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p2/</guid><description>&lt;p>接上篇BGP,这个时候已经拿下了自己ASN和IP,在RIPE中可以查询到,并且也添加了 &lt;code>Route6&lt;/code> 对象,接下来就把自己的IP广播出去&amp;hellip;.&lt;/p>
-&lt;p>在广播之前,需要寻找一家能为你做广播的电信运营商&amp;hellip;.Emm至少在国内是不可能了,不过还可以选择云服务器,Vultr 提供了广播BGP的服务,还有 he.net 家的BGP隧道..&lt;/p></description></item><item><title>年轻人的第一个私人BGP(一) - 注册一个ASN</title><link>https://hex.moe/p/bgp2019-p1/</link><pubDate>Tue, 15 Oct 2019 19:06:15 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p1/</guid><description>&lt;p>很久以前就有这一个想法了,拥有一个自己的私人ASN,经过了一个多月的研究,现在博主终于拥有了年轻人的第一个ASN和网络段(&lt;/p>
-&lt;blockquote>
-&lt;p>&lt;del>实名上网&lt;/del>&lt;/p>&lt;/blockquote>
-&lt;h2 id="0x00-介绍">0x00 介绍
-&lt;/h2>&lt;h3 id="bgp是什么">BGP是什么
-&lt;/h3>&lt;blockquote>
-&lt;p>边界网关协议（英语：Border Gateway Protocol，缩写：BGP）是互联网上一个核心的去中心化自治路由协议。它通过维护IP路由表或‘前缀’表来实现自治系统（AS）之间的可达性，属于矢量路由协议&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Network on Chocolate's 废纸篓</title><link>https://hex.moe/tags/network/</link><description>Recent content in Network on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 28 Feb 2020 19:56:38 +0000</lastBuildDate><atom:link href="https://hex.moe/tags/network/index.xml" rel="self" type="application/rss+xml"/><item><title>年轻人的第一个私人BGP(三) - 带入家中</title><link>https://hex.moe/p/bgp2019-p3/</link><pubDate>Fri, 28 Feb 2020 19:56:38 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p3/</guid><description>&lt;p&gt;BGP系列也好久没更新过了,最近放假放的有点久&amp;hellip;干了点新的东西,让家里的网络用上自己的IP.&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;解决方案是 strongSwan IKEv2 VPN隧道到VPS服务器上,IKEv2 的证书使用的是Let&amp;rsquo;s encrypt的证书,域名挂在了&lt;code&gt;CloudFlare&lt;/code&gt;上以便于调用api.&lt;/p&gt;</description></item><item><title>年轻人的第一个私人BGP(二) - 广播你的IP</title><link>https://hex.moe/p/bgp2019-p2/</link><pubDate>Thu, 31 Oct 2019 19:06:15 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p2/</guid><description>&lt;p&gt;接上篇BGP,这个时候已经拿下了自己ASN和IP,在RIPE中可以查询到,并且也添加了 &lt;code&gt;Route6&lt;/code&gt; 对象,接下来就把自己的IP广播出去&amp;hellip;.&lt;/p&gt;
+&lt;p&gt;在广播之前,需要寻找一家能为你做广播的电信运营商&amp;hellip;.Emm至少在国内是不可能了,不过还可以选择云服务器,Vultr 提供了广播BGP的服务,还有 he.net 家的BGP隧道..&lt;/p&gt;</description></item><item><title>年轻人的第一个私人BGP(一) - 注册一个ASN</title><link>https://hex.moe/p/bgp2019-p1/</link><pubDate>Tue, 15 Oct 2019 19:06:15 +0000</pubDate><guid>https://hex.moe/p/bgp2019-p1/</guid><description>&lt;p&gt;很久以前就有这一个想法了,拥有一个自己的私人ASN,经过了一个多月的研究,现在博主终于拥有了年轻人的第一个ASN和网络段(&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;del&gt;实名上网&lt;/del&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="0x00-介绍"&gt;0x00 介绍
+&lt;/h2&gt;&lt;h3 id="bgp是什么"&gt;BGP是什么
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;边界网关协议（英语：Border Gateway Protocol，缩写：BGP）是互联网上一个核心的去中心化自治路由协议。它通过维护IP路由表或‘前缀’表来实现自治系统（AS）之间的可达性，属于矢量路由协议&lt;/p&gt;</description></item></channel></rss>

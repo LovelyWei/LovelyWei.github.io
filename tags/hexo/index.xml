@@ -1,9 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hexo on Chocolate's 废纸篓</title><link>https://hex.moe/tags/hexo/</link><description>Recent content in Hexo on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 24 Aug 2019 14:24:36 +0000</lastBuildDate><atom:link href="https://hex.moe/tags/hexo/index.xml" rel="self" type="application/rss+xml"/><item><title>再次重建博客(建立一个Hexo博客)</title><link>https://hex.moe/p/rebulid-hexo2019/</link><pubDate>Sat, 24 Aug 2019 14:24:36 +0000</pubDate><guid>https://hex.moe/p/rebulid-hexo2019/</guid><description>&lt;p>&amp;lt;关于我博客又丢档案了这件事&amp;gt;&lt;/p>
-&lt;!-- more -->
-&lt;p>时隔 &lt;del>多年&lt;/del> 几个月 我突然发现好像有个博客已经吃灰很久了,开始想更新下内容,结果发现又又又 &lt;del>丢人&lt;/del> 丢档了(Hexo博客的源文件丢了)&lt;/p></description></item><item><title>用Github来当博客图床</title><link>https://hex.moe/p/picgo2019/</link><pubDate>Sat, 24 Aug 2019 13:44:09 +0000</pubDate><guid>https://hex.moe/p/picgo2019/</guid><description>&lt;blockquote>
-&lt;p>之前试过 sm.ms 觉得还不错,不过最近发现这个图床处于墙与不墙的薛定谔状态,而且也不是很好留档,所以决定使用Github来当作博客的图床&lt;/p>&lt;/blockquote>
-&lt;h1 id="一个图床软件-picgo">一个图床软件 PicGo
-&lt;/h1>&lt;h2 id="下载-picgo">下载 PicGo
-&lt;/h2>&lt;p>在这里&lt;/p></description></item><item><title>为Hexo博客配置上HTTPS</title><link>https://hex.moe/p/blog-https-2019/</link><pubDate>Sat, 24 Aug 2019 11:30:39 +0000</pubDate><guid>https://hex.moe/p/blog-https-2019/</guid><description>&lt;blockquote>
-&lt;p>9012年了,Chrome纷纷给各种HTTP网站打上不安全,由于我用了自定义域名,所以并没有小绿锁,为了&amp;quot;安全&amp;quot;一点,把博客也加上小绿锁好了&lt;/p></description></item><item><title>为Hexo博客安装评论系统(Gitalk)</title><link>https://hex.moe/p/gitalk2019/</link><pubDate>Fri, 23 Aug 2019 17:40:04 +0000</pubDate><guid>https://hex.moe/p/gitalk2019/</guid><description>&lt;blockquote>
-&lt;p>想给博客安装一个评论系统,我了解了许多评论插件多说,Disqus,Gitment和Gitalk等鉴于我已经把博客挂在Github上了,就打算用Github全家桶了,最后我选择了Gitalk,因为Gitment看了下好像挺久没更新了.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hexo on Chocolate's 废纸篓</title><link>https://hex.moe/tags/hexo/</link><description>Recent content in Hexo on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 24 Aug 2019 14:24:36 +0000</lastBuildDate><atom:link href="https://hex.moe/tags/hexo/index.xml" rel="self" type="application/rss+xml"/><item><title>再次重建博客(建立一个Hexo博客)</title><link>https://hex.moe/p/rebulid-hexo2019/</link><pubDate>Sat, 24 Aug 2019 14:24:36 +0000</pubDate><guid>https://hex.moe/p/rebulid-hexo2019/</guid><description>&lt;p&gt;&amp;lt;关于我博客又丢档案了这件事&amp;gt;&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;时隔 &lt;del&gt;多年&lt;/del&gt; 几个月 我突然发现好像有个博客已经吃灰很久了,开始想更新下内容,结果发现又又又 &lt;del&gt;丢人&lt;/del&gt; 丢档了(Hexo博客的源文件丢了)&lt;/p&gt;</description></item><item><title>用Github来当博客图床</title><link>https://hex.moe/p/picgo2019/</link><pubDate>Sat, 24 Aug 2019 13:44:09 +0000</pubDate><guid>https://hex.moe/p/picgo2019/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;之前试过 sm.ms 觉得还不错,不过最近发现这个图床处于墙与不墙的薛定谔状态,而且也不是很好留档,所以决定使用Github来当作博客的图床&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id="一个图床软件-picgo"&gt;一个图床软件 PicGo
+&lt;/h1&gt;&lt;h2 id="下载-picgo"&gt;下载 PicGo
+&lt;/h2&gt;&lt;p&gt;在这里&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class="link" href="https://github.com/Molunerfinn/PicGo/releases" target="_blank" rel="noopener"
+&gt;https://github.com/Molunerfinn/PicGo/releases&lt;/a&gt;&lt;/p&gt;</description></item><item><title>为Hexo博客配置上HTTPS</title><link>https://hex.moe/p/blog-https-2019/</link><pubDate>Sat, 24 Aug 2019 11:30:39 +0000</pubDate><guid>https://hex.moe/p/blog-https-2019/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;9012年了,Chrome纷纷给各种HTTP网站打上不安全,由于我用了自定义域名,所以并没有小绿锁,为了&amp;quot;安全&amp;quot;一点,把博客也加上小绿锁好了&lt;/p&gt;</description></item><item><title>为Hexo博客安装评论系统(Gitalk)</title><link>https://hex.moe/p/gitalk2019/</link><pubDate>Fri, 23 Aug 2019 17:40:04 +0000</pubDate><guid>https://hex.moe/p/gitalk2019/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;想给博客安装一个评论系统,我了解了许多评论插件多说,Disqus,Gitment和Gitalk等鉴于我已经把博客挂在Github上了,就打算用Github全家桶了,最后我选择了Gitalk,因为Gitment看了下好像挺久没更新了.&lt;/p&gt;</description></item></channel></rss>

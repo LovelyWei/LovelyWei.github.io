@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CVE on Chocolate's 废纸篓</title><link>https://hex.moe/tags/cve/</link><description>Recent content in CVE on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 12 Nov 2025 23:00:00 +0800</lastBuildDate><atom:link href="https://hex.moe/tags/cve/index.xml" rel="self" type="application/rss+xml"/><item><title>Ureport2 "savePreviewData" Endpoint XXE</title><link>https://hex.moe/p/cve-2025-61151/</link><pubDate>Wed, 12 Nov 2025 23:00:00 +0800</pubDate><guid>https://hex.moe/p/cve-2025-61151/</guid><description>&lt;h1 id="ureport2-savepreviewdata-endpoint-xxe"&gt;Ureport2 &amp;ldquo;savePreviewData&amp;rdquo; Endpoint XXE
+&lt;/h1&gt;&lt;h2 id="setting-up-the-environment"&gt;Setting up the environment
+&lt;/h2&gt;&lt;p&gt;Download Spring Boot 2 and Ureport 2.2.9 via Maven.
+&lt;img src="https://hex.moe/p/cve-2025-61151/pomxml.png"
+width="1270"
+height="1097"
+loading="lazy"
+alt="pomxml"
+class="gallery-image"
+data-flex-grow="115"
+data-flex-basis="277px"
+&gt;&lt;/p&gt;
+&lt;p&gt;Configuring Ureport2 Servlet.
+&lt;img src="https://hex.moe/p/cve-2025-61151/UReportConfig.png"
+width="2014"
+height="859"
+loading="lazy"
+alt="UReportConfig"
+class="gallery-image"
+data-flex-grow="234"
+data-flex-basis="562px"
+&gt;&lt;/p&gt;
+&lt;p&gt;Browse the designer page.
+&lt;img src="https://hex.moe/p/cve-2025-61151/BrowsePage.png"
+width="2292"
+height="1197"
+loading="lazy"
+alt="BrowsePage"
+class="gallery-image"
+data-flex-grow="191"
+data-flex-basis="459px"
+&gt;&lt;/p&gt;
+&lt;h2 id="poc"&gt;POC
+&lt;/h2&gt;&lt;p&gt;Try to preview the data.
+&lt;img src="https://hex.moe/p/cve-2025-61151/preview-button.png"
+width="1048"
+height="498"
+loading="lazy"
+alt="preview-button"
+class="gallery-image"
+data-flex-grow="210"
+data-flex-basis="505px"
+&gt;&lt;/p&gt;
+&lt;p&gt;Modify the request data sent to savePreviewData.
+&lt;img src="https://hex.moe/p/cve-2025-61151/savePreviewData.png"
+width="1881"
+height="1280"
+loading="lazy"
+alt="savePreviewData"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="352px"
+&gt;&lt;/p&gt;
+&lt;p&gt;Raw:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;POST /ureport/designer/savePreviewData HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Host: 127.0.0.1:8080
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Content-Length: 5569
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sec-ch-ua-platform: &amp;#34;Windows&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Accept-Language: zh-CN,zh;q=0.9
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sec-ch-ua: &amp;#34;Chromium&amp;#34;;v=&amp;#34;139&amp;#34;, &amp;#34;Not;A=Brand&amp;#34;;v=&amp;#34;99&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sec-ch-ua-mobile: ?0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;X-Requested-With: XMLHttpRequest
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Accept: */*
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Origin: http://127.0.0.1:8080
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Sec-Fetch-Site: same-origin
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Sec-Fetch-Mode: cors
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Sec-Fetch-Dest: empty
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Referer: http://127.0.0.1:8080/ureport/designer
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Accept-Encoding: gzip, deflate, br
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Cookie: JSESSIONID=92753162E993D1A4CAD989B0141164BA
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Connection: keep-alive
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;content=%253C%253Fxml%2520version%253D%25221.0%2522%2520encoding%253D%2522UTF-8%2522%253F%253E%253Cureport%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522A1%2522%2520row%253D%25221%2522%2520col%253D%25221%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255Btest%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522B1%2522%2520row%253D%25221%2522%2520col%253D%25222%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522C1%2522%2520row%253D%25221%2522%2520col%253D%25223%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522D1%2522%2520row%253D%25221%2522%2520col%253D%25224%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522A2%2522%2520row%253D%25222%2522%2520col%253D%25221%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522B2%2522%2520row%253D%25222%2522%2520col%253D%25222%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522C2%2522%2520row%253D%25222%2522%2520col%253D%25223%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522D2%2522%2520row%253D%25222%2522%2520col%253D%25224%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522A3%2522%2520row%253D%25223%2522%2520col%253D%25221%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522B3%2522%2520row%253D%25223%2522%2520col%253D%25222%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522C3%2522%2520row%253D%25223%2522%2520col%253D%25223%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Ccell%2520expand%253D%2522None%2522%2520name%253D%2522D3%2522%2520row%253D%25223%2522%2520col%253D%25224%2522%253E%253Ccell-style%2520font-size%253D%252210%2522%2520align%253D%2522center%2522%2520valign%253D%2522middle%2522%253E%253C%252Fcell-style%253E%253Csimple-value%253E%253C!%255BCDATA%255B%255D%255D%253E%253C%252Fsimple-value%253E%253C%252Fcell%253E%253Crow%2520row-number%253D%25221%2522%2520height%253D%252218%2522%252F%253E%253Crow%2520row-number%253D%25222%2522%2520height%253D%252218%2522%252F%253E%253Crow%2520row-number%253D%25223%2522%2520height%253D%252218%2522%252F%253E%253Ccolumn%2520col-number%253D%25221%2522%2520width%253D%252280%2522%252F%253E%253Ccolumn%2520col-number%253D%25222%2522%2520width%253D%252280%2522%252F%253E%253Ccolumn%2520col-number%253D%25223%2522%2520width%253D%252280%2522%252F%253E%253Ccolumn%2520col-number%253D%25224%2522%2520width%253D%252280%2522%252F%253E%253Cpaper%2520type%253D%2522A4%2522%2520left-margin%253D%252290%2522%2520right-margin%253D%252290%2522%250A%2520%2520%2520%2520top-margin%253D%252272%2522%2520bottom-margin%253D%252272%2522%2520paging-mode%253D%2522fitpage%2522%2520fixrows%253D%25220%2522%250A%2520%2520%2520%2520width%253D%2522595%2522%2520height%253D%2522842%2522%2520orientation%253D%2522portrait%2522%2520html-report-align%253D%2522left%2522%2520bg-image%253D%2522%2522%2520html-interval-refresh-value%253D%25220%2522%2520column-enabled%253D%2522false%2522%253E%253C%252Fpaper%253E%253C%252Fureport%253E
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Modified:&lt;/p&gt;</description></item></channel></rss>

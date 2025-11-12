@@ -1,12 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on Chocolate's 废纸篓</title><link>https://hex.moe/tags/python/</link><description>Recent content in Python on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 29 Aug 2019 19:22:48 +0000</lastBuildDate><atom:link href="https://hex.moe/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>按名字判断班级小姐姐的数量</title><link>https://hex.moe/p/girls2019/</link><pubDate>Thu, 29 Aug 2019 19:22:48 +0000</pubDate><guid>https://hex.moe/p/girls2019/</guid><description>&lt;blockquote>
-&lt;p>大学快要开学了,我通过py关系弄到了一份班级的列表,但是没有性别,正好这几天看到一个通过名字猜测性别的库&lt;/p>&lt;/blockquote>
-&lt;h1 id="通过姓名猜测性别">通过姓名猜测性别
-&lt;/h1>&lt;blockquote>
-&lt;p>&lt;a class="link" href="https://github.com/observerss/ngender" target="_blank" rel="noopener"
->https://github.com/observerss/ngender&lt;/a>&lt;/p>&lt;/blockquote>
-&lt;p>在最近,发现了一个&lt;code>ngender&lt;/code>库,作用只有一个 通过姓名猜测性别,使用方式也很简单&lt;/p></description></item><item><title>Python爬虫练习</title><link>https://hex.moe/p/python2019/</link><pubDate>Sun, 25 Aug 2019 12:18:41 +0000</pubDate><guid>https://hex.moe/p/python2019/</guid><description>&lt;blockquote>
-&lt;p>最近感觉没什么好写的,把以前练习Python写的东西记录一下.关于SadPanda和某泥潭的.
-没啥技术含量(&lt;/p>&lt;/blockquote>
-&lt;h2 id="stage1st挂机脚本">Stage1st挂机脚本
-&lt;/h2>&lt;blockquote>
-&lt;p>某知名 &lt;del>巨魔钓鱼&lt;/del> 泥潭需要访问几十个小时才能升级加权限,又刚好有闲置的服务器,所以想想办法实现挂机功能&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Python on Chocolate's 废纸篓</title><link>https://hex.moe/tags/python/</link><description>Recent content in Python on Chocolate's 废纸篓</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 29 Aug 2019 19:22:48 +0000</lastBuildDate><atom:link href="https://hex.moe/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>按名字判断班级小姐姐的数量</title><link>https://hex.moe/p/girls2019/</link><pubDate>Thu, 29 Aug 2019 19:22:48 +0000</pubDate><guid>https://hex.moe/p/girls2019/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;大学快要开学了,我通过py关系弄到了一份班级的列表,但是没有性别,正好这几天看到一个通过名字猜测性别的库&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id="通过姓名猜测性别"&gt;通过姓名猜测性别
+&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;a class="link" href="https://github.com/observerss/ngender" target="_blank" rel="noopener"
+&gt;https://github.com/observerss/ngender&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在最近,发现了一个&lt;code&gt;ngender&lt;/code&gt;库,作用只有一个 通过姓名猜测性别,使用方式也很简单&lt;/p&gt;</description></item><item><title>Python爬虫练习</title><link>https://hex.moe/p/python2019/</link><pubDate>Sun, 25 Aug 2019 12:18:41 +0000</pubDate><guid>https://hex.moe/p/python2019/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;最近感觉没什么好写的,把以前练习Python写的东西记录一下.关于SadPanda和某泥潭的.
+没啥技术含量(&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="stage1st挂机脚本"&gt;Stage1st挂机脚本
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;某知名 &lt;del&gt;巨魔钓鱼&lt;/del&gt; 泥潭需要访问几十个小时才能升级加权限,又刚好有闲置的服务器,所以想想办法实现挂机功能&lt;/p&gt;</description></item></channel></rss>
